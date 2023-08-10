@@ -1,5 +1,5 @@
 ---
-title: "Genotyping by RNA Sequencing"
+title: "GBRS Student Exercies"
 teaching: 10
 exercises: 2
 ---

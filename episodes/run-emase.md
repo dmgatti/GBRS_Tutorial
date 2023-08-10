@@ -1,5 +1,5 @@
 ---
-title: "Genotyping by RNA Sequencing"
+title: "Running EMASE to Quantify Allele-Specific Transcript Expression"
 teaching: 10
 exercises: 2
 ---

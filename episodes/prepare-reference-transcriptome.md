@@ -1,5 +1,5 @@
 ---
-title: "Genotyping by RNA Sequencing"
+title: "Preparing GBRS Reference Transcriptome"
 teaching: 10
 exercises: 2
 ---
