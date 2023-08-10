@@ -8,13 +8,13 @@
 # lc: Library Carpentry
 # cp: Carpentries (to use for instructor training for instance)
 # incubator: The Carpentries Incubator
-carpentry: 'incubator'
+carpentry: 'swc'
 
 # Overall title for pages.
-title: 'Lesson Title' # FIXME
+title: 'Genotyping by RNA Sequencing Tutorial'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~ # FIXME
+created: "2023-08-10" 
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries' # FIXME
@@ -27,13 +27,13 @@ life_cycle: 'pre-alpha' # FIXME
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/carpentries/workbench-template-md' # FIXME
+source: 'https://github.com/dmgatti/GBRS_Tutorial' # FIXME
 
 # Default branch of your lesson
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'team@carpentries.org' # FIXME
+contact: 'dan.gatti@jax.org' # FIXME
 
 # Navigation ------------------------------------------------
 #
