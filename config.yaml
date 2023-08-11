@@ -45,7 +45,11 @@ contact: 'dan.gatti@jax.org' # FIXME
 #
 # episodes:
 # - introduction.md
-# - first-steps.md
+# - prepare-reference-genome.md
+# - prepare-reference-transcriptome.md
+# - run-emase.md
+# - run-gbrs.md
+# - student-exercises.md
 #
 # learners:
 # - setup.md

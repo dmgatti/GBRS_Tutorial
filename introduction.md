@@ -1,19 +1,21 @@
 ---
-title: "Using Markdown"
+title: "Genotyping by RNA Sequencing"
 teaching: 10
 exercises: 2
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How do you write a lesson using Markdown and `{sandpaper}`?
+- What is Genotyping by RNA Sequencing (GBRS)?
+- What analyses does GBRS provide?
+- What are the steps in a GBRS analysis?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how to use markdown with The Carpentries Workbench
-- Demonstrate how to include pieces of code, figures, and nested challenge blocks
+- Explain what GBRS does.
+- List the steps in a GBRS analysis.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
