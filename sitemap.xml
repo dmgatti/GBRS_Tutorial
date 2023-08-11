@@ -46,10 +46,25 @@
     <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor/key-points.html</loc>
   </url>
   <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor/prepare-reference-genome.html</loc>
+  </url>
+  <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor/prepare-reference-transcriptome.html</loc>
+  </url>
+  <url>
     <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor/profiles.html</loc>
   </url>
   <url>
     <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor/run-emase.html</loc>
+  </url>
+  <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor/run-gbrs.html</loc>
+  </url>
+  <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor/student-exercises.html</loc>
   </url>
   <url>
     <loc>https://dmgatti.github.io/GBRS_Tutorial/instructor-notes.html</loc>
@@ -61,9 +76,24 @@
     <loc>https://dmgatti.github.io/GBRS_Tutorial/key-points.html</loc>
   </url>
   <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/prepare-reference-genome.html</loc>
+  </url>
+  <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/prepare-reference-transcriptome.html</loc>
+  </url>
+  <url>
     <loc>https://dmgatti.github.io/GBRS_Tutorial/profiles.html</loc>
   </url>
   <url>
     <loc>https://dmgatti.github.io/GBRS_Tutorial/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/run-emase.html</loc>
+  </url>
+  <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/run-gbrs.html</loc>
+  </url>
+  <url>
+    <loc>https://dmgatti.github.io/GBRS_Tutorial/student-exercises.html</loc>
   </url>
 </urlset>
