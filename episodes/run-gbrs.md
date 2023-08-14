@@ -317,7 +317,6 @@ BOWTIE_INDEX=/projects/churchill-lab/projects/GBRS_GRCm39/eight_way_transcriptom
 
 # Singularity cache directory.
 export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache
-```
 
 
 
