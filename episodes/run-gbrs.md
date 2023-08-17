@@ -645,19 +645,33 @@ eight DO founder strains. The numbers in the directory refere to the
 release. "2112" refers to the 12th month of 2021. "v8" refers to version 8 of
 their genetic variant release.
 
-There are several 
+There are eight arguments that point to the reference files used by GBRS.
 
+```
 # GBRS Transcripts.
 GBRS_TRANSCRIPTS=${GBRS_REF_DIR}/emase.fullTranscripts.info
+```
 
+This file contains the list of transcripts in Ensembl 105 that GBRS will quantify.
+
+```
 # GBRS/EMASE gene to transcript file.
 GBRS_GENE2TRANS=${GBRS_REF_DIR}/emase.gene2transcripts.tsv
+```
 
+This file contains the list of transcripts which map to each gene. Each row
+contains one gene, followed by its associated Ensembl transcripts.
+
+```
 # GBRS Full Transcript.
 GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info
+```
 
+```
 # GBRS Emission Probs.
 GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz
+```
+
 
 # GBRS Transmission Probs.
 GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities
