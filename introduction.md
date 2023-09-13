@@ -127,11 +127,11 @@ We envision four types of users:
   lessons.
   
 
-REference data for DO:  https://zenodo.org/record/8186981  
+Reference data for DO:  https://zenodo.org/record/8186981  
   
   
   
-  
+----------------------------------------------------  
 
 
 This is a lesson created via The Carpentries Workbench. It is written in
