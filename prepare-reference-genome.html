@@ -299,7 +299,7 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Construct a pseudo-genome for Diversity Outbred mice.</li>
+<ul><li>Construct a pseudo-reference genome for Diversity Outbred mice.</li>
 </ul></div>
 </div>
 </div>
@@ -344,12 +344,14 @@ your user ID. Then create a directory called ‘gbrs’. For example:</p>
 <pre><code>module load singularity</code></pre>
 </div>
 <div class="section level3">
-<h3 id="use-vcf2vci-to-gather-strain-specific-snps-and-indels">Use <code>vcf2vci</code> to Gather Strain-Specific SNPs and
-Indels<a class="anchor" aria-label="anchor" href="#use-vcf2vci-to-gather-strain-specific-snps-and-indels"></a></h3>
+<h3 id="use-g2gtools-vcf2vci-to-gather-strain-specific-snps-and-indels">Use <code>g2gtools vcf2vci</code> to Gather Strain-Specific SNPs and
+Indels<a class="anchor" aria-label="anchor" href="#use-g2gtools-vcf2vci-to-gather-strain-specific-snps-and-indels"></a></h3>
 <p>In the first step, we insert indels from a specific strain into the
 reference genome using the <code>vcf2vci</code> command. This is written
 out to a text file in a format called “VCI”.</p>
 <p>The arguments are:</p>
+<p>:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+callout</p>
 <p>╭─ Options
 ───────────────────────────────────────────────────────────────────────────────────────────────╮
 │ * –vcf -i FILE VCF files can seperate files by “,” or have multiple -i
@@ -364,6 +366,7 @@ for the filter value │ │ –quality Filter on quality, FI=PASS │ │
 specify multiple times for more verbose output [default: 0] │ │ –help
 Show this message and exit. │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
+<p>::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
 <p>We will use a subset of the arguments, passing in the reference FASTA
 file, the SNPD and indel VCFs, the strain name to search for in the
 indel VCF, and the output file path.</p>
@@ -383,11 +386,19 @@ singularity run ${G2GTOOLS} g2gtools vcf2vci \
                             --output ${STRAIN_VCI}</code></pre>
 </div>
 <div class="section level3">
-<h3 id="use-patch-to-insert-strain-specific-snps-into-reference">Use <code>patch</code> to Insert Strain-Specific SNPs into
-Reference<a class="anchor" aria-label="anchor" href="#use-patch-to-insert-strain-specific-snps-into-reference"></a></h3>
+<h3 id="use-g2gtools-patch-to-insert-strain-specific-snps-into-reference">Use <code>g2gtools patch</code> to Insert Strain-Specific SNPs into
+Reference<a class="anchor" aria-label="anchor" href="#use-g2gtools-patch-to-insert-strain-specific-snps-into-reference"></a></h3>
 <p>Next, we insert SNPs from a specific strain into the reference genome
 using the ‘patch’ command.</p>
 <p>The arguments are:</p>
+<div id="callout1" class="callout callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
+</h3>
+<div class="callout-content">
 <p>╭─ Options
 ───────────────────────────────────────────────────────────────────────────────────────╮
 │ * –input -i FILE Fasta file to extract from [default: None] [required]
@@ -399,6 +410,9 @@ direction of VCI file │ │ –bgzip compress and index output │ │ –verb
 -v INTEGER specify multiple times for more verbose output [default: 0] │
 │ –help Show this message and exit. │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
+</div>
+</div>
+</div>
 <p>We will use the following arguments:</p>
 <p>Inputs: –input: path to the GRCm39 reference FASTA file –vci: path to
 the <strong>gzipped</strong> VCI file created by
@@ -412,14 +426,22 @@ singularity run ${G2GTOOLS} g2gtools patch \
                             --output ${PATCHED_FASTA}</code></pre>
 </div>
 <div class="section level3">
-<h3 id="use-transform-to-insert-strain-specific-indels-into-strain-fasta">Use <code>transform</code> to Insert Strain-Specific Indels into
-Strain FASTA<a class="anchor" aria-label="anchor" href="#use-transform-to-insert-strain-specific-indels-into-strain-fasta"></a></h3>
+<h3 id="use-g2gtools-transform-to-insert-strain-specific-indels-into-strain-fasta">Use <code>g2gtools transform</code> to Insert Strain-Specific Indels
+into Strain FASTA<a class="anchor" aria-label="anchor" href="#use-g2gtools-transform-to-insert-strain-specific-indels-into-strain-fasta"></a></h3>
 <p>The ‘transform’ function takes the strain-specific SNP-patched FASTA
 file, inserts indels from the VCI file, and outputs a FASTA file. This
 FASTA file contains the inferred sequence of a specific strain.</p>
 <p>Next, we insert SNPs from a specific strain into the reference genome
 using the ‘patch’ command.</p>
 <p>The arguments are:</p>
+<div id="callout2" class="callout callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout2"></a>
+</h3>
+<div class="callout-content">
 <p>╭─ Options
 ───────────────────────────────────────────────────────────────────────────────────────╮
 │ * –input -i FILE Fasta file to extract from [default: None] [required]
@@ -431,13 +453,16 @@ direction of VCI file │ │ –bgzip compress and index output │ │ –verb
 -v INTEGER specify multiple times for more verbose output [default: 0] │
 │ –help Show this message and exit. │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
+</div>
+</div>
+</div>
 <p>We will use the following arguments:</p>
 <p>Inputs: –input: path to the strain-specific patched FASTA file
 created by <code>patch</code>. –vci: path to the
 <strong>gzipped</strong> VCI file created by <code>vcf2vci</code>.</p>
 <p>Output: –output: path to transformed FASTA file with SNPs and indels
 inserted into the reference genome sequence.</p>
-<pre><code>STRAIN_FASTA=${STRAIN}.${GENOME_VERSION}.fa
+<pre><code>STRAIN_FASTA=${STRAIN}/${STRAIN}.${GENOME_VERSION}.fa
 singularity run ${G2GTOOLS} g2gtools transform \
                             --input ${PATCHED_FASTA} \
                             --vci ${STRAIN_VCI}.gz \
@@ -446,8 +471,8 @@ singularity run ${G2GTOOLS} g2gtools transform \
 file.</p>
 </div>
 <div class="section level3">
-<h3 id="use-samtools-to-index-the-strain-specific-fasta-file">Use <code>samtools</code> to Index the Strain-Specific FASTA
-file<a class="anchor" aria-label="anchor" href="#use-samtools-to-index-the-strain-specific-fasta-file"></a></h3>
+<h3 id="use-samtools-faidx-to-index-the-strain-specific-fasta-file">Use <code>samtools faidx</code> to Index the Strain-Specific FASTA
+file<a class="anchor" aria-label="anchor" href="#use-samtools-faidx-to-index-the-strain-specific-fasta-file"></a></h3>
 <p>This is a step which uses the <a href="https://www.htslib.org/doc/samtools.html" class="external-link">samtools</a> suite of
 tools to index the FASTA file.</p>
 <p>We will create a variable for the Singularity container that we use
@@ -457,11 +482,20 @@ on sumner.</p>
 <pre><code>singularity run ${SAMTOOLS} samtools faidx ${STRAIN_FASTA}</code></pre>
 </div>
 <div class="section level3">
-<h3 id="use-convert-to-create-a-strain-specific-gtf-file">Use <code>convert</code> to Create a Strain-Specific GTF File<a class="anchor" aria-label="anchor" href="#use-convert-to-create-a-strain-specific-gtf-file"></a></h3>
+<h3 id="use-g2gtools-convert-to-create-a-strain-specific-gtf-file">Use <code>g2gtools convert</code> to Create a Strain-Specific GTF
+File<a class="anchor" aria-label="anchor" href="#use-g2gtools-convert-to-create-a-strain-specific-gtf-file"></a></h3>
 <p>The <code>convert</code> function takes the strain-specific FASTA
 file, the VCI file, and the reference GTF and creates a strain-specific
 annotation file in GTF.</p>
 <p>The arguments are:</p>
+<div id="callout3" class="callout callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout3"></a>
+</h3>
+<div class="callout-content">
 <p>╭─ Options
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ * –input-file -i FILE Input file to convert to new coordinates
@@ -472,6 +506,9 @@ file [default: None] │ │ –reverse -r Reverse the direction of the
 conversion │ │ –verbose -v INTEGER specify multiple times for more
 verbose output [default: 0] │ │ –help Show this message and exit. │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
+</div>
+</div>
+</div>
 <p>We will use the following arguments:</p>
 <p>Inputs: –input-file: path to the reference GTF. –vci-file: path to
 the <strong>gzipped</strong> VCI file created by <code>vcf2vci</code>.
@@ -615,12 +652,12 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
 <hr class="half-width"><p>You can use standard markdown for static figures with the following
 syntax:</p>
 <p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
+<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout4" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout4"></a>
 </h3>
 <div class="callout-content">
 <p>Callout sections can highlight information.</p>
