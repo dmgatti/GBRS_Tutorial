@@ -83,14 +83,15 @@ Load in the Singularity software.
 module load singularity
 ```
 
-### Use `vcf2vci` to Gather Strain-Specific SNPs and Indels
+### Use `g2gtools vcf2vci` to Gather Strain-Specific SNPs and Indels
 
 In the first step, we insert indels from a specific strain into the reference
 genome using the `vcf2vci` command. This is written out to a text file in a format called "VCI". 
 
 The arguments are:
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+ ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --vcf       -i      FILE     VCF files can seperate files by "," or have multiple -i [default: None]  │
 │                                 [required]                                                               │
@@ -105,7 +106,8 @@ The arguments are:
 │    --verbose   -v      INTEGER  specify multiple times for more verbose output [default: 0]              │
 │    --help                       Show this message and exit.                                              │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We will use a subset of the arguments, passing in the reference FASTA file, 
 the SNPD and indel VCFs, the strain name to search for in the indel VCF, and the
@@ -132,14 +134,15 @@ singularity run ${G2GTOOLS} g2gtools vcf2vci \
                             --output ${STRAIN_VCI}
 ```
 
-### Use `patch` to Insert Strain-Specific SNPs into Reference
+### Use `g2gtools patch` to Insert Strain-Specific SNPs into Reference
 
 Next, we insert SNPs from a specific strain into the reference genome using the
 'patch' command.
 
 The arguments are:
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
 │ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
@@ -151,7 +154,8 @@ The arguments are:
 │    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
 │    --help                      Show this message and exit.                                       │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We will use the following arguments:
 
@@ -171,7 +175,7 @@ singularity run ${G2GTOOLS} g2gtools patch \
                             --output ${PATCHED_FASTA}
 ```
   
-### Use `transform`  to Insert Strain-Specific Indels into Strain FASTA
+### Use `g2gtools transform`  to Insert Strain-Specific Indels into Strain FASTA
 
 The 'transform' function takes the strain-specific SNP-patched FASTA file,
 inserts indels from the VCI file, and outputs a FASTA file. This FASTA file 
@@ -182,7 +186,8 @@ Next, we insert SNPs from a specific strain into the reference genome using the
 
 The arguments are:
    
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
 │ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
@@ -194,7 +199,8 @@ The arguments are:
 │    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
 │    --help                      Show this message and exit.                                       │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We will use the following arguments:
 
@@ -207,7 +213,7 @@ Output:
 the reference genome sequence.
 
 ```
-STRAIN_FASTA=${STRAIN}.${GENOME_VERSION}.fa
+STRAIN_FASTA=${STRAIN}/${STRAIN}.${GENOME_VERSION}.fa
 singularity run ${G2GTOOLS} g2gtools transform \
                             --input ${PATCHED_FASTA} \
                             --vci ${STRAIN_VCI}.gz \
@@ -216,7 +222,7 @@ singularity run ${G2GTOOLS} g2gtools transform \
 
 We now have a pseudo-reference genome in the strain-specific FASTA file.
 
-### Use `samtools` to Index the Strain-Specific FASTA file
+### Use `samtools faidx` to Index the Strain-Specific FASTA file
 
 This is a step which uses the [samtools](https://www.htslib.org/doc/samtools.html) 
 suite of tools to index the FASTA file.
@@ -233,14 +239,15 @@ Then we will use `samtools` to index the FASTA file.
 singularity run ${SAMTOOLS} samtools faidx ${STRAIN_FASTA}
 ```
 
-### Use `convert` to Create a Strain-Specific GTF File
+### Use `g2gtools convert` to Create a Strain-Specific GTF File
 
  The `convert` function takes the strain-specific FASTA file, the VCI file, 
  and the reference GTF and creates a strain-specific annotation file in GTF.
 
 The arguments are:
   
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+
 ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input-file   -i      FILE                   Input file to convert to new coordinates [default: None] [required]  │
 │ *  --vci-file     -c      FILE                   VCI file [default: None] [required]                                  │
@@ -250,7 +257,8 @@ The arguments are:
 │    --verbose      -v      INTEGER                specify multiple times for more verbose output [default: 0]          │
 │    --help                                        Show this message and exit.                                          │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  
 
 We will use the following arguments:
 
