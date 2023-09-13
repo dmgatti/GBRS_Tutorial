@@ -27,7 +27,7 @@ of the genome and g2gtools is able to map positions between the reference
 genome and the modified genome.
 
 
-## Creating Pseudogenomes and Imputed Transcriptomes
+## Creating Pseudo-reference Genomes and Transcriptomes
 
 The first step in creating the reference files for GBRS is to create a set of
 genomes and transcriptomes with SNPs and Indels from other strains inserted
@@ -46,7 +46,7 @@ We need two input files and we will produce one output file per strain.
 The first file is the reference genome in FASTA format. 
 
 ```
-REF=/projects/omics_share/mouse/GRCm39/genome/sequence/ensembl/v105/Mus_musculus.GRCm39.dna.primary_assembly.fa
+REF_FASTA=/projects/omics_share/mouse/GRCm39/genome/sequence/ensembl/v105/Mus_musculus.GRCm39.dna.primary_assembly.fa
 ```
 
 The second file is a VCF containing the SNPs of one or more strains. This file
@@ -77,72 +77,220 @@ Then change into the directory that you just created.
 cd /fastscratch/dgatti/gbrs
 ```
 
-### vcf2vci
+Load in the Singularity software.
+
+```
+module load singularity
+```
+
+### Use `vcf2vci` to Gather Strain-Specific SNPs and Indels
 
 In the first step, we insert indels from a specific strain into the reference
-genome using the 'vcf2vci' command. This is written out to a text file in a format called "VCI". 
+genome using the `vcf2vci` command. This is written out to a text file in a format called "VCI". 
 
 The arguments are:
 
-╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ *  --vcf       -i      FILE     VCF files can seperate files by "," or have multiple -i [default: None]         │
-│                                 [required]                                                                      │
-│ *  --fasta     -f      FILE     Fasta file matching VCF information [default: None] [required]                  │
-│ *  --strain    -s      TEXT     Name of strain/sample (column in VCF file) [default: None] [required]           │
-│    --output    -o      FILE     Name of output file [default: None]                                             │
-│    --diploid   -d               Create diploid VCI file                                                         │
-│    --keep                       Keep track of VCF lines that could not be converted to VCI file                 │
-│    --pass                       Use only VCF lines that have a PASS for the filter value                        │
-│    --quality                    Filter on quality, FI=PASS                                                      │
-│    --no-bgzip                   DO NOT compress and index output                                                │
-│    --verbose   -v      INTEGER  specify multiple times for more verbose output [default: 0]                     │
-│    --help                       Show this message and exit.                                                     │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --vcf       -i      FILE     VCF files can seperate files by "," or have multiple -i [default: None]  │
+│                                 [required]                                                               │
+│ *  --fasta     -f      FILE     Fasta file matching VCF information [default: None] [required]           │
+│ *  --strain    -s      TEXT     Name of strain/sample (column in VCF file) [default: None] [required]    │
+│    --output    -o      FILE     Name of output file [default: None]                                      │
+│    --diploid   -d               Create diploid VCI file                                                  │
+│    --keep                       Keep track of VCF lines that could not be converted to VCI file          │
+│    --pass                       Use only VCF lines that have a PASS for the filter value                 │
+│    --quality                    Filter on quality, FI=PASS                                               │
+│    --no-bgzip                   DO NOT compress and index output                                         │
+│    --verbose   -v      INTEGER  specify multiple times for more verbose output [default: 0]              │
+│    --help                       Show this message and exit.                                              │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯
   
 We will use a subset of the arguments, passing in the reference FASTA file, 
-the indel VCF, the strain name to search for in the indel VCF, and the output
-file path.
+the SNPD and indel VCFs, the strain name to search for in the indel VCF, and the
+output file path.
+
+Inputs:
+--fasta: path to the GRCm39 reference FASTA file
+--vcf: path(s) to the Sanger VCFs for SNPs and indels. Both can be passed in.
+
+Output:
+--output: A VCI file, which is a custom file format, akin to a BED format, 
+which lists the positions and sequences of indels. Note that, while we list
+the output file extension as "vci", `g2gtools` will gzip and index the file, 
+so we will need to add the '.gz' extension when we use the file in downstream
+commands.
   
 ```
-g2gtools vcf2vci --fasta ${REF} \
-                 --vcf ${VCF_INDELS} \
-                 --strain ${STRAIN}  \
-                 --output ${STRAIN}/REF-to-${STRAIN}.vci
+STRAIN_VCI=${STRAIN}/REF-to-${STRAIN}.vci
+singularity run ${G2GTOOLS} g2gtools vcf2vci \
+                            --fasta ${REF_FASTA} \
+                            --vcf ${VCF_INDELS} \
+                            --vcf ${VCF_SNPS} \
+                            --strain ${STRAIN}  \
+                            --output ${STRAIN_VCI}
 ```
 
-### patch
+### Use `patch` to Insert Strain-Specific SNPs into Reference
 
 Next, we insert SNPs from a specific strain into the reference genome using the
 'patch' command.
 
 The arguments are:
   
-╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]                            │
-│ *  --vci      -c      FILE     VCI File to use [default: None] [required]                                       │
-│    --output   -o      FILE     Name of output file [default: None]                                              │
-│    --bed      -b      FILE     BED file name [default: None]                                                    │
-│    --region   -r      TEXT     Region to extract in chromosome:start-end format [default: None]                 │
-│    --reverse                   Reverse the direction of VCI file                                                │
-│    --bgzip                     compress and index output                                                        │
-│    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]                      │
-│    --help                      Show this message and exit.                                                      │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
+│ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
+│    --output   -o      FILE     Name of output file [default: None]                               │
+│    --bed      -b      FILE     BED file name [default: None]                                     │
+│    --region   -r      TEXT     Region to extract in chromosome:start-end format [default: None]  │
+│    --reverse                   Reverse the direction of VCI file                                 │
+│    --bgzip                     compress and index output                                         │
+│    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
+│    --help                      Show this message and exit.                                       │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-> DMG: Can;t figure out the arguments here. Looked in 
-https://github.com/TheJacksonLaboratory/cs-nf-pipelines/blob/main/modules/g2gtools/g2gtools_patch.nf 
-and can't figure it out.
+We will use the following arguments:
+
+Inputs:
+--input: path to the GRCm39 reference FASTA file
+--vci: path to the **gzipped** VCI file created by `vcf2vci`.
+
+Output:
+--output: path to patched FASTA file with SNPs inserted into the
+reference genome sequence.
 
 ```
-g2gtools patch --input ${REF} \
-               --vci ${VCF_SNPS} \
-               --output ${STRAIN}/${STRAIN}.patched.fa
+PATCHED_FASTA=${STRAIN}/${STRAIN}.patched.fa
+singularity run ${G2GTOOLS} g2gtools patch \
+                            --input ${REF_FASTA} \
+                            --vci ${STRAIN_VCI}.gz \
+                            --output ${PATCHED_FASTA}
 ```
   
-### transform
+### Use `transform`  to Insert Strain-Specific Indels into Strain FASTA
 
-The 'transform' function takes the strain-specific SNP-patched FASTA file and
-combines it with the VCI file and outputs a FASTA file. 
+The 'transform' function takes the strain-specific SNP-patched FASTA file,
+inserts indels from the VCI file, and outputs a FASTA file. This FASTA file 
+contains the inferred sequence of a specific strain.
+
+Next, we insert SNPs from a specific strain into the reference genome using the
+'patch' command.
+
+The arguments are:
+
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
+│ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
+│    --output   -o      FILE     Name of output file [default: None]                               │
+│    --bed      -b      FILE     BED file name [default: None]                                     │
+│    --region   -r      TEXT     Region to extract in chromosome:start-end format [default: None]  │
+│    --reverse                   Reverse the direction of VCI file                                 │
+│    --bgzip                     compress and index output                                         │
+│    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
+│    --help                      Show this message and exit.                                       │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+We will use the following arguments:
+
+Inputs:
+--input: path to the strain-specific patched FASTA file created by `patch`.
+--vci: path to the **gzipped** VCI file created by `vcf2vci`.
+
+Output:
+--output: path to transformed FASTA file with SNPs and indels inserted into
+the reference genome sequence.
+
+```
+STRAIN_FASTA=${STRAIN}.${GENOME_VERSION}.fa
+singularity run ${G2GTOOLS} g2gtools transform \
+                            --input ${PATCHED_FASTA} \
+                            --vci ${STRAIN_VCI}.gz \
+                            --output ${STRAIN_FASTA}
+```
+
+We now have a pseudo-reference genome in the strain-specific FASTA file.
+
+### Use `samtools` to Index the Strain-Specific FASTA file
+
+This is a step which uses the [samtools](https://www.htslib.org/doc/samtools.html) 
+suite of tools to index the FASTA file.
+
+We will create a variable for the Singularity container that we use on sumner.
+
+```
+/projects/omics_share/meta/containers/quay.io-jaxcompsci-samtools_with_bc-1.3.1.img
+```
+
+Then we will use `samtools` to index the FASTA file.
+
+```
+singularity run ${SAMTOOLS} samtools faidx ${STRAIN_FASTA}
+```
+
+### Use `convert` to Create a Strain-Specific GTF File
+
+ The `convert` function takes the strain-specific FASTA file, the VCI file, 
+ and the reference GTF and creates a strain-specific annotation file in GTF.
+
+The arguments are:
+
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input-file   -i      FILE                   Input file to convert to new coordinates [default: None] [required]  │
+│ *  --vci-file     -c      FILE                   VCI file [default: None] [required]                                  │
+│ *  --file-format  -f      [BAM|SAM|GFF|GTF|BED]  Input file format [default: None] [required]                         │
+│    --output       -o      FILE                   Name of output file [default: None]                                  │
+│    --reverse      -r                             Reverse the direction of the conversion                              │
+│    --verbose      -v      INTEGER                specify multiple times for more verbose output [default: 0]          │
+│    --help                                        Show this message and exit.                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+We will use the following arguments:
+
+Inputs:
+--input-file: path to the reference GTF.
+--vci-file: path to the **gzipped** VCI file created by `vcf2vci`.
+--file-format: string indicating a GTF file. Lower case since it will be used
+as a file name extension.
+
+Output:
+--output: path to converted GTF file with SNPs and indels inserted into
+the reference transcript and coordinates shifted to the strain-specific 
+coordinates.
+
+```
+singularity run ${G2GTOOLS} 
+```
+
+Next, we need the path to the reference GTF. We have selected the Ensembl 105
+annotation for this lesson.
+
+```
+REF_GTF=/projects/omics_share/mouse/GRCm39/transcriptome/annotation/ensembl/v105/Mus_musculus.GRCm39.105.chr.gtf
+```
+
+We also need to specify the annotation file format in lower case because it
+will be used as a file name extension.
+
+```
+ANNOT_FORMAT=gtf
+```
+
+```
+STRAIN_GTF=${STRAIN}/${STRAIN}.${GENOME_VERSION}.${ANNOT_FORMAT}
+singularity run ${G2GTOOLS} g2gtools convert \
+                            --input-file ${REF_GTF} \
+                            --vci-file ${STRAIN_VCI}.gz \
+                            --file-format ${ANNOT_FORMAT} \
+                            --output ${STRAIN_GTF}
+```
+
+We now have two key files that are used by GBRS:
+
+- the strain-specific FASTA file, which contains the strain's inferred sequence,
+and
+- the strain-specific GTF file, which contains the strain's inferred annotation.
+
+
 
 ```
 g2gtools transform -i ${STRAIN}/${STRAIN}.patched.fa -c ${STRAIN}/REF-to-${STRAIN}.chain -o ${STRAIN}/${STRAIN}.fa
