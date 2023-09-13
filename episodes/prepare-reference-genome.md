@@ -14,7 +14,7 @@ exercises: 15
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Construct a pseudo-genome for Diversity Outbred mice.
+- Construct a pseudo-reference genome for Diversity Outbred mice.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -90,7 +90,7 @@ genome using the `vcf2vci` command. This is written out to a text file in a form
 
 The arguments are:
 
-```
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --vcf       -i      FILE     VCF files can seperate files by "," or have multiple -i [default: None]  │
 │                                 [required]                                                               │
@@ -105,7 +105,7 @@ The arguments are:
 │    --verbose   -v      INTEGER  specify multiple times for more verbose output [default: 0]              │
 │    --help                       Show this message and exit.                                              │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-```
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We will use a subset of the arguments, passing in the reference FASTA file, 
 the SNPD and indel VCFs, the strain name to search for in the indel VCF, and the
@@ -139,7 +139,7 @@ Next, we insert SNPs from a specific strain into the reference genome using the
 
 The arguments are:
 
-```
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
 │ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
@@ -151,7 +151,7 @@ The arguments are:
 │    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
 │    --help                      Show this message and exit.                                       │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
-```
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We will use the following arguments:
 
@@ -181,8 +181,8 @@ Next, we insert SNPs from a specific strain into the reference genome using the
 'patch' command.
 
 The arguments are:
-
-```
+   
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
 │ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
@@ -194,7 +194,7 @@ The arguments are:
 │    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
 │    --help                      Show this message and exit.                                       │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
-```
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We will use the following arguments:
 
@@ -240,16 +240,18 @@ singularity run ${SAMTOOLS} samtools faidx ${STRAIN_FASTA}
 
 The arguments are:
   
-> ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-> │ *  --input-file   -i      FILE                   Input file to convert to new coordinates [default: None] [required]  │
-> │ *  --vci-file     -c      FILE                   VCI file [default: None] [required]                                  │
-> │ *  --file-format  -f      [BAM|SAM|GFF|GTF|BED]  Input file format [default: None] [required]                         │
-> │    --output       -o      FILE                   Name of output file [default: None]                                  │
-> │    --reverse      -r                             Reverse the direction of the conversion                              │
-> │    --verbose      -v      INTEGER                specify multiple times for more verbose output [default: 0]          │
-> │    --help                                        Show this message and exit.                                          │
-> ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-  
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input-file   -i      FILE                   Input file to convert to new coordinates [default: None] [required]  │
+│ *  --vci-file     -c      FILE                   VCI file [default: None] [required]                                  │
+│ *  --file-format  -f      [BAM|SAM|GFF|GTF|BED]  Input file format [default: None] [required]                         │
+│    --output       -o      FILE                   Name of output file [default: None]                                  │
+│    --reverse      -r                             Reverse the direction of the conversion                              │
+│    --verbose      -v      INTEGER                specify multiple times for more verbose output [default: 0]          │
+│    --help                                        Show this message and exit.                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  
+
 We will use the following arguments:
 
 Inputs:
