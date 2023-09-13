@@ -304,7 +304,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Genotyping by RNA Sequencing</a></p>
 <hr>
-<p> Last updated on 2023-08-14 | 
+<p> Last updated on 2023-09-13 | 
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
@@ -345,10 +345,12 @@ quantification.</li>
 </h2>
 <hr class="half-width">
 <p>Genotyping by RNA Sequencing (<strong>GBRS</strong>) is a suite of
-tools which estimates allele-specific transcript expression in
-multi-founder mouse crosses. GBRS can also by used to analyze transcript
-expression in other organisms, but this tutorial will focus on mouse
-crosses.</p>
+tools which estimates allele-specific transcript expression and performs
+haplotype reconstruction in multi-founder mouse crosses. GBRS can also
+by used to analyze transcript expression in other organisms, but this
+tutorial will focus on mouse crosses. We have configured GBRS to use the
+<a href="https://www.nextflow.io/" class="external-link">Nextflow</a> workflow software and <a href="https://docs.sylabs.io/guides/3.5/user-guide/introduction.html" class="external-link">Singularity</a>
+containers.</p>
 </section><section id="prerequisites"><h2 class="section-heading">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
 </h2>
 <hr class="half-width">
@@ -358,8 +360,8 @@ familiar with bash command-line programming.</p>
 <ol style="list-style-type: decimal">
 <li>you understand the folloiwng terms: inbred strain, recombinant
 inbred strain, multi-founder advanced generation intercross;</li>
-<li>you are familiar with the <a href="https://www.jax.org/strain/009376" class="external-link">Diversity Outbred</a> mouse
-population;</li>
+<li>you are familiar with the <a href="https://www.jax.org/strain/009376" class="external-link">Diversity Outbred</a> (J:DO)
+mouse population;</li>
 <li>you understand the concepts of haplotype reconstruction and allele-
 specific expression;</li>
 <li>you understand what RNASeq analysis is used for and what type of
@@ -383,19 +385,20 @@ mismatches. These methods work well for reads derived from mice with
 genomes that are similar to the reference, but may not provide accurate
 alignments for mouse genome that diverge from the reference genome. This
 may be particularly important when users need allele-specific expression
-estimates.</p>
+estimates. Allele-specific expression provides an estimate of the
+expression of each of the two alleles in a diploid sample.</p>
 <p>GBRS provides a suite of tools which aligns reads to pseudogenomes
-and then quantifies allele-specific expression in multi-foundr mouse
-crosses. A “<strong>pseudo-genome</strong>”” is a reference genome with
+and then quantifies allele-specific expression in multi-founder mouse
+crosses. A “<strong>pseudo-genome</strong>” is a reference genome with
 SNPs and indels inserted from the genome of a non-reference mouse
 strain. By analogy, we can also create a
 “<strong>pseudo-transcriptome</strong>” for a non-reference inbred
 strain, which involves inserting SNPs and indels into the reference
 transcriptome. We then align RNASeq reads to multiple
 pseudo-transriptomes and use <a href="https://pubmed.ncbi.nlm.nih.gov/29444201/" class="external-link">expectation
-maximization</a> to estimate allele-specific transcript and total gene
-counts. In the process, we also reconsruct the haplotypes of each mouse
-in terms of the founder strain haplotypes.</p>
+maximization</a> to estimate allele-specific transcript counts and total
+gene counts. In the process, we also reconstruct the haplotypes of each
+mouse in terms of the founder strain haplotypes.</p>
 <p>The GBRS suite consists of three tools:</p>
 <ol style="list-style-type: decimal">
 <li>g2gtools: given a reference genome and a VCF containing SNPs and
@@ -406,7 +409,10 @@ reference genome.</li>
 a set of pseudogenomes and a transcriptome, create a multi-way
 transcriptome. EMASE also produces estimates of allele-specific
 transcript counts.</li>
-<li>GBRS:</li>
+<li>GBRS: Genotyping-by-RNA-Sequencing uses the pesudo-genomes created
+by g2gtools and the RNASeq read alignments from EMASE to reconstruct the
+haplotypes of each sample in terms of the founder strain
+haplotypes.</li>
 </ol>
 <p>GBRS is designed to work well with bulk RNASeq off with sufficient
 read depth to confidently call genetic variants. It does not work well
@@ -424,19 +430,33 @@ and estimation of allele-specific transcript expression. All users may
 not need to perform all steps.</p>
 <p>We envision four types of users:</p>
 <ol style="list-style-type: decimal">
-<li>Users who are analyzing J:DO data</li>
+<li>Users who are analyzing <a href="J:DO">https://www.jax.org/strain/009376</a> data</li>
 </ol>
 <ul>
-<li>inside of The Jackson Laboratory</li>
-<li>outside of The Jackson Laboratory</li>
+<li>inside of The Jackson Laboratory This is the simplest case. The
+Next-Generation Sequencing Operations group has created the reference
+files and a pipeline to execute this workflow. This case is covered in
+the “Running GBRS” lesson.</li>
+<li>outside of The Jackson Laboratory In this case, users will need to
+download and store the DO-related reference files and have Nextflow
+installed on their computing cluster. This case is covered in the
+“Running GBRS” lesson.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li>Users who are analyzing other mouse crosses</li>
 </ol>
 <ul>
-<li>inside of The Jackson Laboratory</li>
-<li>outside of The Jackson Laboratory</li>
+<li>inside of The Jackson Laboratory Users will need to create reference
+files for the founder strains in their cross and point to them in their
+GBRS scripts. This is described in the “Preparing GBRS Reference
+Genomes” and “Preparing GBRS Reference Transcriptomes” lessons.</li>
+<li>outside of The Jackson Laboratory Users will need to create
+reference files for the founder strains in their cross and point to them
+in their GBRS scripts. This is described in the “Preparing GBRS
+Reference Genomes” and “Preparing GBRS Reference Transcriptomes”
+lessons.</li>
 </ul>
+<p>REference data for DO: <a href="https://zenodo.org/record/8186981" class="external-link uri">https://zenodo.org/record/8186981</a></p>
 <p>This is a lesson created via The Carpentries Workbench. It is written
 in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
 for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
@@ -576,14 +596,13 @@ this:</p>
 </h3>
 <div class="callout-content">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>GBRS is a suite of tools which includes pseudo-genome creation,
+allele- specific transcript estimation, and haplotype
+reconstruction.</li>
+<li>Users who have J:DO data and work at The Jackson Laboratory can use
+reference data stored on the high-performance computing cluster.</li>
+<li>Users outside of The Jackson Laboratory will need to create or
+download the reference files.</li>
 </ul>
 </div>
 </div>
@@ -594,10 +613,10 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-prepare-reference-genome"><p>Content from <a href="prepare-reference-genome.html">Preparing GBRS Reference Genomes</a></p>
 <hr>
-<p> Last updated on 2023-08-11 | 
+<p> Last updated on 2023-09-13 | 
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-reference-genome.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
+<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 75 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -609,9 +628,9 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>What is Genotyping by RNA Sequencing (GBRS)?</li>
-<li>What analyses does GBRS provide?</li>
-<li>What are the steps in a GBRS analysis?</li>
+<li>Why do we need to align to a non-reference genome?</li>
+<li>What is a pseudo-genome?</li>
+<li>How do we create a pseudo-genome?</li>
 </ul>
 </div>
 </div>
@@ -621,8 +640,7 @@ any links that you are not going to use.
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Explain what GBRS does.</li>
-<li>List the steps in a GBRS analysis.</li>
+<li>Construct a pseudo-genome for Diversity Outbred mice.</li>
 </ul>
 </div>
 </div>
@@ -632,25 +650,147 @@ any links that you are not going to use.
 <section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
-<p>This is a lesson created via The Carpentries Workbench. It is written
-in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
-for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
-Markdown</a> for dynamic files that can render code into output. Please
-refer to the <a href="https://carpentries.github.io/sandpaper-docs/" class="external-link">Introduction to The
-Carpentries Workbench</a> for full documentation.</p>
-<p>What you need to know is that there are three sections required for a
-valid Carpentries lesson:</p>
-<ol style="list-style-type: decimal">
-<li>
-<code>questions</code> are displayed at the beginning of the episode
-to prime the learner for the content.</li>
-<li>
-<code>objectives</code> are the learning objectives for an episode
-displayed with the questions.</li>
-<li>
-<code>keypoints</code> are displayed at the end of the episode to
-reinforce the objectives.</li>
-</ol>
+<p><a href="https://github.com/churchill-lab/g2gtools" class="external-link">Genome-to-Genome
+Tools</a>, (g2gtools) is a suite of tools which incorporates SNPS and
+indels from mouse strains into the reference genome. Inserting these
+variants may lead to changes in the length of the genome and g2gtools is
+able to map positions between the reference genome and the modified
+genome.</p>
+</section><section id="creating-pseudogenomes-and-imputed-transcriptomes"><h2 class="section-heading">Creating Pseudogenomes and Imputed Transcriptomes<a class="anchor" aria-label="anchor" href="#creating-pseudogenomes-and-imputed-transcriptomes"></a>
+</h2>
+<hr class="half-width">
+<p>The first step in creating the reference files for GBRS is to create
+a set of genomes and transcriptomes with SNPs and Indels from other
+strains inserted into the reference genome.</p>
+<div class="section level3">
+<h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h3>
+<p>We will use the g2gtools container stored in the public reference
+area on sumner.</p>
+<pre><code>G2GTOOLS=/projects/omics_share/meta/containers/quay.io-jaxcompsci-g2gtools-74926ad.img</code></pre>
+<p>We need two input files and we will produce one output file per
+strain.</p>
+<p>The first file is the reference genome in FASTA format.</p>
+<pre><code>REF=/projects/omics_share/mouse/GRCm39/genome/sequence/ensembl/v105/Mus_musculus.GRCm39.dna.primary_assembly.fa</code></pre>
+<p>The second file is a VCF containing the SNPs of one or more strains.
+This file should contain the strain(s) that you have in your mouse
+cross.</p>
+<pre><code>VCF_INDELS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
+VCF_SNPS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz</code></pre>
+<p>Next, we need to pass in the name of the strain for which we are
+creating the VCI file. In this case, we will use DBA/2J.</p>
+<pre><code><span><span class="va">STRAIN</span><span class="op">=</span><span class="va">DBA_2J</span></span></code></pre>
+<p>We will work on the sumner /fastscratch area. Create a directory with
+your user ID. Then create a directory called ‘gbrs’. For example:</p>
+<pre><code>mkdir -p /fastscratch/dgatti/gbrs/${STRAIN}</code></pre>
+<p>Then change into the directory that you just created.</p>
+<pre><code><span><span class="va">cd</span> <span class="op">/</span><span class="va">fastscratch</span><span class="op">/</span><span class="va">dgatti</span><span class="op">/</span><span class="va">gbrs</span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="vcf2vci">vcf2vci<a class="anchor" aria-label="anchor" href="#vcf2vci"></a>
+</h3>
+<p>In the first step, we insert indels from a specific strain into the
+reference genome using the ‘vcf2vci’ command. This is written out to a
+text file in a format called “VCI”.</p>
+<p>The arguments are:</p>
+<p>╭─ Options
+───────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ * –vcf -i FILE VCF files can seperate files by “,” or have multiple -i
+[default: None] │ │ [required] │ │ * –fasta -f FILE Fasta file matching
+VCF information [default: None] [required] │ │ * –strain -s TEXT Name of
+strain/sample (column in VCF file) [default: None] [required] │ │
+–output -o FILE Name of output file [default: None] │ │ –diploid -d
+Create diploid VCI file │ │ –keep Keep track of VCF lines that could not
+be converted to VCI file │ │ –pass Use only VCF lines that have a PASS
+for the filter value │ │ –quality Filter on quality, FI=PASS │ │
+–no-bgzip DO NOT compress and index output │ │ –verbose -v INTEGER
+specify multiple times for more verbose output [default: 0] │ │ –help
+Show this message and exit. │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
+<p>We will use a subset of the arguments, passing in the reference FASTA
+file, the indel VCF, the strain name to search for in the indel VCF, and
+the output file path.</p>
+<pre><code>g2gtools vcf2vci --fasta ${REF} \
+                 --vcf ${VCF_INDELS} \
+                 --strain ${STRAIN}  \
+                 --output ${STRAIN}/REF-to-${STRAIN}.vci</code></pre>
+</div>
+<div class="section level3">
+<h3 id="patch">patch<a class="anchor" aria-label="anchor" href="#patch"></a>
+</h3>
+<p>Next, we insert SNPs from a specific strain into the reference genome
+using the ‘patch’ command.</p>
+<p>The arguments are:</p>
+<p>╭─ Options
+───────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ * –input -i FILE Fasta file to extract from [default: None] [required]
+│ │ * –vci -c FILE VCI File to use [default: None] [required] │ │
+–output -o FILE Name of output file [default: None] │ │ –bed -b FILE BED
+file name [default: None] │ │ –region -r TEXT Region to extract in
+chromosome:start-end format [default: None] │ │ –reverse Reverse the
+direction of VCI file │ │ –bgzip compress and index output │ │ –verbose
+-v INTEGER specify multiple times for more verbose output [default: 0] │
+│ –help Show this message and exit. │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
+<blockquote>
+<p>DMG: Can;t figure out the arguments here. Looked in <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/blob/main/modules/g2gtools/g2gtools_patch.nf" class="external-link uri">https://github.com/TheJacksonLaboratory/cs-nf-pipelines/blob/main/modules/g2gtools/g2gtools_patch.nf</a>
+and can’t figure it out.</p>
+</blockquote>
+<pre><code>g2gtools patch --input ${REF} \
+               --vci ${VCF_SNPS} \
+               --output ${STRAIN}/${STRAIN}.patched.fa</code></pre>
+</div>
+<div class="section level3">
+<h3 id="transform">transform<a class="anchor" aria-label="anchor" href="#transform"></a>
+</h3>
+<p>The ‘transform’ function takes the strain-specific SNP-patched FASTA
+file and combines it with the VCI file and outputs a FASTA file.</p>
+<pre><code>g2gtools transform -i ${STRAIN}/${STRAIN}.patched.fa -c ${STRAIN}/REF-to-${STRAIN}.chain -o ${STRAIN}/${STRAIN}.fa
+g2gtools convert   -c ${STRAIN}/REF-to-${STRAIN}.chain -i ${GTF} -f gtf -o ${STRAIN}/${STRAIN}.gtf
+
+g2gtools gtf2db                -i ${STRAIN}/${STRAIN}.gtf -o ${STRAIN}/${STRAIN}.gtf.db
+g2gtools extract --transcripts -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}.gtf.db &gt; ${STRAIN}/${STRAIN}.transcripts.fa
+g2gtools extract --genes       -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}.gtf.db &gt; ${STRAIN}/${STRAIN}.genes.fa
+g2gtools extract --exons       -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}.gtf.db &gt; ${STRAIN}/${STRAIN}.exons.fa</code></pre>
+<pre><code> g2gtools --help
+
+ Usage: g2gtools [OPTIONS] COMMAND [ARGS]...
+
+ g2gtools
+
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --version                                                                                                 │
+│ --install-completion        [bash|zsh|fish|powershell|pwsh]  Install completion for the specified shell.  │
+│                                                              [default: None]                              │
+│ --show-completion           [bash|zsh|fish|powershell|pwsh]  Show completion for the specified shell, to  │
+│                                                              copy it or customize the installation.       │
+│                                                              [default: None]                              │
+│ --help                                                       Show this message and exit.                  │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ convert           Convert coordinates of BAM|SAM|GTF|GFF|BED files                                        │
+│ extract           Extract subsequence from a fasta file given a region                                    │
+│ fasta-format      Reformat a Fasta file                                                                   │
+│ gtf2db            Convert a GTF file to a G2G DB file                                                     │
+│ parse-region      Parse a region from the command line.  Useful for verifying regions.                    │
+│ patch             Patch SNPs onto the reference sequence                                                  │
+│ transform         Incorporate indels onto the input sequence                                              │
+│ vcf2vci           Create VCI file from VCF file(s)                                                        │
+│ vci-query         Query a VCI file.                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
+<p>For each strain the following is produced:</p>
+<pre><code><span><span class="va">A_J.39.exons.fa</span></span>
+<span><span class="va">A_J.39.fa</span></span>
+<span><span class="va">A_J.39.fa.fai</span></span>
+<span><span class="va">A_J.39.genes.fa</span></span>
+<span><span class="va">A_J.39.gtf</span></span>
+<span><span class="va">A_J.39.gtf.db</span></span>
+<span><span class="va">A_J.39.gtf.unmapped</span></span>
+<span><span class="va">A_J.39.patched.fa</span></span>
+<span><span class="va">A_J.39.patched.fa.fai</span></span>
+<span><span class="va">A_J.39.transcripts.fa</span></span>
+<span><span class="va">A_J.39.vci.gz</span></span>
+<span><span class="va">A_J.39.vci.gz.tbi</span></span></code></pre>
 <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
@@ -677,7 +817,7 @@ View”</p>
 </h3>
 <div class="callout-content">
 <p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -728,6 +868,7 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
+</div>
 </div>
 </div>
 </div>
@@ -2074,7 +2215,7 @@ reinforce the objectives.</li>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Inline instructor notes can help inform instructors of timing
 challenges associated with the lessons. They appear in the “Instructor
@@ -2108,7 +2249,7 @@ View”</p>
   Output
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2139,7 +2280,7 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -2251,8 +2392,8 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/instructor/aio.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/instructor/aio.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2023-09-12",
-  "datePublished": "2023-09-12"
+  "dateModified": "2023-09-13",
+  "datePublished": "2023-09-13"
 }
 
   </script><script>
