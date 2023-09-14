@@ -193,7 +193,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="prepare-reference-genome.html">2. Preparing GBRS Reference Genomes</a>
+        <a href="prepare-reference-genome.html">2. Preparing GBRS Pseudo-References</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -596,7 +596,7 @@ download the reference files.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
  -->
-</section></section><section id="aio-prepare-reference-genome"><p>Content from <a href="prepare-reference-genome.html">Preparing GBRS Reference Genomes</a></p>
+</section></section><section id="aio-prepare-reference-genome"><p>Content from <a href="prepare-reference-genome.html">Preparing GBRS Pseudo-References</a></p>
 <hr>
 <p> Last updated on 2023-09-14 | 
         
@@ -613,8 +613,8 @@ any links that you are not going to use.
 <h3 class="card-title">Questions</h3>
 <ul>
 <li>Why do we need to align to a non-reference genome?</li>
-<li>What is a pseudo-genome?</li>
-<li>How do we create a pseudo-genome?</li>
+<li>What is a pseudo-reference genome?</li>
+<li>How do we create a pseudo-reference genome?</li>
 </ul>
 </div>
 </div>
@@ -652,6 +652,9 @@ strains inserted into the reference genome.</p>
 <p>We will use the g2gtools container stored in the public reference
 area on sumner.</p>
 <pre><code>G2GTOOLS=/projects/omics_share/meta/containers/quay.io-jaxcompsci-g2gtools-74926ad.img</code></pre>
+<p>We will also use a tool called <a href="http://www.htslib.org/doc/samtools.html" class="external-link">samtools</a> to query and
+modify sequence and annotation files.</p>
+<pre><code>SAMTOOLS=/projects/omics_share/meta/containers/quay.io-biocontainers-samtools-1.14--hb421002_0.img</code></pre>
 <p>We need two input files and we will produce one output file per
 strain.</p>
 <p>The first file is the reference genome in FASTA format.</p>
@@ -664,6 +667,106 @@ VCF_SNPS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_21
 <p>Next, we need to pass in the name of the strain for which we are
 creating the VCI file. In this case, we will use DBA/2J.</p>
 <pre><code><span><span class="va">STRAIN</span><span class="op">=</span><span class="va">DBA_2J</span></span></code></pre>
+<div id="challenge-1-viewing-strain-names-in-a-vcf" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-1-viewing-strain-names-in-a-vcf" class="callout-inner">
+<h3 class="callout-title">Challenge 1: Viewing Strain Names in a
+VCF<a class="anchor" aria-label="anchor" href="#challenge-1-viewing-strain-names-in-a-vcf"></a>
+</h3>
+<div class="callout-content">
+<p>There are 50 strains in the VCF SNP file. What are their names? The
+strain names are stored in the VCF header. The <code>samtools</code>
+container also includes a tool called <code>tabix</code>, which queries
+and indexes tab-delimited files. Run the <code>samtools</code> container
+and look at the tabix help page. Find a command that will print out the
+SNP VCF header and find the strain names.</p>
+<pre><code>singularity run ${SAMTOOLS} tabix --help</code></pre>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
+  Output
+  </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
+the SNP VCF. In this course, we are using long option names. You could
+also use ‘-H’ to achieve the same result.</p>
+<pre><code>$ singularity run ${SAMTOOLS} tabix --only-header ${VCF_SNPS}</code></pre>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code><span><span class="co">##fileformat=VCFv4.2</span></span>
+<span><span class="co">##FILTER=&lt;ID=PASS,Description="All filters passed"&gt;</span></span>
+<span><span class="co">##bcftoolsVersion=1.13+htslib-1.13</span></span>
+<span><span class="co">##bcftoolsCommand=mpileup -f Mus_musculus.GRCm39.dna.toplevel.fa.gz -b samples -g 10 -a FORMAT/DP,FORMAT/AD,FORMAT/ADF,FORMAT/ADR,FORMAT/SP,INFO/AD -E -Q 0 -pm 3 -F 0.25 -d 500</span></span>
+<span><span class="co">##reference=Mus_musculus.GRCm39.dna.toplevel.fa.gz</span></span>
+<span><span class="co">##contig=&lt;ID=1,length=195154279&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=2,length=181755017&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=3,length=159745316&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=4,length=156860686&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=5,length=151758149&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=6,length=149588044&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=7,length=144995196&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=8,length=130127694&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=9,length=124359700&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=10,length=130530862&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=11,length=121973369&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=12,length=120092757&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=13,length=120883175&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=14,length=125139656&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=15,length=104073951&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=16,length=98008968&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=17,length=95294699&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=18,length=90720763&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=19,length=61420004&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=X,length=169476592&gt;</span></span>
+<span><span class="co">##ALT=&lt;ID=*,Description="Represents allele(s) other than observed."&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL."&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=IDV,Number=1,Type=Integer,Description="Maximum number of raw reads supporting an indel"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=IMF,Number=1,Type=Float,Description="Maximum fraction of raw reads supporting an indel"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=DP,Number=1,Type=Integer,Description="Raw read depth"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description="Number of high-quality bases"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description="Allelic depths (high-quality bases)"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=AD,Number=R,Type=Integer,Description="Total allelic depths (high-quality bases)"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=END,Number=1,Type=Integer,Description="End position of the variant described in this record"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=MinDP,Number=1,Type=Integer,Description="Minimum per-sample depth in this gVCF block"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=GT,Number=1,Type=String,Description="Genotype"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description="Phred-scaled Genotype Quality"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=MQ,Number=1,Type=Integer,Description="Average mapping quality"&gt;</span></span>
+<span><span class="co">##bcftools_callCommand=call -mAv -f GQ,GP -p 0.99; Date=Wed Aug 11 21:20:03 2021</span></span>
+<span><span class="co">##bcftools_normCommand=norm --fasta-ref Mus_musculus.GRCm39.dna.toplevel.fa.gz -m +indels; Date=Fri Aug 13 11:11:49 2021</span></span>
+<span><span class="co">##FORMAT=&lt;ID=FI,Number=1,Type=Integer,Description="High confidence (1) or low confidence (0) based on soft filtering values"&gt;</span></span>
+<span><span class="co">##FILTER=&lt;ID=LowQual,Description="Low quality variants"&gt;</span></span>
+<span><span class="co">##VEP="v104" time="2021-08-30 23:27:00" cache="mus_musculus/104_GRCm39" ensembl-funcgen=104.59ae779 ensembl-variation=104.6154f8b ensembl=104.1af1dce ensembl-io=104.1d3bb6e assembly="GRCm39" dbSNP="150" gencode="GENCODE M27" regbuild="1.0" sift="sift"</span></span>
+<span><span class="co">##INFO=&lt;ID=CSQ,Number=.,Type=String,Description="Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position|Amino_acids|Codons|Existing_variation|DISTANCE|STRAND|FLAGS|VARIANT_CLASS|SYMBOL_SOURCE|HGNC_ID|SIFT|MOTIF_NAME|MOTIF_POS|HIGH_INF_POS|MOTIF_SCORE_CHANGE|TRANSCRIPTION_FACTORS"&gt;</span></span>
+<span><span class="co">##bcftools_viewVersion=1.13+htslib-1.13</span></span>
+<span><span class="co">##bcftools_viewCommand=view -i 'FORMAT/FI[*] = 1' mgp_REL2021_snps.vcf.gz; Date=Sat Dec 18 19:08:09 2021</span></span>
+<span><span class="co">##bcftools_annotateVersion=1.13+htslib-1.13</span></span>
+<span><span class="co">##bcftools_annotateCommand=annotate -x INFO/VDB,INFO/SGB,INFO/RPBZ,INFO/MQBZ,INFO/MQBZ,INFO/MQSBZ,INFO/BQBZ,INFO/SCBZ,INFO/FS,INFO/MQOF,INFO/AC,INFO/AN,FORMAT/SP,FORMAT/ADF,FORMAT/ADR,FORMAT/GP; Date=Sat Dec 18 19:08:09 2021</span></span>
+<span><span class="co">##INFO=&lt;ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes"&gt;</span></span>
+<span><span class="co">##bcftools_viewCommand=view -a -Oz -o final_mgp_REL2021_snps.vcf.gz; Date=Sat Dec 18 19:08:09 2021</span></span>
+<span><span class="co">##bcftools_annotateCommand=annotate -x INFO/MQ0F -Oz -o final_mgp_REL2021_snps.vcf.gz mgp_REL2021_snps.vcf.gz; Date=Mon Dec 20 07:12:23 2021</span></span>
+<span><span class="co">#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  129P2_OlaHsd    129S1_SvImJ    129S5SvEvBrd     A_J     AKR_J   B10.RIII        BALB_cByJ       BALB_cJ BTBR_T+_Itpr3tf_J       BUB_BnJC3H_HeH  C3H_HeJ C57BL_10J       C57BL_10SnJ     C57BL_6NJ       C57BR_cdJ       C57L_J  C58_J   CAST_EiJCBA_J   CE_J    CZECHII_EiJ     DBA_1J  DBA_2J  FVB_NJ  I_LnJ   JF1_MsJ KK_HiJ  LEWES_EiJ       LG_J   LP_J     MAMy_J  MOLF_EiJ        NOD_ShiLtJ      NON_LtJ NZB_B1NJ        NZO_HlLtJ       NZW_LacJ       PL_J     PWK_PhJ QSi3    QSi5    RF_J    RIIIS_J SEA_GnJ SJL_J   SM_J    SPRET_EiJ       ST_bJ   SWR_J  WSB_EiJ  ZALENDE_EiJ</span></span></code></pre>
+</div>
+<p>The VCF header contains information about the file format version,
+chromosomes, metadata, and tools used to create the VCF. The column
+names are on the last line of the VCF header and this line contains the
+strain names. If you had a cross comprised of other strains, you would
+query the VCF to find their names.</p>
+</div>
+</div>
+</div>
+</div>
 <p>We will work on the sumner /fastscratch area. Create a directory with
 your user ID. Then create a directory called ‘gbrs’. For example:</p>
 <pre><code>mkdir -p /fastscratch/dgatti/gbrs/${STRAIN}</code></pre>
@@ -680,7 +783,8 @@ Indels<a class="anchor" aria-label="anchor" href="#use-g2gtools-vcf2vci-to-gathe
 reference genome using the <code>vcf2vci</code> command. This is written
 out to a text file in a format called “VCI”.</p>
 <p>The arguments are:</p>
-<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────╮
+<pre><code>$ g2gtools vcf2vci --help
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --vcf       -i      FILE     VCF files can seperate files by "," or have multiple -i [default: None]  │
 │                                 [required]                                                               │
 │ *  --fasta     -f      FILE     Fasta file matching VCF information [default: None] [required]           │
@@ -719,7 +823,8 @@ Reference<a class="anchor" aria-label="anchor" href="#use-g2gtools-patch-to-inse
 <p>Next, we insert SNPs from a specific strain into the reference genome
 using the ‘patch’ command.</p>
 <p>The arguments are:</p>
-<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
+<pre><code>$ g2gtools patch --help
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
 │ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
 │    --output   -o      FILE     Name of output file [default: None]                               │
@@ -752,7 +857,8 @@ FASTA file contains the inferred sequence of a specific strain.</p>
 <p>Next, we insert SNPs from a specific strain into the reference genome
 using the ‘patch’ command.</p>
 <p>The arguments are:</p>
-<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
+<pre><code>$ g2gtools transform --help
+╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
 │ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
 │    --output   -o      FILE     Name of output file [default: None]                               │
@@ -783,9 +889,8 @@ file<a class="anchor" aria-label="anchor" href="#use-samtools-faidx-to-index-the
 </h3>
 <p>This is a step which uses the <a href="https://www.htslib.org/doc/samtools.html" class="external-link">samtools</a> suite of
 tools to index the FASTA file.</p>
-<p>We will create a variable for the Singularity container that we use
-on sumner.</p>
-<pre><code>/projects/omics_share/meta/containers/quay.io-jaxcompsci-samtools_with_bc-1.3.1.img</code></pre>
+<p>Remember that we created a variable for the <code>samtools</code>
+Singularity container at the top of the lesson.</p>
 <p>Then we will use <code>samtools</code> to index the FASTA file.</p>
 <pre><code>singularity run ${SAMTOOLS} samtools faidx ${STRAIN_FASTA}</code></pre>
 </div>
@@ -797,7 +902,8 @@ File<a class="anchor" aria-label="anchor" href="#use-g2gtools-convert-to-create-
 file, the VCI file, and the reference GTF and creates a strain-specific
 annotation file in GTF.</p>
 <p>The arguments are:</p>
-<pre><code>╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+<pre><code>$ g2gtools convert --help
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input-file   -i      FILE                   Input file to convert to new coordinates [default: None] [required]  │
 │ *  --vci-file     -c      FILE                   VCI file [default: None] [required]                                  │
 │ *  --file-format  -f      [BAM|SAM|GFF|GTF|BED]  Input file format [default: None] [required]                         │
@@ -834,6 +940,43 @@ sequence, and</li>
 <li>the strain-specific GTF file, which contains the strain’s inferred
 annotation.</li>
 </ul>
+<div id="challenge-1-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-1-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout-inner">
+<h3 class="callout-title">Challenge 1: Create a set of reference files
+for another strain in the VCF.<a class="anchor" aria-label="anchor" href="#challenge-1-create-a-set-of-reference-files-for-another-strain-in-the-vcf."></a>
+</h3>
+<div class="callout-content">
+<p>What is the output of this command?</p>
+<div class="codewrapper sourceCode" id="cb24">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">
+  Output
+  </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <pre><code>g2gtools transform -i ${STRAIN}/${STRAIN}.patched.fa -c ${STRAIN}/REF-to-${STRAIN}.chain -o ${STRAIN}/${STRAIN}.fa
 g2gtools convert   -c ${STRAIN}/REF-to-${STRAIN}.chain -i ${GTF} -f gtf -o ${STRAIN}/${STRAIN}.gtf
 
@@ -890,7 +1033,7 @@ g2gtools extract --exons       -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}
 </h3>
 <div class="callout-content">
 <p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -899,14 +1042,14 @@ g2gtools extract --exons       -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}
 </div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3">
   Output
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -930,14 +1073,14 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
 </div>
 </div>
 </div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4">
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -1084,7 +1227,7 @@ reinforce the objectives.</li>
   Output
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1115,7 +1258,7 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -1261,7 +1404,7 @@ reinforce the objectives.</li>
   Output
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1292,7 +1435,7 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -2251,7 +2394,7 @@ reinforce the objectives.</li>
   Output
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2282,7 +2425,7 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
