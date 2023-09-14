@@ -191,55 +191,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="prepare-reference-genome.html">2. Preparing GBRS Pseudo-References</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush4">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading4">
-        <a href="prepare-reference-transcriptome.html">3. Preparing GBRS Reference Transcriptome</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush5">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading5">
-        <a href="run-emase.html">4. Running EMASE to Quantify Allele-Specific Transcript Expression</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush6">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading6">
-        <a href="run-gbrs.html">5. Running GBRS</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush7">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading7">
-        <a href="student-exercises.html">6. GBRS Student Exercies</a>
+        <a href="prepare-pseudo-reference.html">2. Preparing GBRS Pseudo-References</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -304,7 +256,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Genotyping by RNA Sequencing</a></p>
 <hr>
-<p> Last updated on 2023-09-13 | 
+<p> Last updated on 2023-09-14 | 
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
@@ -430,7 +382,7 @@ and estimation of allele-specific transcript expression. All users may
 not need to perform all steps.</p>
 <p>We envision four types of users:</p>
 <ol style="list-style-type: decimal">
-<li>Users who are analyzing <a href="J:DO">https://www.jax.org/strain/009376</a> data</li>
+<li>Users who are analyzing <a href="https://www.jax.org/strain/009376" class="external-link">J:DO</a> data</li>
 </ol>
 <ul>
 <li>inside of The Jackson Laboratory This is the simplest case. The
@@ -457,137 +409,6 @@ Reference Genomes” and “Preparing GBRS Reference Transcriptomes”
 lessons.</li>
 </ul>
 <p>Reference data for DO: <a href="https://zenodo.org/record/8186981" class="external-link uri">https://zenodo.org/record/8186981</a></p>
-<hr>
-<p>This is a lesson created via The Carpentries Workbench. It is written
-in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
-for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
-Markdown</a> for dynamic files that can render code into output. Please
-refer to the <a href="https://carpentries.github.io/sandpaper-docs/" class="external-link">Introduction to The
-Carpentries Workbench</a> for full documentation.</p>
-<p>What you need to know is that there are three sections required for a
-valid Carpentries lesson:</p>
-<ol style="list-style-type: decimal">
-<li>
-<code>questions</code> are displayed at the beginning of the episode
-to prime the learner for the content.</li>
-<li>
-<code>objectives</code> are the learning objectives for an episode
-displayed with the questions.</li>
-<li>
-<code>keypoints</code> are displayed at the end of the episode to
-reinforce the objectives.</li>
-</ol>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Instructor Note
-  </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
-<div class="accordion-body">
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
-<div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Output
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within
-challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do-you-nest-solutions-within-challenge-blocks"></a>
-</h3>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
-<div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
-</div>
-</div>
-</div>
-</div>
-</section><section id="figures"><h2 class="section-heading">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
-</h2>
-<hr class="half-width">
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</section><section id="math"><h2 class="section-heading">Math<a class="anchor" aria-label="anchor" href="#math"></a>
-</h2>
-<hr class="half-width">
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -612,11 +433,11 @@ download the reference files.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
  -->
-</section></section><section id="aio-prepare-reference-genome"><p>Content from <a href="prepare-reference-genome.html">Preparing GBRS Pseudo-References</a></p>
+</section></section><section id="aio-prepare-pseudo-reference"><p>Content from <a href="prepare-pseudo-reference.html">Preparing GBRS Pseudo-References</a></p>
 <hr>
 <p> Last updated on 2023-09-14 | 
         
-        <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-reference-genome.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-pseudo-reference.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 75 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -657,33 +478,284 @@ indels from mouse strains into the reference genome. Inserting these
 variants may lead to changes in the length of the genome and g2gtools is
 able to map positions between the reference genome and the modified
 genome.</p>
-</section><section id="creating-pseudo-reference-genomes-and-transcriptomes"><h2 class="section-heading">Creating Pseudo-reference Genomes and Transcriptomes<a class="anchor" aria-label="anchor" href="#creating-pseudo-reference-genomes-and-transcriptomes"></a>
+<p>In this tutorial, we will show you how to use the pre-build
+<code>nextflow</code> pipeline to build a pseudo-reference on the JAX
+computing cluster (sumner). Then, we will show you how each step work.
+We expect that most users will use the <code>nextflow</code> pipeline
+and have included the step-by-step pipeline for advanced users who may
+want to use non-standard pipeline options.</p>
+</section><section id="creating-a-pseudo-reference-for-diversity-outbred-mice"><h2 class="section-heading">Creating a Pseudo-Reference for Diversity Outbred Mice<a class="anchor" aria-label="anchor" href="#creating-a-pseudo-reference-for-diversity-outbred-mice"></a>
 </h2>
 <hr class="half-width">
-<p>The first step in creating the reference files for GBRS is to create
-a set of genomes and transcriptomes with SNPs and Indels from other
-strains inserted into the reference genome.</p>
-<div class="section level3">
-<h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+<p>The <code>nextflow</code> pipeline developed by Computational
+Sciences contains default values to make pseudo-reference generation for
+Diversity Outbred mice easy. You can run the commands with minimal
+arguments.</p>
+<p>There is a Quick Start Guide for JAX users at <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Pipeline-Documentation#quick-start-for-jax-users" class="external-link uri">https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Pipeline-Documentation#quick-start-for-jax-users</a>.
+This describes the essentials of running a <code>nextflow</code>
+pipeline on sumner at JAX.</p>
+<p>The documentation for the GBRS <code>nextflow</code> pipeline is at
+<a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Generate-Pseudoreference-Pipeline-ReadMe" class="external-link uri">https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Generate-Pseudoreference-Pipeline-ReadMe</a>.
+This page lists the default values, which point reference files on
+sumner and list the eight Diversity Outbred founder strains by default.
+Some of the default files are listed in the table below.</p>
+<table class="table">
+<colgroup>
+<col width="22%">
+<col width="30%">
+<col width="22%">
+<col width="26%">
+</colgroup>
+<thead><tr class="header">
+<th>File Type</th>
+<th>Argument Name</th>
+<th>File Path</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Reference FASTA</td>
+<td>–primary_reference_fasta</td>
+<td>/projects/compsci/omics_share/mouse/GRCm39/genome/sequence/ensembl/v105/Mus_musculus.GRCm39.dna.primary_assembly.fa</td>
+<td>primary reference fasta file for GRCm39</td>
+</tr>
+<tr class="even">
+<td>SNP VCF</td>
+<td>–snp_vcf</td>
+<td>/projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz</td>
+<td>VCF containing SNPs in mouse strains from the <a href="https://www.mousegenomes.org/" class="external-link">Mouse Genomes Project</a> version
+8</td>
+</tr>
+<tr class="odd">
+<td>Indel VCF</td>
+<td>–indel_vcf</td>
+<td>/projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz</td>
+<td>VCF containing Indels in mouse strains from the <a href="https://www.mousegenomes.org/" class="external-link">Mouse Genomes Project</a> version
+8</td>
+</tr>
+<tr class="even">
+<td>Reference GTF</td>
+<td>–primary_reference_gtf</td>
+<td>/projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/ensembl/v105/Mus_musculus.GRCm39.105.gtf</td>
+<td>Gene annotation for Ensembl 105 in GTF</td>
+</tr>
+</tbody>
+</table>
+<p>The default <code>nextflow</code> pipeline also include the DO
+founder strains as a comma separated list:</p>
+<table class="table">
+<colgroup>
+<col width="58%">
+<col width="41%">
+</colgroup>
+<thead><tr class="header">
+<th>Argument</th>
+<th>Value</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td>–strain</td>
+<td>129S1_SvImJ,A_J,CAST_EiJ,NOD_ShiLtJ,NZO_HlLtJ,PWK_PhJ,WSB_EiJ</td>
+</tr></tbody>
+</table>
+<p>To run the <code>nextflow</code> pipeline to generate a
+pseudo-reference for DO mice on sumner, use the following commands.</p>
+<p>First, we load the <code>nextflow</code> module.</p>
+<pre><code>module use --append /projects/omics_share/meta/modules
+module load nextflow</code></pre>
+<p>Next, change into a directory where you will be working. We suggest
+using /fastscratch and creating a directory for this.</p>
+<p>Create a variable for your user ID on sumner:</p>
+<pre><code>USERID=&lt;your User ID&gt;</code></pre>
+<pre><code>cd /fastscratch/${USERID}</code></pre>
+<p>Then use <code>git</code> to clone the cs-nf-pipelines
+repository.</p>
+<pre><code>git clone https://github.com/TheJacksonLaboratory/cs-nf-pipelines.git</code></pre>
+<p>Next, we need to create a variable for the output directory name and
+create the directory.</p>
+<pre><code>OUTPUT_DIR=/fastscratch/${USERID}/gbrs
+mkdir -p ${OUTPUT_DIR}</code></pre>
+<p>The last step before running the pipeline is to create a temporary
+working directory. This should be on /fastscratch since many large files
+are created.</p>
+<pre><code>WORKING_DIR=/fastscratch/${USERID}/tmp
+mkdir -p ${WORKING_DIR}</code></pre>
+<p>There are two types of arguments in the <code>nextflow</code> call
+below. Arguments to <code>nextflow</code> have a single ‘-’. These
+are:</p>
+<table class="table">
+<colgroup>
+<col width="32%">
+<col width="25%">
+<col width="41%">
+</colgroup>
+<thead><tr class="header">
+<th>Argument</th>
+<th>Value</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>-profile</td>
+<td>sumner</td>
+<td>This sets the resource values for the JAX sumner computing
+cluster</td>
+</tr>
+<tr class="even">
+<td>-w</td>
+<td>${WORKING_DIR}</td>
+<td>The working directory for temporary files</td>
+</tr>
+</tbody>
+</table>
+<p>Arguments which start with ‘–’ go to the <code>nextflow</code>
+pipeline. These are:</p>
+<table class="table">
+<colgroup>
+<col width="36%">
+<col width="24%">
+<col width="39%">
+</colgroup>
+<thead><tr class="header">
+<th>Argument</th>
+<th>Value</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>–workflow</td>
+<td>generate_pseudoreference</td>
+<td>This tells <code>nextflow</code> which workflow to run</td>
+</tr>
+<tr class="even">
+<td>–pubdir</td>
+<td>${OUTPUT_DIR}</td>
+<td>The directory where output should be written</td>
+</tr>
+</tbody>
+</table>
+<p>With this preparation, we can run the <code>nextflow</code>
+pipeline.</p>
+<pre><code>nextflow cs-nf-pipelines/main.nf \
+         -profile sumner \
+         -w ${WORKING_DIR} \
+         --workflow generate_pseudoreference \
+         --pubdir ${OUTPUT_DIR}</code></pre>
+<p>The entire process should take around 30 minutes. It should produce
+the following output on the terminal:</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<p>We will use the g2gtools container stored in the public reference
-area on sumner.</p>
-<pre><code>G2GTOOLS=/projects/omics_share/meta/containers/quay.io-jaxcompsci-g2gtools-74926ad.img</code></pre>
-<p>We will also use a tool called <a href="http://www.htslib.org/doc/samtools.html" class="external-link">samtools</a> to query and
-modify sequence and annotation files.</p>
-<pre><code>SAMTOOLS=/projects/omics_share/meta/containers/quay.io-biocontainers-samtools-1.14--hb421002_0.img</code></pre>
-<p>We need two input files and we will produce one output file per
-strain.</p>
-<p>The first file is the reference genome in FASTA format.</p>
-<pre><code>REF_FASTA=/projects/omics_share/mouse/GRCm39/genome/sequence/ensembl/v105/Mus_musculus.GRCm39.dna.primary_assembly.fa</code></pre>
-<p>The second file is a VCF containing the SNPs of one or more strains.
-This file should contain the strain(s) that you have in your mouse
-cross.</p>
-<pre><code>VCF_INDELS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
-VCF_SNPS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz</code></pre>
-<p>Next, we need to pass in the name of the strain for which we are
-creating the VCI file. In this case, we will use DBA/2J.</p>
-<pre><code><span><span class="va">STRAIN</span><span class="op">=</span><span class="va">DBA_2J</span></span></code></pre>
+<pre class="output" tabindex="0"><code>N E X T F L O W  ~  version 22.04.3
+Launching `cs-nf-pipelines/main.nf` [gloomy_panini] DSL2 - revision: 6b82c2c015
+
+
+ _____ _______ _     _     _______ _______     __   _  ______ _______      _____   _____  _______
+   |   |_____|  \___/  ___ |       |______ ___ | \  | |  ____ |______ ___ |     | |_____| |______
+ __|   |     | _/   \_     |_____  ______|     |  \_| |_____| ______|     |_____| |       ______|
+
+
+GENERATE PSEUDOREFERENCE PARAMETER LOG
+
+--comment:
+
+Results Published to: /fastscratch/dgatti/gbrs
+______________________________________________________
+--workflow                      generate_pseudoreference
+-w                              /fastscratch/dgatti/tmp
+-c                              config/generate_pseudoreference.config
+--snp_vcf                       /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz
+--indel_vcf                     /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
+--primary_reference_fasta       /projects/compsci/omics_share/mouse/GRCm39/genome/sequence/ensembl/v105/Mus_musculus.GRCm39.dna.primary_assembly.fa
+--primary_reference_gtf         /projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/ensembl/v105/Mus_musculus.GRCm39.105.gtf
+--gtf_biotype_include           protein_coding,lncRNA,IG_C_gene,IG_D_gene,IG_J_gene,IG_LV_gene,IG_V_gene,TR_C_gene,TR_D_gene,TR_J_gene,TR_V_gene
+--strain                        129S1_SvImJ,A_J,CAST_EiJ,NOD_ShiLtJ,NZO_HlLtJ,PWK_PhJ,WSB_EiJ
+--genome_version                39
+--append_chromosomes            true
+--diploid                       false
+--keep_fails                    false
+--pass_only                     false
+--quality_filter
+--region
+--bed
+
+--keep_intermediate             false
+
+Project Directory: /gpfs/ctgs0/fastscratch/dgatti/nextflow/cs-nf-pipelines
+
+Command line call:
+nextflow cs-nf-pipelines/main.nf -profile sumner -w /fastscratch/dgatti/tmp --workflow generate_pseudoreference --pubdir /fastscratch/dgatti/gbrs
+______________________________________________________
+
+executor &gt;  slurm (72)
+[9b/2185dd] process &gt; GENERATE_PSEUDOREFERENCE:FILTER_GTF (Filtering GTF)    [100%] 1 of 1 ✔
+[86/d616d1] process &gt; GENERATE_PSEUDOREFERENCE:G2GTOOLS_VCF2VCI (WSB_EiJ)    [100%] 7 of 7 ✔
+[4d/bce7df] process &gt; GENERATE_PSEUDOREFERENCE:G2GTOOLS_PATCH (WSB_EiJ)      [100%] 7 of 7 ✔
+[5c/6c9c51] process &gt; GENERATE_PSEUDOREFERENCE:G2GTOOLS_TRANSFORM (WSB_EiJ)  [100%] 7 of 7 ✔
+[97/91a924] process &gt; GENERATE_PSEUDOREFERENCE:SAMTOOLS_FAIDX_G2GTOOLS (W... [100%] 7 of 7 ✔
+[22/380cb8] process &gt; GENERATE_PSEUDOREFERENCE:G2GTOOLS_CONVERT (CAST_EiJ)   [100%] 7 of 7 ✔
+[6f/5a91f3] process &gt; GENERATE_PSEUDOREFERENCE:APPEND_DROPPED_CHROMS (CAS... [100%] 7 of 7 ✔
+[fa/69434d] process &gt; GENERATE_PSEUDOREFERENCE:G2GTOOLS_GTF2DB (CAST_EiJ)    [100%] 7 of 7 ✔
+[42/d32cda] process &gt; GENERATE_PSEUDOREFERENCE:G2GTOOLS_EXTRACT_GENES (CA... [100%] 7 of 7 ✔
+[c5/15243b] process &gt; GENERATE_PSEUDOREFERENCE:G2GTOOLS_EXTRACT_TRANSCRIP... [100%] 7 of 7 ✔
+[67/e947ad] process &gt; GENERATE_PSEUDOREFERENCE:G2GTOOLS_EXTRACT_EXONS (CA... [100%] 7 of 7 ✔
+[54/203383] process &gt; GENERATE_PSEUDOREFERENCE:SAMTOOLS_FAIDX (primary_st... [100%] 1 of 1 ✔
+Completed at: 14-Sep-2023 14:18:58
+Duration    : 23m 40s
+CPU hours   : 14.7
+Succeeded   : 72</code></pre>
+</div>
+<p>Let’s look at the files in the output directory.</p>
+<pre><code>ls ${OUTPUT_DIR}</code></pre>
+<p>You should see the following directories:</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>g2gtools  generate_pseudoreference_report.html  Mus_musculus.GRCm39.105.filtered.gtf  trace</code></pre>
+</div>
+<p>Look for the reference files in the ‘g2gtools’ directory.</p>
+<pre><code>ls ${OUTPUT_DIR}/g2gtools</code></pre>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>129S1_SvImJ.39_DroppedChromAppended.gtf          NOD_ShiLtJ.39.genes.fa
+129S1_SvImJ.39.exons.fa                          NOD_ShiLtJ.39.gtf.db
+129S1_SvImJ.39.fa                                NOD_ShiLtJ.39.transcripts.fa
+129S1_SvImJ.39.fa.fai                            NOD_ShiLtJ.39.vci.gz
+129S1_SvImJ.39.genes.fa                          NOD_ShiLtJ.39.vci.gz.tbi
+129S1_SvImJ.39.gtf.db                            NZO_HlLtJ.39_DroppedChromAppended.gtf
+129S1_SvImJ.39.transcripts.fa                    NZO_HlLtJ.39.exons.fa
+129S1_SvImJ.39.vci.gz                            NZO_HlLtJ.39.fa
+129S1_SvImJ.39.vci.gz.tbi                        NZO_HlLtJ.39.fa.fai
+A_J.39_DroppedChromAppended.gtf                  NZO_HlLtJ.39.genes.fa
+A_J.39.exons.fa                                  NZO_HlLtJ.39.gtf.db
+A_J.39.fa                                        NZO_HlLtJ.39.transcripts.fa
+A_J.39.fa.fai                                    NZO_HlLtJ.39.vci.gz
+A_J.39.genes.fa                                  NZO_HlLtJ.39.vci.gz.tbi
+A_J.39.gtf.db                                    PWK_PhJ.39_DroppedChromAppended.gtf
+A_J.39.transcripts.fa                            PWK_PhJ.39.exons.fa
+A_J.39.vci.gz                                    PWK_PhJ.39.fa
+A_J.39.vci.gz.tbi                                PWK_PhJ.39.fa.fai
+CAST_EiJ.39_DroppedChromAppended.gtf             PWK_PhJ.39.genes.fa
+CAST_EiJ.39.exons.fa                             PWK_PhJ.39.gtf.db
+CAST_EiJ.39.fa                                   PWK_PhJ.39.transcripts.fa
+CAST_EiJ.39.fa.fai                               PWK_PhJ.39.vci.gz
+CAST_EiJ.39.genes.fa                             PWK_PhJ.39.vci.gz.tbi
+CAST_EiJ.39.gtf.db                               WSB_EiJ.39_DroppedChromAppended.gtf
+CAST_EiJ.39.transcripts.fa                       WSB_EiJ.39.exons.fa
+CAST_EiJ.39.vci.gz                               WSB_EiJ.39.fa
+CAST_EiJ.39.vci.gz.tbi                           WSB_EiJ.39.fa.fai
+Mus_musculus.GRCm39.dna.primary_assembly.fa.fai  WSB_EiJ.39.genes.fa
+NOD_ShiLtJ.39_DroppedChromAppended.gtf           WSB_EiJ.39.gtf.db
+NOD_ShiLtJ.39.exons.fa                           WSB_EiJ.39.transcripts.fa
+NOD_ShiLtJ.39.fa                                 WSB_EiJ.39.vci.gz
+NOD_ShiLtJ.39.fa.fai                             WSB_EiJ.39.vci.gz.tbi</code></pre>
+</div>
+</section><section id="creating-pseudo-reference-genomes-and-transcriptomes-for-other-strains"><h2 class="section-heading">Creating Pseudo-Reference Genomes and Transcriptomes for Other
+Strains<a class="anchor" aria-label="anchor" href="#creating-pseudo-reference-genomes-and-transcriptomes-for-other-strains"></a>
+</h2>
+<hr class="half-width">
+<p>If you are working with a cross comprised of other strains, you can
+change the ’–strain</p>
 <div id="challenge-1-viewing-strain-names-in-a-vcf" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -710,7 +782,7 @@ SNP VCF header and find the strain names.</p>
   Output
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -784,6 +856,153 @@ query the VCF to find their names.</p>
 </div>
 </div>
 </div>
+</section><section id="step-by-step-pseudo-reference-generation"><h2 class="section-heading">Step-by-Step Pseudo-Reference Generation<a class="anchor" aria-label="anchor" href="#step-by-step-pseudo-reference-generation"></a>
+</h2>
+<hr class="half-width">
+<p>In general, most users will not use this strategy. We have included
+this section to document the steps for advanced users who may want to
+modify specific steps in the pipeline.</p>
+<p>The first step in creating the reference files for GBRS is to create
+a set of genomes and transcriptomes with SNPs and Indels from other
+strains inserted into the reference genome.</p>
+<div class="section level3">
+<h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h3>
+<p>We will use the g2gtools container stored in the public reference
+area on sumner.</p>
+<pre><code>G2GTOOLS=/projects/omics_share/meta/containers/quay.io-jaxcompsci-g2gtools-74926ad.img</code></pre>
+<p>We will also use a tool called <a href="http://www.htslib.org/doc/samtools.html" class="external-link">samtools</a> to query and
+modify sequence and annotation files.</p>
+<pre><code>SAMTOOLS=/projects/omics_share/meta/containers/quay.io-biocontainers-samtools-1.14--hb421002_0.img</code></pre>
+<p>We need two input files and we will produce one output file per
+strain.</p>
+<p>The first file is the reference genome in FASTA format.</p>
+<pre><code>REF_FASTA=/projects/omics_share/mouse/GRCm39/genome/sequence/ensembl/v105/Mus_musculus.GRCm39.dna.primary_assembly.fa</code></pre>
+<p>The second file is a VCF containing the SNPs of one or more strains.
+This file should contain the strain(s) that you have in your mouse
+cross.</p>
+<pre><code>VCF_INDELS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
+VCF_SNPS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz</code></pre>
+<p>Next, we need to pass in the name of the strain for which we are
+creating the VCI file. In this case, we will use DBA/2J.</p>
+<pre><code><span><span class="va">STRAIN</span><span class="op">=</span><span class="va">DBA_2J</span></span></code></pre>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
+  Instructor Note
+  </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div class="accordion-body">
+<p>This Challenge is used in above as well in “Creating Pseudo-Reference
+Genomes and Transcriptomes for Other Strains”.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-2-viewing-strain-names-in-a-vcf" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-2-viewing-strain-names-in-a-vcf" class="callout-inner">
+<h3 class="callout-title">Challenge 2: Viewing Strain Names in a
+VCF<a class="anchor" aria-label="anchor" href="#challenge-2-viewing-strain-names-in-a-vcf"></a>
+</h3>
+<div class="callout-content">
+<p>There are 50 strains in the VCF SNP file. What are their names? The
+strain names are stored in the VCF header. The <code>samtools</code>
+container also includes a tool called <code>tabix</code>, which queries
+and indexes tab-delimited files. Run the <code>samtools</code> container
+and look at the tabix help page. Find a command that will print out the
+SNP VCF header and find the strain names.</p>
+<pre><code>singularity run ${SAMTOOLS} tabix --help</code></pre>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">
+  Output
+  </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
+the SNP VCF. In this course, we are using long option names. You could
+also use ‘-H’ to achieve the same result.</p>
+<pre><code>$ singularity run ${SAMTOOLS} tabix --only-header ${VCF_SNPS}</code></pre>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code><span><span class="co">##fileformat=VCFv4.2</span></span>
+<span><span class="co">##FILTER=&lt;ID=PASS,Description="All filters passed"&gt;</span></span>
+<span><span class="co">##bcftoolsVersion=1.13+htslib-1.13</span></span>
+<span><span class="co">##bcftoolsCommand=mpileup -f Mus_musculus.GRCm39.dna.toplevel.fa.gz -b samples -g 10 -a FORMAT/DP,FORMAT/AD,FORMAT/ADF,FORMAT/ADR,FORMAT/SP,INFO/AD -E -Q 0 -pm 3 -F 0.25 -d 500</span></span>
+<span><span class="co">##reference=Mus_musculus.GRCm39.dna.toplevel.fa.gz</span></span>
+<span><span class="co">##contig=&lt;ID=1,length=195154279&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=2,length=181755017&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=3,length=159745316&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=4,length=156860686&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=5,length=151758149&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=6,length=149588044&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=7,length=144995196&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=8,length=130127694&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=9,length=124359700&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=10,length=130530862&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=11,length=121973369&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=12,length=120092757&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=13,length=120883175&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=14,length=125139656&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=15,length=104073951&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=16,length=98008968&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=17,length=95294699&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=18,length=90720763&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=19,length=61420004&gt;</span></span>
+<span><span class="co">##contig=&lt;ID=X,length=169476592&gt;</span></span>
+<span><span class="co">##ALT=&lt;ID=*,Description="Represents allele(s) other than observed."&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL."&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=IDV,Number=1,Type=Integer,Description="Maximum number of raw reads supporting an indel"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=IMF,Number=1,Type=Float,Description="Maximum fraction of raw reads supporting an indel"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=DP,Number=1,Type=Integer,Description="Raw read depth"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description="Number of high-quality bases"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description="Allelic depths (high-quality bases)"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=AD,Number=R,Type=Integer,Description="Total allelic depths (high-quality bases)"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=END,Number=1,Type=Integer,Description="End position of the variant described in this record"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=MinDP,Number=1,Type=Integer,Description="Minimum per-sample depth in this gVCF block"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=GT,Number=1,Type=String,Description="Genotype"&gt;</span></span>
+<span><span class="co">##FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description="Phred-scaled Genotype Quality"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=MQ,Number=1,Type=Integer,Description="Average mapping quality"&gt;</span></span>
+<span><span class="co">##bcftools_callCommand=call -mAv -f GQ,GP -p 0.99; Date=Wed Aug 11 21:20:03 2021</span></span>
+<span><span class="co">##bcftools_normCommand=norm --fasta-ref Mus_musculus.GRCm39.dna.toplevel.fa.gz -m +indels; Date=Fri Aug 13 11:11:49 2021</span></span>
+<span><span class="co">##FORMAT=&lt;ID=FI,Number=1,Type=Integer,Description="High confidence (1) or low confidence (0) based on soft filtering values"&gt;</span></span>
+<span><span class="co">##FILTER=&lt;ID=LowQual,Description="Low quality variants"&gt;</span></span>
+<span><span class="co">##VEP="v104" time="2021-08-30 23:27:00" cache="mus_musculus/104_GRCm39" ensembl-funcgen=104.59ae779 ensembl-variation=104.6154f8b ensembl=104.1af1dce ensembl-io=104.1d3bb6e assembly="GRCm39" dbSNP="150" gencode="GENCODE M27" regbuild="1.0" sift="sift"</span></span>
+<span><span class="co">##INFO=&lt;ID=CSQ,Number=.,Type=String,Description="Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position|Amino_acids|Codons|Existing_variation|DISTANCE|STRAND|FLAGS|VARIANT_CLASS|SYMBOL_SOURCE|HGNC_ID|SIFT|MOTIF_NAME|MOTIF_POS|HIGH_INF_POS|MOTIF_SCORE_CHANGE|TRANSCRIPTION_FACTORS"&gt;</span></span>
+<span><span class="co">##bcftools_viewVersion=1.13+htslib-1.13</span></span>
+<span><span class="co">##bcftools_viewCommand=view -i 'FORMAT/FI[*] = 1' mgp_REL2021_snps.vcf.gz; Date=Sat Dec 18 19:08:09 2021</span></span>
+<span><span class="co">##bcftools_annotateVersion=1.13+htslib-1.13</span></span>
+<span><span class="co">##bcftools_annotateCommand=annotate -x INFO/VDB,INFO/SGB,INFO/RPBZ,INFO/MQBZ,INFO/MQBZ,INFO/MQSBZ,INFO/BQBZ,INFO/SCBZ,INFO/FS,INFO/MQOF,INFO/AC,INFO/AN,FORMAT/SP,FORMAT/ADF,FORMAT/ADR,FORMAT/GP; Date=Sat Dec 18 19:08:09 2021</span></span>
+<span><span class="co">##INFO=&lt;ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes"&gt;</span></span>
+<span><span class="co">##INFO=&lt;ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes"&gt;</span></span>
+<span><span class="co">##bcftools_viewCommand=view -a -Oz -o final_mgp_REL2021_snps.vcf.gz; Date=Sat Dec 18 19:08:09 2021</span></span>
+<span><span class="co">##bcftools_annotateCommand=annotate -x INFO/MQ0F -Oz -o final_mgp_REL2021_snps.vcf.gz mgp_REL2021_snps.vcf.gz; Date=Mon Dec 20 07:12:23 2021</span></span>
+<span><span class="co">#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  129P2_OlaHsd    129S1_SvImJ    129S5SvEvBrd     A_J     AKR_J   B10.RIII        BALB_cByJ       BALB_cJ BTBR_T+_Itpr3tf_J       BUB_BnJC3H_HeH  C3H_HeJ C57BL_10J       C57BL_10SnJ     C57BL_6NJ       C57BR_cdJ       C57L_J  C58_J   CAST_EiJCBA_J   CE_J    CZECHII_EiJ     DBA_1J  DBA_2J  FVB_NJ  I_LnJ   JF1_MsJ KK_HiJ  LEWES_EiJ       LG_J   LP_J     MAMy_J  MOLF_EiJ        NOD_ShiLtJ      NON_LtJ NZB_B1NJ        NZO_HlLtJ       NZW_LacJ       PL_J     PWK_PhJ QSi3    QSi5    RF_J    RIIIS_J SEA_GnJ SJL_J   SM_J    SPRET_EiJ       ST_bJ   SWR_J  WSB_EiJ  ZALENDE_EiJ</span></span>
+<span></span></code></pre>
+</div>
+<p>The VCF header contains information about the file format version,
+chromosomes, metadata, and tools used to create the VCF. The column
+names are on the last line of the VCF header and this line contains the
+strain names. If you had a cross comprised of other strains, you would
+query the VCF to find their names.</p>
+</div>
+</div>
+</div>
+</div>
 <p>We will work on the sumner /fastscratch area. Create a directory with
 your user ID. Then create a directory called ‘gbrs’. For example:</p>
 <pre><code>mkdir -p /fastscratch/dgatti/gbrs/${STRAIN}</code></pre>
@@ -818,13 +1037,15 @@ out to a text file in a format called “VCI”.</p>
 <p>We will use a subset of the arguments, passing in the reference FASTA
 file, the SNPD and indel VCFs, the strain name to search for in the
 indel VCF, and the output file path.</p>
-<p>Inputs: –fasta: path to the GRCm39 reference FASTA file –vcf: path(s)
-to the Sanger VCFs for SNPs and indels. Both can be passed in.</p>
-<p>Output: –output: A VCI file, which is a custom file format, akin to a
-BED format, which lists the positions and sequences of indels. Note
-that, while we list the output file extension as “vci”,
-<code>g2gtools</code> will gzip and index the file, so we will need to
-add the ‘.gz’ extension when we use the file in downstream commands.</p>
+<p><strong>Inputs</strong> | Argument | Description | |———-|————-| |
+–fasta | path to the GRCm39 reference FASTA file | | –vcf | path(s) to
+the Sanger VCFs for SNPs and indels. Both can be passed in. |</p>
+<p><strong>Output</strong> | Argument | Description | |———-|————-| |
+–output | A VCI file, which is a custom file format, akin to a BED
+format, which lists the positions and sequences of indels. Note that,
+while we list the output file extension as “vci”, <code>g2gtools</code>
+will gzip and index the file, so we will need to add the ‘.gz’ extension
+when we use the file in downstream commands. |</p>
 <pre><code>STRAIN_VCI=${STRAIN}/REF-to-${STRAIN}.vci
 singularity run ${G2GTOOLS} g2gtools vcf2vci \
                             --fasta ${REF_FASTA} \
@@ -853,11 +1074,12 @@ using the ‘patch’ command.</p>
 │    --help                      Show this message and exit.                                       │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
 <p>We will use the following arguments:</p>
-<p>Inputs: –input: path to the GRCm39 reference FASTA file –vci: path to
-the <strong>gzipped</strong> VCI file created by
-<code>vcf2vci</code>.</p>
-<p>Output: –output: path to patched FASTA file with SNPs inserted into
-the reference genome sequence.</p>
+<p><strong>Inputs</strong> | Argument | Description | |———-|————-| |
+–input | path to the GRCm39 reference FASTA file | | –vci | path to the
+<strong>gzipped</strong> VCI file created by <code>vcf2vci</code>. |</p>
+<p><strong>Output</strong> | Argument | Description | |———-|————-| |
+–output | path to patched FASTA file with SNPs inserted into the
+reference genome sequence. |</p>
 <pre><code>PATCHED_FASTA=${STRAIN}/${STRAIN}.patched.fa
 singularity run ${G2GTOOLS} g2gtools patch \
                             --input ${REF_FASTA} \
@@ -887,11 +1109,17 @@ using the ‘patch’ command.</p>
 │    --help                      Show this message and exit.                                       │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
 <p>We will use the following arguments:</p>
-<p>Inputs: –input: path to the strain-specific patched FASTA file
-created by <code>patch</code>. –vci: path to the
-<strong>gzipped</strong> VCI file created by <code>vcf2vci</code>.</p>
-<p>Output: –output: path to transformed FASTA file with SNPs and indels
-inserted into the reference genome sequence.</p>
+<p><strong>Inputs</strong> | Argument | Description | |———-|————-| |
+–input | path to the strain-specific patched FASTA file created by
+<code>patch</code>. | | –vci | path to the <strong>gzipped</strong> VCI
+file created by <code>vcf2vci</code>. |</p>
+<p><strong>Output</strong> | Argument | Description | |———-|————-| |
+–output | path to transformed FASTA file with SNPs and indels inserted
+into the reference genome sequence. |</p>
+<p>We need to create a genome version variable to create informative
+file names.</p>
+<pre><code><span><span class="va">GENOME_VERSION</span><span class="op">=</span><span class="va">GRCm39</span></span></code></pre>
+<p>Next, we will run the <code>transform</code> command.</p>
 <pre><code>STRAIN_FASTA=${STRAIN}/${STRAIN}.${GENOME_VERSION}.fa
 singularity run ${G2GTOOLS} g2gtools transform \
                             --input ${PATCHED_FASTA} \
@@ -930,14 +1158,15 @@ annotation file in GTF.</p>
 │    --help                                        Show this message and exit.                                          │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
 <p>We will use the following arguments:</p>
-<p>Inputs: –input-file: path to the reference GTF. –vci-file: path to
-the <strong>gzipped</strong> VCI file created by <code>vcf2vci</code>.
-–file-format: string indicating a GTF file. Lower case since it will be
-used as a file name extension.</p>
-<p>Output: –output: path to converted GTF file with SNPs and indels
-inserted into the reference transcript and coordinates shifted to the
-strain-specific coordinates.</p>
-<pre><code>singularity run ${G2GTOOLS} </code></pre>
+<p><strong>Inputs</strong> | Argument | Description | |———-|————-| |
+–input-file | path to the reference GTF. | | –vci-file | path to the
+<strong>gzipped</strong> VCI file created by <code>vcf2vci</code>. | |
+–file-format | string indicating a GTF file. Lower case since it will be
+used as a file name extension. |</p>
+<p><strong>Output</strong> | Argument | Description | |———-|————-| |
+–output | path to converted GTF file with SNPs and indels inserted into
+the reference transcript and coordinates shifted to the strain-specific
+coordinates. |</p>
 <p>Next, we need the path to the reference GTF. We have selected the
 Ensembl 105 annotation for this lesson.</p>
 <pre><code>REF_GTF=/projects/omics_share/mouse/GRCm39/transcriptome/annotation/ensembl/v105/Mus_musculus.GRCm39.105.chr.gtf</code></pre>
@@ -957,33 +1186,32 @@ sequence, and</li>
 <li>the strain-specific GTF file, which contains the strain’s inferred
 annotation.</li>
 </ul>
-<div id="challenge-1-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout challenge">
+<blockquote>
+<p>DMG: Stopped here.</p>
+</blockquote>
+<div id="challenge-3-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="challenge-1-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout-inner">
-<h3 class="callout-title">Challenge 1: Create a set of reference files
-for another strain in the VCF.<a class="anchor" aria-label="anchor" href="#challenge-1-create-a-set-of-reference-files-for-another-strain-in-the-vcf."></a>
+<div id="challenge-3-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout-inner">
+<h3 class="callout-title">Challenge 3: Create a set of reference files
+for another strain in the VCF.<a class="anchor" aria-label="anchor" href="#challenge-3-create-a-set-of-reference-files-for-another-strain-in-the-vcf."></a>
 </h3>
 <div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb24">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
+<p>You will need to look back at Challenge 1 to see how to list the
+strains in the VCFs. You can query either the SNP or Indel VCF. Create
+an entire script on your compute instance to run the commands above</p>
 </div>
 </div>
 </div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3">
   Output
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1040,118 +1268,6 @@ g2gtools extract --exons       -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}
 <span><span class="va">A_J.39.transcripts.fa</span></span>
 <span><span class="va">A_J.39.vci.gz</span></span>
 <span><span class="va">A_J.39.vci.gz.tbi</span></span></code></pre>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Instructor Note
-  </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
-<div class="accordion-body">
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
-<div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb29">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
-  <h4 class="accordion-header" id="headingSolution3">
-  Output
-  </h4>
-</button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
-<div class="accordion-body">
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within
-challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do-you-nest-solutions-within-challenge-blocks"></a>
-</h3>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
-<div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="figures"><h2 class="section-heading">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
-</h2>
-<hr class="half-width">
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</section><section id="math"><h2 class="section-heading">Math<a class="anchor" aria-label="anchor" href="#math"></a>
-</h2>
-<hr class="half-width">
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1161,1233 +1277,12 @@ this:</p>
 </h3>
 <div class="callout-content">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- 
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
- -->
-</section></section><section id="aio-prepare-reference-transcriptome"><p>Content from <a href="prepare-reference-transcriptome.html">Preparing GBRS Reference Transcriptome</a></p>
-<hr>
-<p> Last updated on 2023-08-11 | 
-        
-        <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-reference-transcriptome.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>What is Genotyping by RNA Sequencing (GBRS)?</li>
-<li>What analyses does GBRS provide?</li>
-<li>What are the steps in a GBRS analysis?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>Explain what GBRS does.</li>
-<li>List the steps in a GBRS analysis.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
-<hr class="half-width">
-<p>This is a lesson created via The Carpentries Workbench. It is written
-in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
-for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
-Markdown</a> for dynamic files that can render code into output. Please
-refer to the <a href="https://carpentries.github.io/sandpaper-docs/" class="external-link">Introduction to The
-Carpentries Workbench</a> for full documentation.</p>
-<p>What you need to know is that there are three sections required for a
-valid Carpentries lesson:</p>
-<ol style="list-style-type: decimal">
-<li>
-<code>questions</code> are displayed at the beginning of the episode
-to prime the learner for the content.</li>
-<li>
-<code>objectives</code> are the learning objectives for an episode
-displayed with the questions.</li>
-<li>
-<code>keypoints</code> are displayed at the end of the episode to
-reinforce the objectives.</li>
-</ol>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Instructor Note
-  </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
-<div class="accordion-body">
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
-<div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Output
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within
-challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do-you-nest-solutions-within-challenge-blocks"></a>
-</h3>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
-<div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
-</div>
-</div>
-</div>
-</div>
-</section><section id="figures"><h2 class="section-heading">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
-</h2>
-<hr class="half-width">
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</section><section id="math"><h2 class="section-heading">Math<a class="anchor" aria-label="anchor" href="#math"></a>
-</h2>
-<hr class="half-width">
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
-<div class="callout-content">
-<ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- 
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
- -->
-</section></section><section id="aio-run-emase"><p>Content from <a href="run-emase.html">Running EMASE to Quantify Allele-Specific Transcript Expression</a></p>
-<hr>
-<p> Last updated on 2023-08-11 | 
-        
-        <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-emase.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>What is Genotyping by RNA Sequencing (GBRS)?</li>
-<li>What analyses does GBRS provide?</li>
-<li>What are the steps in a GBRS analysis?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>Explain what GBRS does.</li>
-<li>List the steps in a GBRS analysis.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
-<hr class="half-width">
-<p>This is a lesson created via The Carpentries Workbench. It is written
-in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
-for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
-Markdown</a> for dynamic files that can render code into output. Please
-refer to the <a href="https://carpentries.github.io/sandpaper-docs/" class="external-link">Introduction to The
-Carpentries Workbench</a> for full documentation.</p>
-<p>What you need to know is that there are three sections required for a
-valid Carpentries lesson:</p>
-<ol style="list-style-type: decimal">
-<li>
-<code>questions</code> are displayed at the beginning of the episode
-to prime the learner for the content.</li>
-<li>
-<code>objectives</code> are the learning objectives for an episode
-displayed with the questions.</li>
-<li>
-<code>keypoints</code> are displayed at the end of the episode to
-reinforce the objectives.</li>
-</ol>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Instructor Note
-  </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
-<div class="accordion-body">
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
-<div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Output
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within
-challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do-you-nest-solutions-within-challenge-blocks"></a>
-</h3>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
-<div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
-</div>
-</div>
-</div>
-</div>
-</section><section id="figures"><h2 class="section-heading">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
-</h2>
-<hr class="half-width">
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</section><section id="math"><h2 class="section-heading">Math<a class="anchor" aria-label="anchor" href="#math"></a>
-</h2>
-<hr class="half-width">
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
-<div class="callout-content">
-<ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- 
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
- -->
-</section></section><section id="aio-run-gbrs"><p>Content from <a href="run-gbrs.html">Running GBRS</a></p>
-<hr>
-<p> Last updated on 2023-08-17 | 
-        
-        <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 120 minutes </p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>How do I run GBRS on my FASTQ files at JAX?</li>
-<li>How do I run GBRS on my FASTQ files at another institution?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>At JAX: analyze FASTQ files using GBRS on the High Performance
-Computing cluster.</li>
-<li>At other institutions: configure Nexflow and the reference files and
-analyze FASTQ files using GBRS.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="at-the-jackson-laboratory-jax"><h2 class="section-heading">At the Jackson Laboratory (JAX)<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
-</h2>
-<hr class="half-width">
-<p>The GBRS Nextflow pipeline is configured to run on <em>sumner</em>,
-the High Performance Computing (HPC) cluster at JAX.</p>
-<p>We will consider two scenarios:</p>
-<ol style="list-style-type: decimal">
-<li>You are analyzing expression data from Diversity Outbred mice;</li>
-<li>You are analyzing expression data from some other cross;</li>
-</ol>
-<div class="section level3">
-<h3 id="gbrs-for-diversity-outbred-mice">GBRS for Diversity Outbred Mice<a class="anchor" aria-label="anchor" href="#gbrs-for-diversity-outbred-mice"></a>
-</h3>
-<p>The Next-Generaiong Operations (NGSOps) team has configured the
-default arrguments for the GBRS Nextflow pipeline to use the reference
-files for GRCm39 and Ensembl version 105. This means that the arguments
-that point GBRS to the locations of the founder genomes, founder
-transcriptomes, and aligner indices are already set.</p>
-<p>Here is the entire script:</p>
-<pre><code>#!/bin/bash 
-#SBATCH --qos=batch # job queue 
-#SBATCH --ntasks=1 # number of nodes 
-#SBATCH --cpus-per-task=1 # number of cores 
-#SBATCH --mem=1G # memory pool for all cores 
-#SBATCH --time=48:00:00 # wall clock time (D-HH:MM)
-
-################################################################################
-# Run GBRS on each sample. GRCm39. Ensembl 105.
-#
-# Daniel Gatti
-# dan.gatti@jax.org
-# 2022-09-28
-################################################################################
-
-set -e -u -x -o pipefail
-
-
-##### VARIABLES #####
-
-# Base directory for project.
-BASE_DIR=/projects/research_lab_directory/diabetes
-
-# Sample metadata file.
-SAMPLE_META_FILE=${BASE_DIR}/data/gbrs_sample_metadata.csv
-
-# Base /flashscratch directory.
-FLASHSCRATCH=/flashscratch/dgatti
-
-# Temporary working directory.
-TMP_DIR=${FLASHSCRATCH}/tmp
-
-# Temporary output directory.
-OUT_DIR=${FLASHSCRATCH}/results
-
-# Final results directory (in backed up space)
-DEST_DIR=${BASE_DIR}/results
-
-# GBRS path.
-GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines
-
-# GBRS version on Github.
-GBRS_VERSION=v0.4.2
-
-# Singularity cache directory.
-#export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache
-
-##### MAIN #####
-
-
-mkdir -p ${OUT_DIR} 
-mkdir -p ${DEST_DIR} 
-mkdir -p ${TMP_DIR} 
-#mkdir -p ${NXF_SINGULARITY_CACHEDIR} 
-
-module load singularity 
-
-cd ${TMP_DIR} 
-
-nextflow run ${GBRS_GITHUB_PATH} \
-         -r ${GBRS_VERSION} \
-         -profile sumner \
-         -w ${TMP_DIR} \
-         --workflow gbrs \
-         --pubdir ${OUT_DIR} \
-         --csv_input ${SAMPLE_META_FILE} \
-         -resume
-
-# Copy output files from OUT_DIR to DEST_DIR.
-DIRS=`(ls ${OUT_DIR})`
-
-for i in ${DIRS} 
-do
-
-  cp ${OUT_DIR}/${i}/stats/* ${DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*_counts ${DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*.tsv ${DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*.pdf ${DEST_DIR}
-
-done
-
-# Clean up tmp directory.
-rm -rf ${TMP_DIR}</code></pre>
-<p>For Diversity Outbred (DO) mice, the reference files are stored in
-the reference data directories <code>/projects/omics_share</code> on
-<em>sumner</em>.</p>
-<p>JAX uses <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx" class="external-link">slurm</a>
-(NOTE: This is an internal JAX link which requires a JAX login.) to
-manage computing jobs on <em>sumner</em>. There are several good
-tutorials on using <em>slurm</em> on the JAX <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx" class="external-link">Research
-IT Documentation Library</a>.</p>
-<div class="section level4">
-<h4 id="slurm-options-block">
-<em>slurm</em> Options Block<a class="anchor" aria-label="anchor" href="#slurm-options-block"></a>
-</h4>
-<p><em>slurm</em> scripts are <em>bash</em> scripts, so they start
-with:</p>
-<pre><code><span><span class="co">#!/bin/bash</span></span></code></pre>
-<p>Next, we use a <em>slurm</em> options block to tell <em>slurm</em>
-what computing resources we would like to use. You could pass
-<em>slurm</em> options in at the command line, but we recommend using an
-options block in your script so that you have a record of the resources
-required to run your job.</p>
-<p>Each line in the <em>slurm</em> options block starts with:</p>
-<pre><code><span><span class="co">#SBATCH</span></span></code></pre>
-<p>This tells <em>slurm</em> that what follows on this line is a
-<em>slurm</em> option. There are many <em>slurm</em> options, which are
-exhaustively enumerated in the <a href="https://slurm.schedmd.com/sbatch.html" class="external-link">slurm documentation</a>.
-Here we will use only a few of the options:</p>
-<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span>
-<span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
-<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span>
-<span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span>
-<span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
-<p>The first option specifies the job queue to use for this job. In this
-case, it is the “batch” queue on <em>sumner</em>.</p>
-<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span></code></pre>
-<p>The next two options specify the number of nodes and number of CPUs
-(or cores) per node to use. In this case, we will use one node and one
-CPU. This may seem confusing because we would like to use many nodes and
-cores to reduce the total run time of our job. But Nextflow handles
-resource request. This script just starts the Nextflow job, which does
-not require many resources. If you request more nodes and CPUs here, you
-will only be tying up resources that will sit idle while your job run.
-So <strong>one</strong> node and <strong>one</strong> CPU per node are
-sufficient.</p>
-<pre><code><span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
-<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span></code></pre>
-<p>The next option specifies the memory required for this task. We will
-request one Gigabyte (G). Again, this may seem like a small amount of
-memory for a large computational job, but this is only the memeory
-required to start and manage the Nextflow job. Nextflow will request the
-resources that it needs to run GBRS.</p>
-<pre><code><span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span></code></pre>
-<p>The last option that we will speicify is the total wall-clock time
-needed to complete the job. This needs to be the total amount of time
-required to complete the job. This can be difficult to estimate and
-depends upon the number of samples, depth of coverage, and the
-configuration and utilization of the cluster.</p>
-<blockquote>
-<p>DMG: TBD: Should we run 50, 100, 200 &amp; 300 samples and include a
-time/samples plot? I have 350 samples that we could use for this. It’s
-not going to be linear with more sample, but it’s something.</p>
-</blockquote>
-<pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="header-section">Header Section<a class="anchor" aria-label="anchor" href="#header-section"></a>
-</h4>
-<pre><code><span><span class="co">################################################################################</span></span>
-<span><span class="co"># Run GBRS on each sample. GRCm39. Ensembl 105.</span></span>
-<span><span class="co">#</span></span>
-<span><span class="co"># Daniel Gatti</span></span>
-<span><span class="co"># dan.gatti@jax.org</span></span>
-<span><span class="co"># 2022-09-28</span></span>
-<span><span class="co">################################################################################</span></span></code></pre>
-<p>This section is not required, but it allows you to add some comments
-about what are doing. It is also a consistent place to put your name,
-contact information, and the date. Putting your name and contact
-information helps to keep you accountable for the code. Putting the date
-in the header helps you to remember when you wrote the script.</p>
-</div>
-<div class="section level4">
-<h4 id="error-handling">Error Handling<a class="anchor" aria-label="anchor" href="#error-handling"></a>
-</h4>
-<pre><code>set -e -u -x -o pipefail</code></pre>
-<p>This commands tells <em>bash</em> to exit if any line of the script
-fails (-e), to catch uninitialized variables (-u), to print commands as
-we run (-x), and to<br>
-output the last exit code (-o).</p>
-</div>
-<div class="section level4">
-<h4 id="variable-section">Variable Section<a class="anchor" aria-label="anchor" href="#variable-section"></a>
-</h4>
-<p>We strongly recommend that you use <em>bash</em> variables to build
-file paths and specify arguments to the GBRS script. The reason for this
-is that it is easier to remember what each varible is when it is given a
-meaningful name.</p>
-<p>Consider this script which runs the “analysis_tool_of_science”:</p>
-<pre><code>analysis_tool_of_science -t 8 \
-  -g /path/to/another/file \
-  -a /really/long/path/to/yet/another/file \
-  -i /path/to/mystery/file/number1 /path/to/mystery/file/number2 \
-  -x /path/to/some/directory/on/the/cluster
-  -o /path/to/another/directory/with/a/file/prefix</code></pre>
-<p>You can read the tool’s documentation to find out what each file is,
-but that requires extra time. This script would be easier to read if the
-paths had meaningful names. In the code block below, we give each file a
-meaningful variable name and provide a comment explaining what each file
-is. We also use this opportunity to specify the genome and annotation
-builds.</p>
-<pre><code># FASTA file containing genome sequence for GRCm39.
-GENOME_FASTA=/path/to/another/file
-
-# GTF file containing genome annotation for Ensembl 105.
-ANNOTATION_GTF=/really/long/path/to/yet/another/file
-
-# Paths to the forward and reverse FASTQ files.
-FASTQ_FILE1=/path/to/mystery/file/number1 
-FASTQ_FILE2=/path/to/mystery/file/number2
-
-# Path to temporary directory for analysis_tool.
-TEMP_DIR=/path/to/some/directory/on/the/cluster
-
-# Path to output file, with a file prefix.
-OUTPUT_PATH=/path/to/another/directory/with/a/file/prefix
-
-analysis_tool_of_science -t 8 \
-  -g ${GENOME_FASTA} \
-  -a ${ANNOTATION_GTF} \
-  -i $(FASTQ_FILE1} ${FASTQ_FILE2} \
-  -x ${TEMP_DIR}
-  -o ${OUTPUT_PATH}</code></pre>
-<p>This makes the script much easier for yourself (a year from now) and
-others to read and understand.</p>
-<p>First, we will focus on variables that set the location of your files
-and working directories.</p>
-<pre><code># Base directory for project.
-BASE_DIR=/projects/research_lab_directory/diabetes</code></pre>
-<p>We like to set a “base directory”, which is the high-level directory
-for the project on which you are working. In this case, we are using a
-diabetes project as an example. We use the base directory to create
-other file paths which are below this directory.</p>
-<pre><code># Sample metadata file.
-SAMPLE_META_FILE=${BASE_DIR}/data/sodo_gbrs_metadata.csv</code></pre>
-<p>This is the path to the sample metadata file, which contains
-information about your samples. This includies the sample ID, sex,
-outbreeding generation, sequencer lane, and paths to the forward and
-reverse FASTQ files. Each row will contain information for one
-sample.</p>
-<p>The <code>sampleID</code> column should contain values that you use
-to identify the samples.</p>
-<p>The <code>sex</code> column should contain the mouse’s sex recorded
-as ‘F’ for females or ‘M’ for males.</p>
-<p>The <code>generation</code> column should contain the outbreeding
-generation for the mouse.</p>
-<p>The <code>lane</code> column should contain the lane number on which
-the sample was run. This can sometimes be found in the FASTQ file name.
-In the example below, it is recorded as ‘L004’ in the FASTQ file names
-and this is what we used in the <code>lane</code> column.</p>
-<p>The <code>fastq_1</code> and <code>fastq_2</code> columns contain the
-full path to the forward and reverse FASTQ files. In this case, we
-copied the files to /flashscratch, which is the temporary sratch storage
-space for large files.</p>
-<p>Below is an example of the top of a sample metadata file. It is
-comma-delimited and has column names as the top.</p>
-<pre><code>sampleID,sex,generation,lane,fastq_1,fastq_2
-D2,F,46,L004,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R2_001.fastq.gz
-D3,F,46,L001,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R2_001.fastq.gz
-D4,F,46,L001,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R2_001.fastq.gz
-D5,F,46,L001,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R2_001.fastq.gz</code></pre>
-<p>Notice that we have copied the FASTQ files over to /flashscratch.
-This isn’t required but we do this to simplify the file paths.</p>
-<pre><code># Base /flashscratch directory.
-FLASHSCRATCH=/flashscratch/username</code></pre>
-<p>This is the path to your directory on /flashscratch. You should
-create this before you begin your analysis. And you should replace
-‘username’ with your username.</p>
-<pre><code># Temporary directory.
-TMP_DIR=${FLASHSCRATCH}/tmp</code></pre>
-<p>This is the path to the temporary directory where Nextflow and GBRS
-can store temporary working files during the analysis.</p>
-<pre><code># Output directory.
-OUT_DIR=${FLASHSCRATCH}/results</code></pre>
-<p>This is the directory where you would like GBRS to write your
-results. You should place this on /flashscratch and then copy the files
-that you need over to /projects when the analysis is complete.</p>
-<pre><code># Final results directory (in backed up space)
-DEST_DIR=${BASE_DIR}/results/gbrs</code></pre>
-<p>This is the directory to which you will copy your final results. It
-should be a location that is backed up (like /projects). Remember,
-/flashscratch is not backed up and your files will be deleted without
-notice after 10 days.</p>
-<p>Once you have set all of the paths and created your sample metadata
-file, you can submit the script to the <em>slurm</em> queue. Save the
-script to a file called ‘run_gbrs.sh’, and then submit it using
-‘sbatch’.</p>
-<pre><code>sbatch run_gbrs.sh</code></pre>
-</div>
-</div>
-<div class="section level3">
-<h3 id="gbrs-for-other-mouse-crosses">GBRS for Other Mouse Crosses<a class="anchor" aria-label="anchor" href="#gbrs-for-other-mouse-crosses"></a>
-</h3>
-<p>For Diversity Outbred (DO) mice, the reference files are stored in
-the reference data directories <code>/projects/omics_share</code> on
-<em>sumner</em>. We will use these files as examples ot show you which
-arguments to provide.</p>
-<p>JAX uses <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx" class="external-link">slurm</a>
-(NOTE: This is an internal JAX link which requires a JAX login.) to
-manage computing jobs on <em>sumner</em>. There are several good
-tutorials on using <em>slurm</em> on the JAX <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx" class="external-link">Research
-IT Documentation Library</a>.</p>
-<div class="section level4">
-<h4 id="slurm-options-block-1">
-<em>slurm</em> Options Block<a class="anchor" aria-label="anchor" href="#slurm-options-block-1"></a>
-</h4>
-<p><em>slurm</em> scripts are <em>bash</em> scripts, so they start
-with:</p>
-<pre><code><span><span class="co">#!/bin/bash</span></span></code></pre>
-<p>Next, we use a <em>slurm</em> options block to tell <em>slurm</em>
-what computing resources we would like to use. You could pass
-<em>slurm</em> options in at the command line, but we recommend using an
-options block in your script so that you have a record of the resources
-required to run your job.</p>
-<p>Each line in the <em>slurm</em> options block starts with:</p>
-<pre><code><span><span class="co">#SBATCH</span></span></code></pre>
-<p>This tells <em>slurm</em> that what follows on this line is a
-<em>slurm</em> option. There are many <em>slurm</em> options, which are
-exhaustively enumerated in the <a href="https://slurm.schedmd.com/sbatch.html" class="external-link">slurm documentation</a>.
-Here we will use only a few of the options:</p>
-<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span>
-<span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
-<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span>
-<span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span>
-<span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
-<p>The first option specifies the job queue to use for this job. In this
-case, it is the “batch” queue on <em>sumner</em>.</p>
-<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span></code></pre>
-<p>The next two options specify the number of nodes and number of CPUs
-(or cores) per node to use. In this case, we will use one node and one
-CPU. This may seem confusing because we would like to use many nodes and
-cores to reduce the total run time of our job. But Nextflow handles
-resource request. This script just starts the Nextflow job, which does
-not require many resources. If you request more nodes and CPUs here, you
-will only be tying up resources that will sit idle while your job run.
-So <strong>one</strong> node and <strong>one</strong> CPU per node are
-sufficient.</p>
-<pre><code><span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
-<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span></code></pre>
-<p>The next option specifies the memory required for this task. We will
-request one Gigabyte (G). Again, this may seem like a small amount of
-memory for a large computational job, but this is only the memeory
-required to start and manage the Nextflow job. Nextflow will request the
-resources that it needs to run GBRS.</p>
-<pre><code><span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span></code></pre>
-<p>The last option that we will speicify is the total wall-clock time
-needed to complete the job. This needs to be the total amount of time
-required to complete the job. This can be difficult to estimate and
-depends upon the number of samples, depth of coverage, and the
-configuration and utilization of the cluster.</p>
-<blockquote>
-<p>DMG: TBD: Should we run 50, 100, 200 &amp; 300 samples and include a
-time/samples plot? I have 350 samples that we could use for this. It’s
-not going to be linear with more sample, but it’s something.</p>
-</blockquote>
-<pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="header-section-1">Header Section<a class="anchor" aria-label="anchor" href="#header-section-1"></a>
-</h4>
-<p>This section is not required, but it allows you to add some comments
-about what are doing. It is also a consistent place to put your name,
-contact information, and the date. Putting your name and contact
-information helps to keep you accountable for the code. Putting the date
-in the header helps you to remember when you wrote the script.</p>
-<pre><code><span><span class="co">################################################################################</span></span>
-<span><span class="co"># Run GBRS on each sample.</span></span>
-<span><span class="co"># GRCm39. Ensembl 105.</span></span>
-<span><span class="co">#</span></span>
-<span><span class="co"># Daniel Gatti</span></span>
-<span><span class="co"># dan.gatti@jax.org</span></span>
-<span><span class="co"># 2022-09-28</span></span>
-<span><span class="co">################################################################################</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="variable-section-1">Variable Section<a class="anchor" aria-label="anchor" href="#variable-section-1"></a>
-</h4>
-<p>We strongly recommend that you use <em>bash</em> variables to build
-file paths and specify arguments to the GBRS script. The reason for this
-is that it is easier to remember what each varible is when it is given a
-meaningful name.</p>
-<p>Consider this script which runs the “analysis_tool_of_science”:</p>
-<pre><code>analysis_tool_of_science -t 8 \
-  -g /path/to/another/file \
-  -a /really/long/path/to/yet/another/file \
-  -i /path/to/mystery/file/number1 /path/to/mystery/file/number2 \
-  -x /path/to/some/directory/on/the/cluster
-  -o /path/to/another/directory/with/a/file/prefix</code></pre>
-<p>You can read the tool’s documentation to find out what each file is,
-but that requires extra time. It would be easier to read if the paths
-had meaningful names. In the code block below, we give each file a
-meaningful variable name and prrovide a comment explaining what each
-file is. We also use this opportunity to specify the genome and
-annotation builds.</p>
-<pre><code># FASTA file containing genome sequence for GRCm39.
-GENOME_FASTA=/path/to/another/file
-
-# GTF file containing genome annotation for Ensembl 105.
-ANNOTATION_GTF=/really/long/path/to/yet/another/file
-
-# Paths to the forward and reverse FASTQ files.
-FASTQ_FILE1=/path/to/mystery/file/number1 
-FASTQ_FILE2=/path/to/mystery/file/number2
-
-# Path to temporary directory for analysis_tool.
-TEMP_DIR=/path/to/some/directory/on/the/cluster
-
-# Path to output file, with a file prefix.
-OUTPUT_PATH=/path/to/another/directory/with/a/file/prefix
-
-analysis_tool_of_science -t 8 \
-  -g ${GENOME_FASTA} \
-  -a ${ANNOTATION_GTF} \
-  -i $(FASTQ_FILE1} ${FASTQ_FILE2} \
-  -x ${TEMP_DIR}
-  -o ${OUTPUT_PATH}</code></pre>
-<p>This makes the script much easier for yourself (a year from now) and
-others to read and understand.</p>
-<p>The GBRS script has a lot of variables. We will explain each one so
-that you know what to use for your samples.</p>
-<p>In this first section, we will focus on variables that set the
-location of your files and working directories.</p>
-<pre><code># Base directory for project.
-BASE_DIR=/projects/research_lab_directory/diabetes</code></pre>
-<p>We like to set a “base directory”, which is the high-level directory
-for the project which you are working on. In this case, we are using a
-diabetes project as an example. We use the base directory to create
-other file paths which are below this directory.</p>
-<pre><code># Sample metadata file.
-SAMPLE_META_FILE=${BASE_DIR}/data/sodo_gbrs_metadata.csv</code></pre>
-<p>This is the path to the sample metadata file. This file contains
-information about your samples, including the sample ID, sex,
-outbreeding generation, sequencer lane, and paths to the forward and
-reverse FASTQ files. Each row will contain information for one
-sample.</p>
-<p>The <code>sampleID</code> should contain values that you use to
-identify the samples.</p>
-<p>The <code>sex</code> column should contain the mouse’s sex recorded
-as ‘F’ for females or ‘M’ for males.</p>
-<p>The <code>generation</code> column should contain the outbreeding
-generation for the mouse.</p>
-<p>The <code>lane</code> column should contain the lane number on which
-the sample was run. This can sometimes be found in the FASTQ file name.
-In the example below, it is recorded as ‘L004’ in the FASTQ file names
-and this is what we used in the <code>lane</code> column.</p>
-<p>The <code>fastq_1</code> and <code>fastq_2</code> columns contain the
-full path to the forward and reverse FASTQ files. In this case, we
-copied the files to /flashscratch, which is the temporary sratch storage
-space for large files.</p>
-<blockquote>
-<p>DMG: TBD: explain why we should copy the files over to /flashscrath
-instead of using them from /projects.</p>
-</blockquote>
-<pre><code>sampleID,sex,generation,lane,fastq_1,fastq_2
-D2,F,46,L004,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R2_001.fastq.gz
-D3,F,46,L001,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R2_001.fastq.gz
-D4,F,46,L001,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R2_001.fastq.gz
-D5,F,46,L001,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R2_001.fastq.gz</code></pre>
-<pre><code># Base /flashscratch directory.
-FLASHSCRATCH=/flashscratch/username</code></pre>
-<p>This is the path to your directory on /flashscratch. You should
-create this before you begin your analysis.</p>
-<pre><code># Temporary directory.
-TMP_DIR=${FLASHSCRATCH}/tmp</code></pre>
-<p>This is the path to the temporary directory where Nextflow and GBRS
-can store temporary working files during the analysis.</p>
-<pre><code># Output directory.
-OUT_DIR=${FLASHSCRATCH}/results</code></pre>
-<p>This is the directory where you would like GBRS to write your
-results. You should place this on /flashscratch and then copy the files
-that you need over to /projects when the analysis is complete.</p>
-<pre><code># Final results directory (in backed up space)
-DEST_DIR=${BASE_DIR}/results/gbrs</code></pre>
-<p>This is the directory to which you will copy your final results. It
-should be a location that is backed up (like /projects). Remember,
-/flashscratch is not backed up and your files will be deleted without
-notice after 10 days.</p>
-<p>In the next section, we will focus on the reference files that are
-required by GBRS.</p>
-<pre><code># GBRS Reference File Directory
-GBRS_REF_DIR=/projects/omics_share/mouse/GRCm39/supporting_files/emase_gbrs/rel_2112_v8</code></pre>
-<p>This is the directory where the GBRS reference files are stored.
-These are a series of files which contain information about genes and
-transcripts in the eight DO founder strains. The numbers in the
-directory refere to the <a href="https://www.sanger.ac.uk/data/mouse-genomes-project/" class="external-link">Sanger Mouse
-Genomes Project</a> release. “2112” refers to the 12th month of 2021.
-“v8” refers to version 8 of their genetic variant release.</p>
-<p>There are eight arguments that point to the reference files used by
-GBRS.</p>
-<pre><code># GBRS Transcripts.
-GBRS_TRANSCRIPTS=${GBRS_REF_DIR}/emase.fullTranscripts.info</code></pre>
-<p>This file contains the list of transcripts in Ensembl 105 that GBRS
-will quantify.</p>
-<pre><code># GBRS/EMASE gene to transcript file.
-GBRS_GENE2TRANS=${GBRS_REF_DIR}/emase.gene2transcripts.tsv</code></pre>
-<p>This file contains the list of transcripts which map to each gene.
-Each row contains one gene, followed by its associated Ensembl
-transcripts.</p>
-<pre><code># GBRS Full Transcript.
-GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info</code></pre>
-<pre><code># GBRS Emission Probs.
-GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz</code></pre>
-</div>
-</div>
-</section><div class="section level1">
-<h1 id="gbrs-transmission-probs-">GBRS Transmission Probs.<a class="anchor" aria-label="anchor" href="#gbrs-transmission-probs-"></a>
-</h1>
-<p>GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities</p>
-</div>
-<div class="section level1">
-<h1 id="ensembl-105-gene-positions-">Ensembl 105 gene positions.<a class="anchor" aria-label="anchor" href="#ensembl-105-gene-positions-"></a>
-</h1>
-<p>ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz</p>
-</div>
-<div class="section level1">
-<h1 id="gbrs-69k-marker-grid-">GBRS 69K Marker Grid.<a class="anchor" aria-label="anchor" href="#gbrs-69k-marker-grid-"></a>
-</h1>
-<p>MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv</p>
-</div>
-<div class="section level1">
-<h1 id="bowtie-index-for-gbrs-">Bowtie index for GBRS.<a class="anchor" aria-label="anchor" href="#bowtie-index-for-gbrs-"></a>
-</h1>
-<p>BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts</p>
-</div>
-<div class="section level1">
-<h1 id="gbrs-path-">GBRS path.<a class="anchor" aria-label="anchor" href="#gbrs-path-"></a>
-</h1>
-<p>GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines</p>
-</div>
-<div class="section level1">
-<h1 id="singularity-cache-directory-">Singularity cache directory.<a class="anchor" aria-label="anchor" href="#singularity-cache-directory-"></a>
-</h1>
-<p>export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache</p>
-<div class="section level4">
-<h4 id="entire-gbrs-script">Entire GBRS Script<a class="anchor" aria-label="anchor" href="#entire-gbrs-script"></a>
-</h4>
-<p>Here is the whole script in one piece.</p>
-<pre><code>#!/bin/bash
-#SBATCH --qos=batch       # job queue 
-#SBATCH --ntasks=1        # number of nodes
-#SBATCH --cpus-per-task=1 # number of cores
-#SBATCH --mem=1G          # memory pool for all cores
-#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)
-
-################################################################################
-# Run GBRS on each sample.
-# GRCm39. Ensembl 105.
-#
-# Daniel Gatti
-# dan.gatti@jax.org
-# 2022-09-28
-################################################################################
-
-
-##### VARIABLES #####
-
-# Base directory for project.
-BASE_DIR=/projects/bolcun-filas-lab/DO_Superovulation
-
-# Sample metadata file.
-SAMPLE_META_FILE=${BASE_DIR}/gbrs_sample_metadata.csv
-
-# Base /flashscratch directory.
-FLASHSCRATCH=/flashscratch/dgatti
-
-# Temporary directory.
-TMP_DIR=${FLASHSCRATCH}/tmp
-
-# Output directory.
-OUT_DIR=${FLASHSCRATCH}/results
-
-# Final results directory (in backed up space)
-DEST_DIR=${BASE_DIR}/results/gbrs/grcm39
-
-# GBRS Reference File Directory
-GBRS_REF_DIR=/projects/churchill-lab/projects/GBRS_GRCm39
-
-# GBRS Transcripts.
-GBRS_TRANSCRIPTS=${GBRS_REF_DIR}/emase.fullTranscripts.info
-
-# GBRS/EMASE gene to transcript file.
-GBRS_GENE2TRANS=${GBRS_REF_DIR}/emase.gene2transcripts.tsv
-
-# GBRS Full Transcript.
-GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info
-
-# GBRS Emission Probs.
-GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz
-
-# GBRS Transmission Probs.
-GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities
-
-# Ensembl 105 gene positions.
-ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz
-
-# GBRS 69K Marker Grid.
-MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv
-
-# Bowtie index for GBRS.
-BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts
-
-# GBRS path.
-GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines
-
-# Singularity cache directory.
-export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache
-
-
-##### MAIN #####
-
-mkdir -p ${OUT_DIR}
-mkdir -p ${DEST_DIR}
-mkdir -p ${TMP_DIR}
-mkdir -p ${NXF_SINGULARITY_CACHEDIR}
-
-module load singularity
-
-cd ${TMP_DIR}
-
-nextflow run ${GBRS_GITHUB_PATH} \
-         -profile sumner \
-         --workflow gbrs \
-         --pubdir ${OUT_DIR} \
-         -w ${TMP_DIR} \
-         --bowtie_index ${BOWTIE_INDEX} \
-         --csv_input ${SAMPLE_META_FILE} \
-         --transcripts_info ${GBRS_TRANSCRIPTS} \
-         --gene2transcript_csv ${GBRS_GENE2TRANS} \
-         --full_transcript_info ${GBRS_FULL_TRANSCRIPTS} \
-         --emission_prob_avecs ${GBRS_EMIS_PROBS} \
-         --trans_prob_dir ${GBRS_TRANS_PROBS} \
-         --gene_position_file ${ENSEMBL_105} \
-         --genotype_grid ${MARKER_GRID} \
-         -resume
-
-# Copy output files from OUT_DIR to DEST_DIR.
-DIRS=`ls ${OUT_DIR}`
-
-for i in ${DIRS}
-do
-
-  CURR_DEST_DIR=${DEST_DIR}/$i
-
-  mkdir -p ${CURR_DEST_DIR}
-  cp ${OUT_DIR}/${i}/stats/* ${CURR_DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*_counts ${CURR_DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*.tsv ${CURR_DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*.pdf ${CURR_DEST_DIR}
-
-done</code></pre>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Instructor Note
-  </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
-<div class="accordion-body">
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
-<div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb44">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Output
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
-<div class="accordion-body">
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within
-challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do-you-nest-solutions-within-challenge-blocks"></a>
-</h3>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
-<div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="figures">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
-</h2>
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="math">Math<a class="anchor" aria-label="anchor" href="#math"></a>
-</h2>
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
-<div class="callout-content">
-<ul>
-<li>Use <em>bash</em> variables to build file paths and analysis tool
-arguments.</li>
+<li>Use the default <code>nextflow</code> pipeline if working with DO
+mice.</li>
+<li>You can specify another set of strains and use the default reference
+genome.</li>
+<li>Advanced users can run the pipeline line-by-line and specify
+different options.</li>
 </ul>
 </div>
 </div>
@@ -2397,201 +1292,6 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
  -->
 </div>
-</div></section><section id="aio-student-exercises"><p>Content from <a href="student-exercises.html">GBRS Student Exercies</a></p>
-<hr>
-<p> Last updated on 2023-08-11 | 
-        
-        <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/student-exercises.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 12 minutes </p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>What is Genotyping by RNA Sequencing (GBRS)?</li>
-<li>What analyses does GBRS provide?</li>
-<li>What are the steps in a GBRS analysis?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>Explain what GBRS does.</li>
-<li>List the steps in a GBRS analysis.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
-<hr class="half-width">
-<p>This is a lesson created via The Carpentries Workbench. It is written
-in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
-for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
-Markdown</a> for dynamic files that can render code into output. Please
-refer to the <a href="https://carpentries.github.io/sandpaper-docs/" class="external-link">Introduction to The
-Carpentries Workbench</a> for full documentation.</p>
-<p>What you need to know is that there are three sections required for a
-valid Carpentries lesson:</p>
-<ol style="list-style-type: decimal">
-<li>
-<code>questions</code> are displayed at the beginning of the episode
-to prime the learner for the content.</li>
-<li>
-<code>objectives</code> are the learning objectives for an episode
-displayed with the questions.</li>
-<li>
-<code>keypoints</code> are displayed at the end of the episode to
-reinforce the objectives.</li>
-</ol>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Instructor Note
-  </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
-<div class="accordion-body">
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
-<div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Output
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within
-challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do-you-nest-solutions-within-challenge-blocks"></a>
-</h3>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
-<div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
-</div>
-</div>
-</div>
-</div>
-</section><section id="figures"><h2 class="section-heading">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
-</h2>
-<hr class="half-width">
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</section><section id="math"><h2 class="section-heading">Math<a class="anchor" aria-label="anchor" href="#math"></a>
-</h2>
-<hr class="half-width">
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
-<div class="callout-content">
-<ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- 
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
- -->
 </section></section>
 </div>
     </main>
@@ -2635,7 +1335,7 @@ any links that you are not going to use.
   "@id": "https://dmgatti.github.io/GBRS_Tutorial/instructor/aio.html",
   "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson, The Carpentries",
+  "keywords": "software, data, lesson, The Carpentries, RNA-Seq, genetic diversity",
   "name": "All in One View",
   "creativeWorkStatus": "active",
   "url": "https://dmgatti.github.io/GBRS_Tutorial/instructor/aio.html",

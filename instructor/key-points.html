@@ -191,55 +191,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="prepare-reference-genome.html">2. Preparing GBRS Pseudo-References</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush4">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading4">
-        <a href="prepare-reference-transcriptome.html">3. Preparing GBRS Reference Transcriptome</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush5">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading5">
-        <a href="run-emase.html">4. Running EMASE to Quantify Allele-Specific Transcript Expression</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush6">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading6">
-        <a href="run-gbrs.html">5. Running GBRS</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush7">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading7">
-        <a href="student-exercises.html">6. GBRS Student Exercies</a>
+        <a href="prepare-pseudo-reference.html">2. Preparing GBRS Pseudo-References</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -312,55 +264,15 @@ reconstruction.</li>
 reference data stored on the high-performance computing cluster.</li>
 <li>Users outside of The Jackson Laboratory will need to create or
 download the reference files.</li>
-</ul></section><section id="prepare-reference-genome"><h2 class="section-heading"><a href="prepare-reference-genome.html">Preparing GBRS Pseudo-References</a></h2>
+</ul></section><section id="prepare-pseudo-reference"><h2 class="section-heading"><a href="prepare-pseudo-reference.html">Preparing GBRS Pseudo-References</a></h2>
 <hr class="half-width">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul></section><section id="prepare-reference-transcriptome"><h2 class="section-heading"><a href="prepare-reference-transcriptome.html">Preparing GBRS Reference Transcriptome</a></h2>
-<hr class="half-width">
-<ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul></section><section id="run-emase"><h2 class="section-heading"><a href="run-emase.html">Running EMASE to Quantify Allele-Specific Transcript Expression</a></h2>
-<hr class="half-width">
-<ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul></section><section id="run-gbrs"><h2 class="section-heading"><a href="run-gbrs.html">Running GBRSGBRS Transmission Probs.<a class="anchor" aria-label="anchor" href="#gbrs-transmission-probs-"></a>Ensembl 105 gene positions.<a class="anchor" aria-label="anchor" href="#ensembl-105-gene-positions-"></a>GBRS 69K Marker Grid.<a class="anchor" aria-label="anchor" href="#gbrs-69k-marker-grid-"></a>Bowtie index for GBRS.<a class="anchor" aria-label="anchor" href="#bowtie-index-for-gbrs-"></a>GBRS path.<a class="anchor" aria-label="anchor" href="#gbrs-path-"></a>Singularity cache directory.<a class="anchor" aria-label="anchor" href="#singularity-cache-directory-"></a></a></h2>
-<hr class="half-width">
-<ul>
-<li>Use <em>bash</em> variables to build file paths and analysis tool
-arguments.</li>
-</ul></section><section id="student-exercises"><h2 class="section-heading"><a href="student-exercises.html">GBRS Student Exercies</a></h2>
-<hr class="half-width">
-<ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>Use the default <code>nextflow</code> pipeline if working with DO
+mice.</li>
+<li>You can specify another set of strains and use the default reference
+genome.</li>
+<li>Advanced users can run the pipeline line-by-line and specify
+different options.</li>
 </ul></section>
 </div>
     </main>
@@ -404,7 +316,7 @@ locally</li>
   "@id": "https://dmgatti.github.io/GBRS_Tutorial/instructor/key-points.html",
   "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson, The Carpentries",
+  "keywords": "software, data, lesson, The Carpentries, RNA-Seq, genetic diversity",
   "name": "Key Points",
   "creativeWorkStatus": "active",
   "url": "https://dmgatti.github.io/GBRS_Tutorial/instructor/key-points.html",
