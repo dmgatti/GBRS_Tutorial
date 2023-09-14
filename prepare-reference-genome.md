@@ -89,9 +89,8 @@ In the first step, we insert indels from a specific strain into the reference
 genome using the `vcf2vci` command. This is written out to a text file in a format called "VCI". 
 
 The arguments are:
-
- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
-
+  
+```
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --vcf       -i      FILE     VCF files can seperate files by "," or have multiple -i [default: None]  │
 │                                 [required]                                                               │
@@ -106,17 +105,16 @@ The arguments are:
 │    --verbose   -v      INTEGER  specify multiple times for more verbose output [default: 0]              │
 │    --help                       Show this message and exit.                                              │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+```
+  
 We will use a subset of the arguments, passing in the reference FASTA file, 
 the SNPD and indel VCFs, the strain name to search for in the indel VCF, and the
 output file path.
-
+  
 Inputs:
 --fasta: path to the GRCm39 reference FASTA file
 --vcf: path(s) to the Sanger VCFs for SNPs and indels. Both can be passed in.
-
+  
 Output:
 --output: A VCI file, which is a custom file format, akin to a BED format, 
 which lists the positions and sequences of indels. Note that, while we list
@@ -140,9 +138,8 @@ Next, we insert SNPs from a specific strain into the reference genome using the
 'patch' command.
 
 The arguments are:
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
-
+  
+```
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
 │ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
@@ -154,19 +151,18 @@ The arguments are:
 │    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
 │    --help                      Show this message and exit.                                       │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+```
+  
 We will use the following arguments:
-
+  
 Inputs:
 --input: path to the GRCm39 reference FASTA file
 --vci: path to the **gzipped** VCI file created by `vcf2vci`.
-
+  
 Output:
 --output: path to patched FASTA file with SNPs inserted into the
 reference genome sequence.
-
+  
 ```
 PATCHED_FASTA=${STRAIN}/${STRAIN}.patched.fa
 singularity run ${G2GTOOLS} g2gtools patch \
@@ -186,8 +182,7 @@ Next, we insert SNPs from a specific strain into the reference genome using the
 
 The arguments are:
    
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
-
+```
 ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
 │ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
@@ -199,19 +194,18 @@ The arguments are:
 │    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
 │    --help                      Show this message and exit.                                       │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+```
+  
 We will use the following arguments:
-
+  
 Inputs:
 --input: path to the strain-specific patched FASTA file created by `patch`.
 --vci: path to the **gzipped** VCI file created by `vcf2vci`.
-
+  
 Output:
 --output: path to transformed FASTA file with SNPs and indels inserted into
 the reference genome sequence.
-
+  
 ```
 STRAIN_FASTA=${STRAIN}/${STRAIN}.${GENOME_VERSION}.fa
 singularity run ${G2GTOOLS} g2gtools transform \
@@ -246,8 +240,7 @@ singularity run ${SAMTOOLS} samtools faidx ${STRAIN_FASTA}
 
 The arguments are:
   
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
-
+```
 ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ *  --input-file   -i      FILE                   Input file to convert to new coordinates [default: None] [required]  │
 │ *  --vci-file     -c      FILE                   VCI file [default: None] [required]                                  │
@@ -257,22 +250,21 @@ The arguments are:
 │    --verbose      -v      INTEGER                specify multiple times for more verbose output [default: 0]          │
 │    --help                                        Show this message and exit.                                          │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  
-
+```
+  
 We will use the following arguments:
-
+  
 Inputs:
 --input-file: path to the reference GTF.
 --vci-file: path to the **gzipped** VCI file created by `vcf2vci`.
 --file-format: string indicating a GTF file. Lower case since it will be used
 as a file name extension.
-
+  
 Output:
 --output: path to converted GTF file with SNPs and indels inserted into
 the reference transcript and coordinates shifted to the strain-specific 
 coordinates.
-
+  
 ```
 singularity run ${G2GTOOLS} 
 ```
