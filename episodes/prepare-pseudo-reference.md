@@ -1,4 +1,4 @@
----
+--
 title: "Preparing GBRS Pseudo-References"
 teaching: 60
 exercises: 15
