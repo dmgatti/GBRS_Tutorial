@@ -17,7 +17,7 @@ title: 'Genotyping by RNA Sequencing Tutorial'
 created: "2023-08-10" 
 
 # Comma-separated list of keywords for the lesson
-keywords: 'software, data, lesson, The Carpentries' # FIXME
+keywords: 'software, data, lesson, The Carpentries, RNA-Seq, genetic diversity'
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
@@ -27,13 +27,13 @@ life_cycle: 'pre-alpha' # FIXME
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/dmgatti/GBRS_Tutorial' # FIXME
+source: 'https://github.com/dmgatti/GBRS_Tutorial'
 
 # Default branch of your lesson
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'dan.gatti@jax.org' # FIXME
+contact: 'dan.gatti@jax.org'
 
 # Navigation ------------------------------------------------
 #
@@ -59,8 +59,7 @@ contact: 'dan.gatti@jax.org' # FIXME
 # Order of episodes in your lesson
 episodes: 
 - introduction.md
-- prepare-reference-genome.md
-- prepare-reference-transcriptome.md
+- prepare-pseudo-reference.md
 - run-emase.md
 - run-gbrs.md
 - student-exercises.md
