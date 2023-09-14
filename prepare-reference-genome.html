@@ -270,7 +270,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Preparing GBRS Reference Genomes</h1>
-        <p> Last updated on 2023-09-13 | 
+        <p> Last updated on 2023-09-14 | 
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-reference-genome.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -350,23 +350,20 @@ Indels<a class="anchor" aria-label="anchor" href="#use-g2gtools-vcf2vci-to-gathe
 reference genome using the <code>vcf2vci</code> command. This is written
 out to a text file in a format called “VCI”.</p>
 <p>The arguments are:</p>
-<p>:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-callout</p>
-<p>╭─ Options
-───────────────────────────────────────────────────────────────────────────────────────────────╮
-│ * –vcf -i FILE VCF files can seperate files by “,” or have multiple -i
-[default: None] │ │ [required] │ │ * –fasta -f FILE Fasta file matching
-VCF information [default: None] [required] │ │ * –strain -s TEXT Name of
-strain/sample (column in VCF file) [default: None] [required] │ │
-–output -o FILE Name of output file [default: None] │ │ –diploid -d
-Create diploid VCI file │ │ –keep Keep track of VCF lines that could not
-be converted to VCI file │ │ –pass Use only VCF lines that have a PASS
-for the filter value │ │ –quality Filter on quality, FI=PASS │ │
-–no-bgzip DO NOT compress and index output │ │ –verbose -v INTEGER
-specify multiple times for more verbose output [default: 0] │ │ –help
-Show this message and exit. │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --vcf       -i      FILE     VCF files can seperate files by "," or have multiple -i [default: None]  │
+│                                 [required]                                                               │
+│ *  --fasta     -f      FILE     Fasta file matching VCF information [default: None] [required]           │
+│ *  --strain    -s      TEXT     Name of strain/sample (column in VCF file) [default: None] [required]    │
+│    --output    -o      FILE     Name of output file [default: None]                                      │
+│    --diploid   -d               Create diploid VCI file                                                  │
+│    --keep                       Keep track of VCF lines that could not be converted to VCI file          │
+│    --pass                       Use only VCF lines that have a PASS for the filter value                 │
+│    --quality                    Filter on quality, FI=PASS                                               │
+│    --no-bgzip                   DO NOT compress and index output                                         │
+│    --verbose   -v      INTEGER  specify multiple times for more verbose output [default: 0]              │
+│    --help                       Show this message and exit.                                              │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
 <p>We will use a subset of the arguments, passing in the reference FASTA
 file, the SNPD and indel VCFs, the strain name to search for in the
 indel VCF, and the output file path.</p>
@@ -391,28 +388,17 @@ Reference<a class="anchor" aria-label="anchor" href="#use-g2gtools-patch-to-inse
 <p>Next, we insert SNPs from a specific strain into the reference genome
 using the ‘patch’ command.</p>
 <p>The arguments are:</p>
-<div id="callout1" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>╭─ Options
-───────────────────────────────────────────────────────────────────────────────────────╮
-│ * –input -i FILE Fasta file to extract from [default: None] [required]
-│ │ * –vci -c FILE VCI File to use [default: None] [required] │ │
-–output -o FILE Name of output file [default: None] │ │ –bed -b FILE BED
-file name [default: None] │ │ –region -r TEXT Region to extract in
-chromosome:start-end format [default: None] │ │ –reverse Reverse the
-direction of VCI file │ │ –bgzip compress and index output │ │ –verbose
--v INTEGER specify multiple times for more verbose output [default: 0] │
-│ –help Show this message and exit. │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
-</div>
-</div>
-</div>
+<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
+│ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
+│    --output   -o      FILE     Name of output file [default: None]                               │
+│    --bed      -b      FILE     BED file name [default: None]                                     │
+│    --region   -r      TEXT     Region to extract in chromosome:start-end format [default: None]  │
+│    --reverse                   Reverse the direction of VCI file                                 │
+│    --bgzip                     compress and index output                                         │
+│    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
+│    --help                      Show this message and exit.                                       │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
 <p>We will use the following arguments:</p>
 <p>Inputs: –input: path to the GRCm39 reference FASTA file –vci: path to
 the <strong>gzipped</strong> VCI file created by
@@ -434,28 +420,17 @@ FASTA file contains the inferred sequence of a specific strain.</p>
 <p>Next, we insert SNPs from a specific strain into the reference genome
 using the ‘patch’ command.</p>
 <p>The arguments are:</p>
-<div id="callout2" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout2"></a>
-</h3>
-<div class="callout-content">
-<p>╭─ Options
-───────────────────────────────────────────────────────────────────────────────────────╮
-│ * –input -i FILE Fasta file to extract from [default: None] [required]
-│ │ * –vci -c FILE VCI File to use [default: None] [required] │ │
-–output -o FILE Name of output file [default: None] │ │ –bed -b FILE BED
-file name [default: None] │ │ –region -r TEXT Region to extract in
-chromosome:start-end format [default: None] │ │ –reverse Reverse the
-direction of VCI file │ │ –bgzip compress and index output │ │ –verbose
--v INTEGER specify multiple times for more verbose output [default: 0] │
-│ –help Show this message and exit. │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
-</div>
-</div>
-</div>
+<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input    -i      FILE     Fasta file to extract from [default: None] [required]             │
+│ *  --vci      -c      FILE     VCI File to use [default: None] [required]                        │
+│    --output   -o      FILE     Name of output file [default: None]                               │
+│    --bed      -b      FILE     BED file name [default: None]                                     │
+│    --region   -r      TEXT     Region to extract in chromosome:start-end format [default: None]  │
+│    --reverse                   Reverse the direction of VCI file                                 │
+│    --bgzip                     compress and index output                                         │
+│    --verbose  -v      INTEGER  specify multiple times for more verbose output [default: 0]       │
+│    --help                      Show this message and exit.                                       │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
 <p>We will use the following arguments:</p>
 <p>Inputs: –input: path to the strain-specific patched FASTA file
 created by <code>patch</code>. –vci: path to the
@@ -488,27 +463,15 @@ File<a class="anchor" aria-label="anchor" href="#use-g2gtools-convert-to-create-
 file, the VCI file, and the reference GTF and creates a strain-specific
 annotation file in GTF.</p>
 <p>The arguments are:</p>
-<div id="callout3" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout3"></a>
-</h3>
-<div class="callout-content">
-<p>╭─ Options
-────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ * –input-file -i FILE Input file to convert to new coordinates
-[default: None] [required] │ │ * –vci-file -c FILE VCI file [default:
-None] [required] │ │ * –file-format -f [BAM|SAM|GFF|GTF|BED] Input file
-format [default: None] [required] │ │ –output -o FILE Name of output
-file [default: None] │ │ –reverse -r Reverse the direction of the
-conversion │ │ –verbose -v INTEGER specify multiple times for more
-verbose output [default: 0] │ │ –help Show this message and exit. │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</p>
-</div>
-</div>
-</div>
+<pre><code>╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --input-file   -i      FILE                   Input file to convert to new coordinates [default: None] [required]  │
+│ *  --vci-file     -c      FILE                   VCI file [default: None] [required]                                  │
+│ *  --file-format  -f      [BAM|SAM|GFF|GTF|BED]  Input file format [default: None] [required]                         │
+│    --output       -o      FILE                   Name of output file [default: None]                                  │
+│    --reverse      -r                             Reverse the direction of the conversion                              │
+│    --verbose      -v      INTEGER                specify multiple times for more verbose output [default: 0]          │
+│    --help                                        Show this message and exit.                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
 <p>We will use the following arguments:</p>
 <p>Inputs: –input-file: path to the reference GTF. –vci-file: path to
 the <strong>gzipped</strong> VCI file created by <code>vcf2vci</code>.
@@ -591,7 +554,7 @@ g2gtools extract --exons       -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}
 </h3>
 <div class="callout-content">
 <p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -652,12 +615,12 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
 <hr class="half-width"><p>You can use standard markdown for static figures with the following
 syntax:</p>
 <p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout4" class="callout callout">
+<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout4"></a>
+<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
 </h3>
 <div class="callout-content">
 <p>Callout sections can highlight information.</p>
@@ -757,8 +720,8 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/prepare-reference-genome.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/prepare-reference-genome.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2023-09-13",
-  "datePublished": "2023-09-13"
+  "dateModified": "2023-09-14",
+  "datePublished": "2023-09-14"
 }
 
   </script><script>
