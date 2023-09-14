@@ -1,4 +1,4 @@
---
+---
 title: "Preparing GBRS Pseudo-References"
 teaching: 60
 exercises: 15
@@ -31,7 +31,7 @@ to build a pseudo-reference on the JAX computing cluster (sumner). Then, we will
 show you how each step work. We expect that most users will use the `nextflow`
 pipeline and have included the step-by-step pipeline for advanced users who
 may want to use non-standard pipeline options.
-
+  
 ## Creating a Pseudo-Reference for Diversity Outbred Mice
 
 The `nextflow` pipeline developed by Computational Sciences contains default
@@ -105,14 +105,14 @@ mkdir -p ${WORKING_DIR}
 ```
   
 There are two types of arguments in the `nextflow` call below. Arguments to
-`nextflow` have a single <kbd>-<kbd>. These are:
+`nextflow` have a single '-'. These are:
 
 | Argument | Value  | Description |
 |----------|--------|-------------|
 | -profile | sumner | This sets the resource values for the JAX sumner computing cluster |
 | -w       | ${WORKING_DIR} | The working directory for temporary files |
   
-Arguments which start with <kbd>--<kbd> go to the `nextflow` pipeline. These 
+Arguments which start with '--' go to the `nextflow` pipeline. These 
 are:
   
 | Argument   | Value  | Description |
@@ -129,6 +129,7 @@ nextflow cs-nf-pipelines/main.nf \
          --workflow generate_pseudoreference \
          --pubdir ${OUTPUT_DIR}
 ```
+
 
 The entire process should take around 30 minutes. It should produce the 
 following output on the terminal:
@@ -248,7 +249,9 @@ NOD_ShiLtJ.39.fa.fai                             WSB_EiJ.39.vci.gz.tbi
 ```
   
 ## Creating Pseudo-Reference Genomes and Transcriptomes for Other Strains
-
+  
+If you are working with a cross comprised of other strains, you can change the
+'--strain
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -341,7 +344,6 @@ cross comprised of other strains, you would query the VCF to find their names.
 
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 
 ## Step-by-Step Pseudo-Reference Generation
@@ -709,15 +711,12 @@ We will use the following arguments:
 |----------|-------------|
 | --input-file | path to the reference GTF. |
 | --vci-file | path to the **gzipped** VCI file created by `vcf2vci`. |
-| --file-format | string indicating a GTF file. Lower case since it will be used
-as a file name extension. |
-  
+| --file-format | string indicating a GTF file. Lower case since it will be used as a file name extension. |
+   
 **Output**
 | Argument | Description |
 |----------|-------------|
-| --output | path to converted GTF file with SNPs and indels inserted into
-the reference transcript and coordinates shifted to the strain-specific 
-coordinates. |
+| --output | path to converted GTF file with SNPs and indels inserted into the reference transcript and coordinates shifted to the strain-specific coordinates. |
   
 Next, we need the path to the reference GTF. We have selected the Ensembl 105
 annotation for this lesson.
@@ -748,6 +747,7 @@ We now have two key files that are used by GBRS:
 and
 - the strain-specific GTF file, which contains the strain's inferred annotation.
 
+> DMG: Stopped here.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -825,81 +825,13 @@ A_J.39.vci.gz
 A_J.39.vci.gz.tbi
 ```
 
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-Inline instructor notes can help inform instructors of timing challenges
-associated with the lessons. They appear in the "Instructor View"
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-## Challenge 1: Can you do it?
-
-What is the output of this command?
-
-```r
-paste("This", "new", "lesson", "looks", "good")
-```
-
-:::::::::::::::::::::::: solution 
-
-## Output
- 
-```output
-[1] "This new lesson looks good"
-```
-
-:::::::::::::::::::::::::::::::::
-
-
-## Challenge 2: how do you nest solutions within challenge blocks?
-
-:::::::::::::::::::::::: solution 
-
-You can add a line with at least three colons and a `solution` tag.
-
-:::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-## Figures
-
-You can use standard markdown for static figures with the following syntax:
-
-`![optional caption that appears below the figure](figure url){alt='alt text for
-accessibility purposes'}`
-
-![You belong in The Carpentries!](https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg){alt='Blue Carpentries hex person logo with no text.'}
-
-::::::::::::::::::::::::::::::::::::: callout
-
-Callout sections can highlight information.
-
-They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present "asides": 
-content that is not central to the narrative of the lesson,
-e.g. by providing the answer to a commonly-asked question.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-## Math
-
-One of our episodes contains $\LaTeX$ equations when describing how to create
-dynamic reports with {knitr}, so we now use mathjax to describe this:
-
-`$\alpha = \dfrac{1}{(1 - \beta)^2}$` becomes: $\alpha = \dfrac{1}{(1 - \beta)^2}$
-
-Cool, right?
-
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `.md` files for episodes when you want static content
-- Use `.Rmd` files for episodes when you need to generate output
-- Run `sandpaper::check_lesson()` to identify any issues with your lesson
-- Run `sandpaper::build_lesson()` to preview your lesson locally
+- Use the default `nextflow` pipeline if working with DO mice.
+- You can specify another set of strains and use the default reference genome.
+- Advanced users can run the pipeline line-by-line and specify different options.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 [r-markdown]: https://rmarkdown.rstudio.com/
+
