@@ -26,6 +26,24 @@ the reference genome. Inserting these variants may lead to changes in the length
 of the genome and g2gtools is able to map positions between the reference
 genome and the modified genome.
 
+In this tutorial, we will show you how to use the pre-build `nextflow` pipeline
+to build a pseudo-reference on the JAX computing cluster (sumner). Then, we will
+show you how each step work. We expect that most users will use the `nextflow`
+pipeline and have included the step-by-step pipeline for advanced users who
+may want to use non-standard pipeline options.
+
+## Creating a Pseudo-Reference for Diversity Outbred Mice
+
+The documentation for the GBRS `nextflow` pipeline is at <https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Generate-Pseudoreference-Pipeline-ReadMe>.
+This page lists the default values, which point reference files on sumner
+and list the eight Diversity Outbred founder strains by default.
+
+| File Type | Argument Name | File Path | Description | 
+|-----------|---------------|-----------|-------------|
+| Reference FASTA | --primary_reference_fasta | /projects/compsci/omics_share/mouse/GRCm39/genome/sequence/ensembl/v105/Mus_musculus.GRCm39.dna.primary_assembly.fa | primary reference fasta file for GRCm39 | 
+| SNP VCF | --snp_vcf | /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz | VCF containing SNPs in mouse strains from the [Mouse Genomes Project](https://www.mousegenomes.org/) version 8 |
+| Indel VCF | --indel_vcf | /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz | VCF containing Indels in mouse strains from the [Mouse Genomes Project](https://www.mousegenomes.org/) version 8 |
+| Reference GTF | --primary_reference_gtf | /projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/ensembl/v105/Mus_musculus.GRCm39.105.gtf | Gene annotation for Ensembl 105 in GTF |
 
 ## Creating Pseudo-reference Genomes and Transcriptomes
 
@@ -211,16 +229,20 @@ We will use a subset of the arguments, passing in the reference FASTA file,
 the SNPD and indel VCFs, the strain name to search for in the indel VCF, and the
 output file path.
   
-Inputs:
---fasta: path to the GRCm39 reference FASTA file
---vcf: path(s) to the Sanger VCFs for SNPs and indels. Both can be passed in.
+**Inputs**
+| Argument | Description |
+|----------|-------------|
+| --fasta  | path to the GRCm39 reference FASTA file |
+| --vcf    | path(s) to the Sanger VCFs for SNPs and indels. Both can be passed in. |
   
-Output:
---output: A VCI file, which is a custom file format, akin to a BED format, 
+**Output**
+| Argument | Description |
+|----------|-------------|
+| --output | A VCI file, which is a custom file format, akin to a BED format, 
 which lists the positions and sequences of indels. Note that, while we list
 the output file extension as "vci", `g2gtools` will gzip and index the file, 
 so we will need to add the '.gz' extension when we use the file in downstream
-commands.
+commands. |
   
 ```
 STRAIN_VCI=${STRAIN}/REF-to-${STRAIN}.vci
@@ -256,13 +278,17 @@ $ g2gtools patch --help
   
 We will use the following arguments:
   
-Inputs:
---input: path to the GRCm39 reference FASTA file
---vci: path to the **gzipped** VCI file created by `vcf2vci`.
+**Inputs**
+| Argument | Description |
+|----------|-------------|
+| --input  | path to the GRCm39 reference FASTA file |
+| --vci    | path to the **gzipped** VCI file created by `vcf2vci`. |
   
-Output:
---output: path to patched FASTA file with SNPs inserted into the
-reference genome sequence.
+**Output**
+| Argument | Description |
+|----------|-------------|
+| --output | path to patched FASTA file with SNPs inserted into the
+reference genome sequence. |
   
 ```
 PATCHED_FASTA=${STRAIN}/${STRAIN}.patched.fa
@@ -300,13 +326,25 @@ $ g2gtools transform --help
   
 We will use the following arguments:
   
-Inputs:
---input: path to the strain-specific patched FASTA file created by `patch`.
---vci: path to the **gzipped** VCI file created by `vcf2vci`.
+**Inputs**
+| Argument | Description |
+|----------|-------------|
+| --input  | path to the strain-specific patched FASTA file created by `patch`. |
+| --vci    | path to the **gzipped** VCI file created by `vcf2vci`. |
   
-Output:
---output: path to transformed FASTA file with SNPs and indels inserted into
-the reference genome sequence.
+**Output**
+| Argument | Description |
+|----------|-------------|
+| --output | path to transformed FASTA file with SNPs and indels inserted into
+the reference genome sequence. |
+
+We need to create a genome version variable to create informative file names.
+
+```
+GENOME_VERSION=GRCm39
+```
+
+Next, we will run the `transform` command.
   
 ```
 STRAIN_FASTA=${STRAIN}/${STRAIN}.${GENOME_VERSION}.fa
@@ -322,12 +360,10 @@ We now have a pseudo-reference genome in the strain-specific FASTA file.
 
 This is a step which uses the [samtools](https://www.htslib.org/doc/samtools.html) 
 suite of tools to index the FASTA file.
-
+  
 Remember that we created a variable for the `samtools` Singularity container 
 at the top of the lesson.
-
-
-
+  
 Then we will use `samtools` to index the FASTA file.
 
 ```
@@ -356,21 +392,21 @@ $ g2gtools convert --help
   
 We will use the following arguments:
   
-Inputs:
---input-file: path to the reference GTF.
---vci-file: path to the **gzipped** VCI file created by `vcf2vci`.
---file-format: string indicating a GTF file. Lower case since it will be used
-as a file name extension.
+**Inputs**
+| Argument | Description |
+|----------|-------------|
+| --input-file | path to the reference GTF. |
+| --vci-file | path to the **gzipped** VCI file created by `vcf2vci`. |
+| --file-format | string indicating a GTF file. Lower case since it will be used
+as a file name extension. |
   
-Output:
---output: path to converted GTF file with SNPs and indels inserted into
+**Output**
+| Argument | Description |
+|----------|-------------|
+| --output | path to converted GTF file with SNPs and indels inserted into
 the reference transcript and coordinates shifted to the strain-specific 
-coordinates.
+coordinates. |
   
-```
-singularity run ${G2GTOOLS} 
-```
-
 Next, we need the path to the reference GTF. We have selected the Ensembl 105
 annotation for this lesson.
 
@@ -403,13 +439,11 @@ and
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Challenge 1: Create a set of reference files for another strain in the VCF.
-
-What is the output of this command?
-
-```r
-paste("This", "new", "lesson", "looks", "good")
-```
+## Challenge 2: Create a set of reference files for another strain in the VCF.
+  
+You will need to look back at Challenge 1 to see how to list the strains in
+the VCFs. You can query either the SNP or Indel VCF. Create an entire script
+on your compute instance to run the commands above 
 
 :::::::::::::::::::::::: solution 
 
