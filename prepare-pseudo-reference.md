@@ -64,6 +64,7 @@ To run the `nextflow` pipeline to generate a pseudo-reference for DO mice on
 sumner, use the following commands.
   
 First, we load the `nextflow` module.
+  
 ```
 module use --append /projects/omics_share/meta/modules
 module load nextflow
@@ -201,7 +202,7 @@ Let's look at the files in the output directory.
 ls ${OUTPUT_DIR}
 ```
   
-You should see the following directories:
+You should see the following files and directories:
   
 ```output
 g2gtools  generate_pseudoreference_report.html  Mus_musculus.GRCm39.105.filtered.gtf  trace
@@ -827,11 +828,10 @@ A_J.39.vci.gz.tbi
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use the default `nextflow` pipeline if working with DO mice.
+- Use the default `nextflow` pipeline if working with DO mice on sumner.
+- You can query the VCFs and get the strain names using `tabix`.
 - You can specify another set of strains and use the default reference genome.
 - Advanced users can run the pipeline line-by-line and specify different options.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-[r-markdown]: https://rmarkdown.rstudio.com/
 
