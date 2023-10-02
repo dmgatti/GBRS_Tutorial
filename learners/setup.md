@@ -7,13 +7,22 @@ the data sets the Learner needs to have installed.
 
 ## Data Sets
 
-<!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
--->
-Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
+If you are working outside of The Jackson Laboratory, you will need to download
+the reference FASTA and GTF file from: [Zenodo](https://zenodo.org/record/8289936).
 
+Specifically, you should download:
+
+- [Ensembl 105 GTF](https://zenodo.org/record/8289936/files/Mus_musculus.GRCm39.105.gtf?download=1)
+- [GRCm39 FASTA](https://zenodo.org/record/8289936/files/Mus_musculus.GRCm39.dna.primary_assembly.fa?download=1)
+- [GRCm39 FASTA Index](https://zenodo.org/record/8289936/files/Mus_musculus.GRCm39.dna.primary_assembly.fa.fai?download=1)
+
+You should also download the mouse SNP and Indel files from the [Mouse Genomes Proejct](https://www.mousegenomes.org/).
+
+- [SNP VCF](https://ftp.ebi.ac.uk/pub/databases/mousegenomes/REL-2112-v8-SNPs_Indels/mgp_REL2021_snps.vcf.gz)
+- [SNP VCF Index](https://ftp.ebi.ac.uk/pub/databases/mousegenomes/REL-2112-v8-SNPs_Indels/mgp_REL2021_snps.vcf.gz.csi)
+- [Indel VCF](https://ftp.ebi.ac.uk/pub/databases/mousegenomes/REL-2112-v8-SNPs_Indels/mgp_REL2021_indels.vcf.gz)
+- [Indel VCF Index](https://ftp.ebi.ac.uk/pub/databases/mousegenomes/REL-2112-v8-SNPs_Indels/mgp_REL2021_indels.vcf.gz.csi)
+  
 ## Software Setup
 
 ::::::::::::::::::::::::::::::::::::::: discussion
@@ -31,7 +40,7 @@ systems (and potentially add more, e.g. online setup) in the solutions blocks.
 
 ### Windows
 
-Use PuTTY
+Use [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html).
 
 :::::::::::::::::::::::::
 

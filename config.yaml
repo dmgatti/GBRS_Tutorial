@@ -59,6 +59,7 @@ contact: 'dan.gatti@jax.org'
 # Order of episodes in your lesson
 episodes: 
 - introduction.md
+- installation.md
 - prepare-pseudo-reference.md
 
 

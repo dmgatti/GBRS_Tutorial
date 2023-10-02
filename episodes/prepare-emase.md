@@ -1,5 +1,5 @@
 ---
-title: "Running EMASE to Quantify Allele-Specific Transcript Expression"
+title: "Prepare EMASE to ???"
 teaching: 10
 exercises: 2
 ---
@@ -19,56 +19,12 @@ exercises: 2
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-workflow EMASE {
-    // Step 0: Download data and concat Fastq files if needed. 
-    if (params.download_data){
-        FILE_DOWNLOAD(ch_input_sample)
-
-        if (params.read_type == 'PE'){
-            FILE_DOWNLOAD.out.read_meta_ch.map{it -> [it[0], it[2][0], 'R1']}.set{r1}
-            FILE_DOWNLOAD.out.read_meta_ch.map{it -> [it[0], it[2][1], 'R2']}.set{r2}
-            read_ch = r1.mix(r2)
-        } else if (params.read_type == 'SE'){
-            FILE_DOWNLOAD.out.read_meta_ch.map{it -> [it[0], it[2][0], 'R1']}.set{read_ch}
-        }
-
-        FILE_DOWNLOAD.out.read_meta_ch.map{it -> [it[0], it[1]]}.set{meta_ch}
-    }
-
-    // Step 00: Concat local Fastq files from CSV input if required.
-    if (!params.download_data && params.csv_input){
-        CONCATENATE_LOCAL_FILES(ch_input_sample)
-        
-        if (params.read_type == 'PE'){
-            CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it -> [it[0], it[2][0], 'R1']}.set{r1}
-            CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it -> [it[0], it[2][1], 'R2']}.set{r2}
-            read_ch = r1.mix(r2)
-        } else if (params.read_type == 'SE'){
-            CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it -> [it[0], it[2][0], 'R1']}.set{read_ch}
-        }
-
-        CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it -> [it[0], it[1]]}.set{meta_ch}
-    }
-
-    // Step 00: Concatenate Fastq files if required. 
-    if (params.concat_lanes && !params.csv_input){
-        if (params.read_type == 'PE'){
-            CONCATENATE_READS_PE(read_ch)
-            temp_read_ch = CONCATENATE_READS_PE.out.concat_fastq
-            temp_read_ch.map{it -> [it[0], it[1][0], 'R1']}.set{r1}
-            temp_read_ch.map{it -> [it[0], it[1][1], 'R2']}.set{r2}
-            read_ch = r1.mix(r2)
-        } else if (params.read_type == 'SE'){
-            CONCATENATE_READS_SE(read_ch)
-            temp_read_ch = CONCATENATE_READS_SE.out.concat_fastq
-            temp_read_ch.map{it -> [it[0], it[1], 'R1']}.set{read_ch}
-        }
-    }
-
-    RUN_EMASE(read_ch)
-    // workflow found in: subworkflows/run-emase
-    // workflow run as subworkflow due to re-use in GBRS workflow. 
-
+workflow PREPARE_EMASE {
+    // Prepare emase reference, given list of genomes and gtf files. 
+    EMASE_PREPARE_EMASE()
+    BOWTIE_BUILD(EMASE_PREPARE_EMASE.out.pooled_transcript_fasta, 'bowtie.transcripts')
+    // clean transcript lists to add transcripts absent from certain haplotypes.
+    CLEAN_TRANSCRIPT_LISTS(EMASE_PREPARE_EMASE.out.pooled_transcript_info)
 }
 
 ## Introduction
