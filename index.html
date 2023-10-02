@@ -168,7 +168,16 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="prepare-pseudo-reference.html">2. Preparing GBRS Pseudo-References</a>
+        <a href="installation.html">2. Installing GBRS</a>
+    </div><!--/div.accordion-header-->
+        
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -224,26 +233,44 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Setup</h1>
       
-
-<p>This is a new lesson built with <a href="https://carpentries.github.io/sandpaper-docs" class="external-link">The Carpentries
-Workbench</a>.</p>
-<!-- 
+<section id="setup"><h2 class="section-heading">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
+<hr class="half-width"><p>Two scenarios:</p>
+<ul><li>JAX: No setup required. Just need sumner access &amp; terminal
+program.</li>
+<li>Outside:
+<ul><li>install nextflow (beyond scope),</li>
+<li>configure nextflow profile for local computing environment,</li>
+<li>install Singularity (will Docker work?),</li>
+<li>get Singularity containers from ???,</li>
+<li>get reference files <a href="https://zenodo.org/record/8289936" class="external-link">Zenodo</a>,</li>
+</ul></li>
+</ul><!-- 
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
- -->
-
-
-      <section id="setup"><p>FIXME: Setup instructions live in this document. Please specify the
+ --></section><section id="setup"><p>FIXME: Setup instructions live in this document. Please specify the
 tools and the data sets the Learner needs to have installed.</p>
 <section id="data-sets"><h2 class="section-heading">Data Sets<a class="anchor" aria-label="anchor" href="#data-sets"></a>
 </h2>
-<hr class="half-width"><!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
---><p>Download the <a href="https://example.com/FIXME" class="external-link">data zip file</a>
-and unzip it to your Desktop</p>
-</section><section id="software-setup"><h2 class="section-heading">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a>
+<hr class="half-width"><p>If you are working outside of The Jackson Laboratory, you will need
+to download the reference FASTA and GTF file from: <a href="https://zenodo.org/record/8289936" class="external-link">Zenodo</a>.</p>
+<p>Specifically, you should download:</p>
+<ul><li><a href="https://zenodo.org/record/8289936/files/Mus_musculus.GRCm39.105.gtf?download=1" class="external-link">Ensembl
+105 GTF</a></li>
+<li><a href="https://zenodo.org/record/8289936/files/Mus_musculus.GRCm39.dna.primary_assembly.fa?download=1" class="external-link">GRCm39
+FASTA</a></li>
+<li><a href="https://zenodo.org/record/8289936/files/Mus_musculus.GRCm39.dna.primary_assembly.fa.fai?download=1" class="external-link">GRCm39
+FASTA Index</a></li>
+</ul><p>You should also download the mouse SNP and Indel files from the <a href="https://www.mousegenomes.org/" class="external-link">Mouse Genomes Proejct</a>.</p>
+<ul><li><a href="https://ftp.ebi.ac.uk/pub/databases/mousegenomes/REL-2112-v8-SNPs_Indels/mgp_REL2021_snps.vcf.gz" class="external-link">SNP
+VCF</a></li>
+<li><a href="https://ftp.ebi.ac.uk/pub/databases/mousegenomes/REL-2112-v8-SNPs_Indels/mgp_REL2021_snps.vcf.gz.csi" class="external-link">SNP
+VCF Index</a></li>
+<li><a href="https://ftp.ebi.ac.uk/pub/databases/mousegenomes/REL-2112-v8-SNPs_Indels/mgp_REL2021_indels.vcf.gz" class="external-link">Indel
+VCF</a></li>
+<li><a href="https://ftp.ebi.ac.uk/pub/databases/mousegenomes/REL-2112-v8-SNPs_Indels/mgp_REL2021_indels.vcf.gz.csi" class="external-link">Indel
+VCF Index</a></li>
+</ul></section><section id="software-setup"><h2 class="section-heading">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a>
 </h2>
 <hr class="half-width"><div id="details" class="callout discussion">
 <div class="callout-square">
@@ -270,7 +297,7 @@ e.g. online setup) in the solutions blocks.</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>Use PuTTY</p>
+<p>Use <a href="https://mobaxterm.mobatek.net/download-home-edition.html" class="external-link">MobaXterm</a>.</p>
 </div>
 </div>
 </div>
@@ -334,8 +361,8 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.13.3" class="external-link">sandpaper (0.13.3)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.6.1" class="external-link">pegboard (0.6.1)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.14.0" class="external-link">sandpaper (0.14.0)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.0" class="external-link">pegboard (0.7.0)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.3.0" class="external-link">varnish (0.3.0)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -357,8 +384,8 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/index.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/index.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2023-09-26",
-  "datePublished": "2023-09-26"
+  "dateModified": "2023-10-02",
+  "datePublished": "2023-10-02"
 }
 
   </script><script>
