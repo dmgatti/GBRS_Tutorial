@@ -85,11 +85,11 @@
   Genotyping by RNA Sequencing Tutorial
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 46%" class="percentage">
-    46%
+<aside class="col-md-12 lesson-progress"><div style="width: 53%" class="percentage">
+    53%
   </div>
   <div class="progress software">
-    <div class="progress-bar software" role="progressbar" style="width: 46%" aria-valuenow="46" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar software" role="progressbar" style="width: 53%" aria-valuenow="53" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -155,7 +155,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="prepare-reference-genome.html">2. Preparing GBRS Pseudo-References</a>
+        <a href="installation.html">2. Installing GBRS</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -164,7 +164,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="prepare-reference-transcriptome.html">3. Preparing GBRS Reference Transcriptome</a>
+        <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -173,7 +173,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="run-emase.html">4. Running EMASE to Quantify Allele-Specific Transcript Expression</a>
+        <a href="prepare-emase.html">4. Prepare EMASE to ???</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -195,15 +195,6 @@
         <ul><li><a href="#at-the-jackson-laboratory-jax">At the Jackson Laboratory (JAX)</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush7">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading7">
-        <a href="student-exercises.html">6. GBRS Student Exercies</a>
-    </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -250,23 +241,23 @@
         <!-- START: inst/pkgdown/templates/content-instructor.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="../instructor/run-emase.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/student-exercises.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="../instructor/prepare-emase.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="../instructor/run-emase.html" rel="prev">
+        <a class="chapter-link" href="../instructor/prepare-emase.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Running EMASE to
+          Previous: Prepare EMASE to ???
         </a>
-        <a class="chapter-link float-end" href="../instructor/student-exercises.html" rel="next">
-          Next: GBRS Student... 
+        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">
+          Home
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running GBRS</h1>
-        <p> Last updated on 2023-08-17 | 
+        <p> Last updated on 2023-10-03 | 
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -598,6 +589,78 @@ script to a file called ‘run_gbrs.sh’, and then submit it using
 </div>
 <div class="section level3">
 <h3 id="gbrs-for-other-mouse-crosses">GBRS for Other Mouse Crosses<a class="anchor" aria-label="anchor" href="#gbrs-for-other-mouse-crosses"></a></h3>
+<p>workflow GBRS { // Step 0: Download data and concat Fastq files if
+needed. meta_ch = null</p>
+<div class="codewrapper sourceCode" id="cb21">
+<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">params.download_data</span><span class="kw">){</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">FILE_DOWNLOAD</span><span class="er">(</span><span class="ex">ch_input_sample</span><span class="kw">)</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'PE'</span><span class="kw">){</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="ex">FILE_DOWNLOAD.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][0], <span class="st">'R1'</span>]}.set{r1}</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="ex">FILE_DOWNLOAD.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][1], <span class="st">'R2'</span>]}.set{r2}</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="ex">read_ch</span> = r1.mix<span class="er">(</span><span class="ex">r2</span><span class="kw">)</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'SE'</span><span class="kw">){</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">FILE_DOWNLOAD.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][0], <span class="st">'R1'</span>]}.set{read_ch}</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">FILE_DOWNLOAD.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1]]}.set{meta_ch}</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> Step 00: Concat local Fastq files from CSV input if required.</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">!params.download_data</span> <span class="kw">&amp;&amp;</span> <span class="ex">params.csv_input</span><span class="kw">){</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">CONCATENATE_LOCAL_FILES</span><span class="er">(</span><span class="ex">ch_input_sample</span><span class="kw">)</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'PE'</span><span class="kw">){</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][0], <span class="st">'R1'</span>]}.set{r1}</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][1], <span class="st">'R2'</span>]}.set{r2}</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>        <span class="ex">read_ch</span> = r1.mix<span class="er">(</span><span class="ex">r2</span><span class="kw">)</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'SE'</span><span class="kw">){</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][0], <span class="st">'R1'</span>]}.set{read_ch}</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="ex">CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1]]}.set{meta_ch}</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> Step 00: Concatenate Fastq files if required. </span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">params.concat_lanes</span> <span class="kw">&amp;&amp;</span> <span class="ex">!params.csv_input</span><span class="kw">){</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'PE'</span><span class="kw">){</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_READS_PE</span><span class="er">(</span><span class="ex">read_ch</span><span class="kw">)</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch</span> = CONCATENATE_READS_PE.out.concat_fastq</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1][0], <span class="st">'R1'</span>]}.set{r1}</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1][1], <span class="st">'R2'</span>]}.set{r2}</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>        <span class="ex">read_ch</span> = r1.mix<span class="er">(</span><span class="ex">r2</span><span class="kw">)</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'SE'</span><span class="kw">){</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_READS_SE</span><span class="er">(</span><span class="ex">read_ch</span><span class="kw">)</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch</span> = CONCATENATE_READS_SE.out.concat_fastq</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1], <span class="st">'R1'</span>]}.set{read_ch}</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN_EMASE</span><span class="er">(</span><span class="ex">read_ch</span><span class="kw">)</span></span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> workflow found in: subworkflows/run-emase</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">meta_ch</span><span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RUN_EMASE.out.emase_genes_tpm.join</span><span class="er">(</span><span class="ex">meta_ch</span><span class="kw">)</span></span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1], it[2].sex, it[2].generation]}</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.set{grbs_recon_input}</span></span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="cf">else</span> <span class="kw">{</span></span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RUN_EMASE.out.emase_genes_tpm</span></span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1], params.sample_sex, params.sample_generation]}</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.set{grbs_recon_input}</span>              </span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_RECONSTRUCT</span><span class="er">(</span><span class="ex">grbs_recon_input</span><span class="kw">)</span></span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_QUANTIFY_GENOTYPES</span><span class="er">(</span><span class="ex">RUN_EMASE.out.compressed_emase_h5.join</span><span class="er">(</span><span class="ex">GBRS_RECONSTRUCT.out.genotypes_tsv</span><span class="kw">))</span></span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_INTERPOLATE</span><span class="er">(</span><span class="ex">GBRS_RECONSTRUCT.out.genoprobs_npz</span><span class="kw">)</span></span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_PLOT</span><span class="er">(</span><span class="ex">GBRS_INTERPOLATE.out.interpolated_genoprobs</span><span class="kw">)</span></span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_EXPORT</span><span class="er">(</span><span class="ex">GBRS_INTERPOLATE.out.interpolated_genoprobs</span><span class="kw">)</span></span></code></pre>
+</div>
+<p>}</p>
 <p>For Diversity Outbred (DO) mice, the reference files are stored in
 the reference data directories <code>/projects/omics_share</code> on
 <em>sumner</em>. We will use these files as examples ot show you which
@@ -802,33 +865,54 @@ Each row contains one gene, followed by its associated Ensembl
 transcripts.</p>
 <pre><code># GBRS Full Transcript.
 GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info</code></pre>
+<p>This file contains a list of transcript lengths in each of the eight
+DO founders.</p>
+<blockquote>
+<p>DMG: Confirm this with Mike.</p>
+</blockquote>
 <pre><code># GBRS Emission Probs.
 GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz</code></pre>
+<p>This file contains the allele emission probabilities for the hidden
+Markov model. These are used at each gene to estimate the probability
+that a given allele is obsered, given that the model is in a certain
+genotype state.</p>
+<pre><code># GBRS Transmission Probs.
+GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities</code></pre>
+<p>This directory contains the transmission probabilities for the hidden
+Markov model. There are many files in this directory, one for each DO
+outbreeding generation. Each file contains the probability of changing
+genotype state between each gene at a given DO outbreeding
+generation.</p>
+<pre><code># Ensembl 105 gene positions.
+ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz</code></pre>
+<p>This file contains the Ensembl 105 gene positions in a python
+format.</p>
+<pre><code># GBRS 69K Marker Grid.
+MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv</code></pre>
+<p>This file contains the pseudomarker genome grid which is used to
+report results. Each tissue expresses different gene, which leads GBRS
+to estimate genotypes at different genomic positions in each tissue. In
+order to standardize results, GBRS interpolates its founder haplotype
+estimates to a common grid of 74,165 positions.</p>
+<pre><code># Bowtie index for GBRS.
+BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts</code></pre>
+<p>This is the path to the bowtie index files. There are multiple files
+and this variable should contain the directory and the file prefix for
+the index files. In this case, the file prefix is “bowtie.transcripts”
+and the files are named “bowtie.transcripts.1.ewbt”,
+“bowtie.transcripts.2.ewbt”, etc.</p>
+<pre><code><span><span class="co"># GBRS path.</span></span>
+<span><span class="va">GBRS_GITHUB_PATH</span><span class="op">=</span><span class="va">TheJacksonLaboratory</span><span class="op">/</span><span class="va">cs</span><span class="op">-</span><span class="va">nf</span><span class="op">-</span><span class="va">pipelines</span></span></code></pre>
+<p>This is the Github path to the Computational Science
+<code>nextflow</code> pipelines.</p>
+<pre><code># Singularity cache directory.
+export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache</code></pre>
+<p>This is the cache directory where Singularity will store containers
+which it downloads during the analysis run.</p>
+<blockquote>
+<p>DMG: confirm with Mike.</p>
+</blockquote>
 </div>
-</div>
-</section><div class="section level1">
-<h1 id="gbrs-transmission-probs-">GBRS Transmission Probs.<a class="anchor" aria-label="anchor" href="#gbrs-transmission-probs-"></a></h1>
-<p>GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities</p>
-</div>
-<div class="section level1">
-<h1 id="ensembl-105-gene-positions-">Ensembl 105 gene positions.<a class="anchor" aria-label="anchor" href="#ensembl-105-gene-positions-"></a></h1>
-<p>ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz</p>
-</div>
-<div class="section level1">
-<h1 id="gbrs-69k-marker-grid-">GBRS 69K Marker Grid.<a class="anchor" aria-label="anchor" href="#gbrs-69k-marker-grid-"></a></h1>
-<p>MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv</p>
-</div>
-<div class="section level1">
-<h1 id="bowtie-index-for-gbrs-">Bowtie index for GBRS.<a class="anchor" aria-label="anchor" href="#bowtie-index-for-gbrs-"></a></h1>
-<p>BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts</p>
-</div>
-<div class="section level1">
-<h1 id="gbrs-path-">GBRS path.<a class="anchor" aria-label="anchor" href="#gbrs-path-"></a></h1>
-<p>GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines</p>
-</div>
-<div class="section level1">
-<h1 id="singularity-cache-directory-">Singularity cache directory.<a class="anchor" aria-label="anchor" href="#singularity-cache-directory-"></a></h1>
-<p>export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache</p>
 <div class="section level4">
 <h4 id="entire-gbrs-script">Entire GBRS Script<a class="anchor" aria-label="anchor" href="#entire-gbrs-script"></a></h4>
 <p>Here is the whole script in one piece.</p>
@@ -945,117 +1029,6 @@ do
   cp ${OUT_DIR}/${i}/gbrs/*.pdf ${CURR_DEST_DIR}
 
 done</code></pre>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Instructor Note
-  </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
-<div class="accordion-body">
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
-<div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb44">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Output
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
-<div class="accordion-body">
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within
-challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do-you-nest-solutions-within-challenge-blocks"></a>
-</h3>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
-<div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="figures">Figures<a class="anchor" aria-label="anchor" href="#figures"></a></h2>
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><figcaption>You belong in The Carpentries!</figcaption></figure><div id="callout1" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="math">Math<a class="anchor" aria-label="anchor" href="#math"></a></h2>
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1075,22 +1048,19 @@ any links that you are not going to use.
  -->
 </div>
 </div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="../instructor/run-emase.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/student-exercises.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="../instructor/prepare-emase.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="../instructor/run-emase.html" rel="prev">
+        <a class="chapter-link" href="../instructor/prepare-emase.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Running EMASE to
+          Previous: Prepare EMASE to ???
         </a>
-        <a class="chapter-link float-end" href="../instructor/student-exercises.html" rel="next">
-          Next: GBRS Student... 
+        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">
+          Home
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -1114,8 +1084,8 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.13.0" class="external-link">sandpaper (0.13.0)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.6.1" class="external-link">pegboard (0.6.1)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.14.0" class="external-link">sandpaper (0.14.0)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.0" class="external-link">pegboard (0.7.0)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.3.0" class="external-link">varnish (0.3.0)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -1131,14 +1101,14 @@ any links that you are not going to use.
   "@id": "https://dmgatti.github.io/GBRS_Tutorial/instructor/run-gbrs.html",
   "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson, The Carpentries",
+  "keywords": "software, data, lesson, The Carpentries, RNA-Seq, genetic diversity",
   "name": "Running GBRS",
   "creativeWorkStatus": "active",
   "url": "https://dmgatti.github.io/GBRS_Tutorial/instructor/run-gbrs.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/instructor/run-gbrs.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2023-08-17",
-  "datePublished": "2023-09-14"
+  "dateModified": "2023-10-03",
+  "datePublished": "2023-10-03"
 }
 
   </script><script>

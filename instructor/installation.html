@@ -85,11 +85,11 @@
   Genotyping by RNA Sequencing Tutorial
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 10%" class="percentage">
-    10%
+<aside class="col-md-12 lesson-progress"><div style="width: 5%" class="percentage">
+    5%
   </div>
   <div class="progress software">
-    <div class="progress-bar software" role="progressbar" style="width: 10%" aria-valuenow="10" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar software" role="progressbar" style="width: 5%" aria-valuenow="5" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -171,7 +171,6 @@
 <li><a href="#nextflow-pipeline-repository">Nextflow Pipeline Repository</a></li>
 <li><a href="#cluster-profile-configuration-file">Cluster Profile Configuration File</a></li>
 <li><a href="#reference-data-files">Reference Data Files</a></li>
-<li><a href="#running-gbrs">Running GBRS</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
         
@@ -182,6 +181,24 @@
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
         <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
+    </div><!--/div.accordion-header-->
+        
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="prepare-emase.html">4. Prepare EMASE to ???</a>
+    </div><!--/div.accordion-header-->
+        
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="run-gbrs.html">5. Running GBRS</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -245,7 +262,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Installing GBRS</h1>
-        <p> Last updated on 2023-10-02 | 
+        <p> Last updated on 2023-10-03 | 
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/installation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -412,29 +429,8 @@ reporting of results.</p>
 <ul><li><a href="https://zenodo.org/record/8289936/files/transition_probabilities.tar.gz?download=1" class="external-link">transition_probabilities.tar.gz</a></li>
 </ul><p>Colors to use when drawing founder haplotypes:</p>
 <ul><li><a href="https://zenodo.org/record/8186981/files/founder.hexcolor.info?download=1" class="external-link">founder.hexcolor.info</a></li>
-</ul></section><section id="running-gbrs"><h2 class="section-heading">Running GBRS<a class="anchor" aria-label="anchor" href="#running-gbrs"></a>
-</h2>
-<hr class="half-width"><p>When you run GBRS on a cluster outside of The Jackson Laboratory, you
-will need to specify many command-line options.</p>
-<pre><code># Full path to nextflow main.nf file.
-GBRS_PATH=/path/to/gbrs/main.nf
-
-nextflow ${GBRS_PATH} \
-         -profile sumner \
-         --workflow gbrs \
-         --pubdir ${OUT_DIR} \
-         -w ${TMP_DIR} \
-         --bowtie_index ${BOWTIE_INDEX} \
-         --csv_input ${SAMPLE_META_FILE} \
-         --transcripts_info ${GBRS_TRANSCRIPTS} \
-         --gene2transcript_csv ${GBRS_GENE2TRANS} \
-         --full_transcript_info ${GBRS_FULL_TRANSCRIPTS} \
-         --emission_prob_avecs ${GBRS_EMIS_PROBS} \
-         --trans_prob_dir ${GBRS_TRANS_PROBS} \
-         --gene_position_file ${ENSEMBL_105} \
-         --genotype_grid ${MARKER_GRID} \
-         -resume
-</code></pre>
+</ul><p>Once you have these file in place, navigate to the “Running GBRS”
+lesson.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -516,7 +512,7 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/instructor/installation.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/instructor/installation.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2023-10-02",
+  "dateModified": "2023-10-03",
   "datePublished": "2023-10-03"
 }
 

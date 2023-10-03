@@ -61,7 +61,8 @@ episodes:
 - introduction.md
 - installation.md
 - prepare-pseudo-reference.md
-
+- prepare-emase.md
+- run-gbrs.md
 
 # Information for Learners
 learners: 
