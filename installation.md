@@ -189,32 +189,8 @@ Colors to use when drawing founder haplotypes:
 
 * [founder.hexcolor.info](https://zenodo.org/record/8186981/files/founder.hexcolor.info?download=1)
   
-## Running GBRS
+Once you have these file in place, navigate to the "Running GBRS" lesson.
 
-When you run GBRS on a cluster outside of The Jackson Laboratory, you will need
-to specify many command-line options.
-
-```
-# Full path to nextflow main.nf file.
-GBRS_PATH=/path/to/gbrs/main.nf
-
-nextflow ${GBRS_PATH} \
-         -profile sumner \
-         --workflow gbrs \
-         --pubdir ${OUT_DIR} \
-         -w ${TMP_DIR} \
-         --bowtie_index ${BOWTIE_INDEX} \
-         --csv_input ${SAMPLE_META_FILE} \
-         --transcripts_info ${GBRS_TRANSCRIPTS} \
-         --gene2transcript_csv ${GBRS_GENE2TRANS} \
-         --full_transcript_info ${GBRS_FULL_TRANSCRIPTS} \
-         --emission_prob_avecs ${GBRS_EMIS_PROBS} \
-         --trans_prob_dir ${GBRS_TRANS_PROBS} \
-         --gene_position_file ${ENSEMBL_105} \
-         --genotype_grid ${MARKER_GRID} \
-         -resume
-
-```
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
