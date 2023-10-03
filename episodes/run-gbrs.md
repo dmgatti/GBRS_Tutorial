@@ -739,31 +739,73 @@ contains one gene, followed by its associated Ensembl transcripts.
 GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info
 ```
 
+This file contains a list of transcript lengths in each of the eight DO founders.
+
+> DMG: Confirm this with Mike.
+
 ```
 # GBRS Emission Probs.
 GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz
 ```
 
+This file contains the allele emission probabilities for the hidden Markov model.
+These are used at each gene to estimate the probability that a given allele
+is obsered, given that the model is in a certain genotype state.
 
+```
 # GBRS Transmission Probs.
 GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities
+```
 
+This directory contains the transmission probabilities for the hidden Markov model.
+There are many files in this directory, one for each DO outbreeding generation.
+Each file contains the probability of changing genotype state between each gene
+at a given DO outbreeding generation.
+
+```
 # Ensembl 105 gene positions.
 ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz
+```
 
+This file contains the Ensembl 105 gene positions in a python format.
+
+```
 # GBRS 69K Marker Grid.
 MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv
+```
 
+This file contains the pseudomarker genome grid which is used to report results.
+Each tissue expresses different gene, which leads GBRS to estimate genotypes
+at different genomic positions in each tissue. In order to standardize results,
+GBRS interpolates its founder haplotype estimates to a common grid of 74,165
+positions.
+
+```
 # Bowtie index for GBRS.
 BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts
+```
 
+This is the path to the bowtie index files. There are multiple files and this
+variable should contain the directory and the file prefix for the index files.
+In this case, the file prefix is "bowtie.transcripts" and the files are named
+"bowtie.transcripts.1.ewbt", "bowtie.transcripts.2.ewbt", etc.
+
+```
 # GBRS path.
 GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines
+```
 
+This is the Github path to the Computational Science `nextflow` pipelines.
+
+```
 # Singularity cache directory.
 export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache
+```
 
+This is the cache directory where Singularity will store containers which it
+downloads during the analysis run.
 
+> DMG: confirm with Mike.
 
 #### Entire GBRS Script
 
@@ -884,73 +926,6 @@ do
 
 done
 ```
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-Inline instructor notes can help inform instructors of timing challenges
-associated with the lessons. They appear in the "Instructor View"
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-## Challenge 1: Can you do it?
-
-What is the output of this command?
-
-```r
-paste("This", "new", "lesson", "looks", "good")
-```
-
-:::::::::::::::::::::::: solution 
-
-## Output
- 
-```output
-[1] "This new lesson looks good"
-```
-
-:::::::::::::::::::::::::::::::::
-
-
-## Challenge 2: how do you nest solutions within challenge blocks?
-
-:::::::::::::::::::::::: solution 
-
-You can add a line with at least three colons and a `solution` tag.
-
-:::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-## Figures
-
-You can use standard markdown for static figures with the following syntax:
-
-`![optional caption that appears below the figure](figure url){alt='alt text for
-accessibility purposes'}`
-
-![You belong in The Carpentries!](https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg){alt='Blue Carpentries hex person logo with no text.'}
-
-::::::::::::::::::::::::::::::::::::: callout
-
-Callout sections can highlight information.
-
-They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present "asides": 
-content that is not central to the narrative of the lesson,
-e.g. by providing the answer to a commonly-asked question.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-## Math
-
-One of our episodes contains $\LaTeX$ equations when describing how to create
-dynamic reports with {knitr}, so we now use mathjax to describe this:
-
-`$\alpha = \dfrac{1}{(1 - \beta)^2}$` becomes: $\alpha = \dfrac{1}{(1 - \beta)^2}$
-
-Cool, right?
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
