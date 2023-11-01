@@ -11,5 +11,5 @@
 "episodes/run-gbrs.md" "1b2cd4e16c4c47bd4e392889b6e32e0c" "site/built/run-gbrs.md" "2023-10-03"
 "instructors/instructor-notes.md" "cae72b6712578d74a49fea7513099f8c" "site/built/instructor-notes.md" "2023-08-10"
 "learners/reference.md" "73054d2da4d709f727382b3f080c6289" "site/built/reference.md" "2023-09-14"
-"learners/setup.md" "afe8ae8cefb7e57ffdce76201016989b" "site/built/setup.md" "2023-10-02"
+"learners/setup.md" "c67ac976d8229eedc0f389dbcaa342d5" "site/built/setup.md" "2023-11-01"
 "profiles/learner-profiles.md" "60b93493cf1da06dfd63255d73854461" "site/built/learner-profiles.md" "2023-08-10"
