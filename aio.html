@@ -1702,7 +1702,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-run-gbrs"><p>Content from <a href="run-gbrs.html">Running GBRS</a></p>
 <hr>
-<p>Last updated on 2023-10-03 |
+<p>Last updated on 2024-01-30 |
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1750,7 +1750,7 @@ the High Performance Computing (HPC) cluster at JAX.</p>
 <div class="section level3">
 <h3 id="gbrs-for-diversity-outbred-mice">GBRS for Diversity Outbred Mice<a class="anchor" aria-label="anchor" href="#gbrs-for-diversity-outbred-mice"></a>
 </h3>
-<p>The Next-Generaiong Operations (NGSOps) team has configured the
+<p>The Next-Generation Operations (NGSOps) team has configured the
 default arrguments for the GBRS Nextflow pipeline to use the reference
 files for GRCm39 and Ensembl version 105. This means that the arguments
 that point GBRS to the locations of the founder genomes, founder
@@ -1841,10 +1841,10 @@ done
 rm -rf ${TMP_DIR}</code></pre>
 <p>For Diversity Outbred (DO) mice, the reference files are stored in
 the reference data directories <code>/projects/omics_share</code> on
-<em>sumner</em>.</p>
+<em>sumner2</em>.</p>
 <p>JAX uses <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx" class="external-link">slurm</a>
 (NOTE: This is an internal JAX link which requires a JAX login.) to
-manage computing jobs on <em>sumner</em>. There are several good
+manage computing jobs on <em>sumner2</em>. There are several good
 tutorials on using <em>slurm</em> on the JAX <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx" class="external-link">Research
 IT Documentation Library</a>.</p>
 <div class="section level4">
@@ -2035,6 +2035,17 @@ script to a file called ‘run_gbrs.sh’, and then submit it using
 ‘sbatch’.</p>
 <pre><code>sbatch run_gbrs.sh</code></pre>
 </div>
+<div class="section level4">
+<h4 id="paired-end-versus-single-end-data">Paired-end versus Single-end Data<a class="anchor" aria-label="anchor" href="#paired-end-versus-single-end-data"></a>
+</h4>
+<p>The default settings in GBRS assume that you have paired-end
+sequencing data. If you have single-end data, you will need to make two
+changes.</p>
+<ol style="list-style-type: decimal">
+<li>Remove the “fast_2” column from your sample metadata file.</li>
+<li>Add the “–read_type SE” argument to your script.</li>
+</ol>
+</div>
 </div>
 <div class="section level3">
 <h3 id="gbrs-for-other-mouse-crosses">GBRS for Other Mouse Crosses<a class="anchor" aria-label="anchor" href="#gbrs-for-other-mouse-crosses"></a>
@@ -2113,11 +2124,11 @@ needed. meta_ch = null</p>
 <p>}</p>
 <p>For Diversity Outbred (DO) mice, the reference files are stored in
 the reference data directories <code>/projects/omics_share</code> on
-<em>sumner</em>. We will use these files as examples ot show you which
+<em>sumner2</em>. We will use these files as examples ot show you which
 arguments to provide.</p>
 <p>JAX uses <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx" class="external-link">slurm</a>
 (NOTE: This is an internal JAX link which requires a JAX login.) to
-manage computing jobs on <em>sumner</em>. There are several good
+manage computing jobs on <em>sumner2</em>. There are several good
 tutorials on using <em>slurm</em> on the JAX <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx" class="external-link">Research
 IT Documentation Library</a>.</p>
 <div class="section level4">
