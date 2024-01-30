@@ -299,7 +299,7 @@ analyze FASTQ files using GBRS.</li>
 </div>
 <section id="at-the-jackson-laboratory-jax"><h2 class="section-heading">At the Jackson Laboratory (JAX)<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
 </h2>
-<hr class="half-width"><p>The GBRS Nextflow pipeline is configured to run on <em>sumner</em>,
+<hr class="half-width"><p>The GBRS Nextflow pipeline is configured to run on <em>sumner2</em>,
 the High Performance Computing (HPC) cluster at JAX.</p>
 <p>We will consider two scenarios:</p>
 <ol style="list-style-type: decimal"><li>You are analyzing expression data from Diversity Outbred mice;</li>
@@ -426,7 +426,7 @@ Here we will use only a few of the options:</p>
 <span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span>
 <span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
 <p>The first option specifies the job queue to use for this job. In this
-case, it is the “batch” queue on <em>sumner</em>.</p>
+case, it is the “batch” queue on <em>sumner2</em>.</p>
 <pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span></code></pre>
 <p>The next two options specify the number of nodes and number of CPUs
 (or cores) per node to use. In this case, we will use one node and one
@@ -453,7 +453,7 @@ configuration and utilization of the cluster.</p>
 <blockquote>
 <p>DMG: TBD: Should we run 50, 100, 200 &amp; 300 samples and include a
 time/samples plot? I have 350 samples that we could use for this. It’s
-not going to be linear with more sample, but it’s something.</p>
+not going to be linear with more samples, but it’s something.</p>
 </blockquote>
 <pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
 </div>
@@ -598,78 +598,6 @@ changes.</p>
 </div>
 <div class="section level3">
 <h3 id="gbrs-for-other-mouse-crosses">GBRS for Other Mouse Crosses<a class="anchor" aria-label="anchor" href="#gbrs-for-other-mouse-crosses"></a></h3>
-<p>workflow GBRS { // Step 0: Download data and concat Fastq files if
-needed. meta_ch = null</p>
-<div class="codewrapper sourceCode" id="cb21">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">params.download_data</span><span class="kw">){</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">FILE_DOWNLOAD</span><span class="er">(</span><span class="ex">ch_input_sample</span><span class="kw">)</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'PE'</span><span class="kw">){</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="ex">FILE_DOWNLOAD.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][0], <span class="st">'R1'</span>]}.set{r1}</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="ex">FILE_DOWNLOAD.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][1], <span class="st">'R2'</span>]}.set{r2}</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="ex">read_ch</span> = r1.mix<span class="er">(</span><span class="ex">r2</span><span class="kw">)</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'SE'</span><span class="kw">){</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">FILE_DOWNLOAD.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][0], <span class="st">'R1'</span>]}.set{read_ch}</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">FILE_DOWNLOAD.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1]]}.set{meta_ch}</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> Step 00: Concat local Fastq files from CSV input if required.</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">!params.download_data</span> <span class="kw">&amp;&amp;</span> <span class="ex">params.csv_input</span><span class="kw">){</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">CONCATENATE_LOCAL_FILES</span><span class="er">(</span><span class="ex">ch_input_sample</span><span class="kw">)</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'PE'</span><span class="kw">){</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][0], <span class="st">'R1'</span>]}.set{r1}</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][1], <span class="st">'R2'</span>]}.set{r2}</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>        <span class="ex">read_ch</span> = r1.mix<span class="er">(</span><span class="ex">r2</span><span class="kw">)</span></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'SE'</span><span class="kw">){</span></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[2][0], <span class="st">'R1'</span>]}.set{read_ch}</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="ex">CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1]]}.set{meta_ch}</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> Step 00: Concatenate Fastq files if required. </span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">params.concat_lanes</span> <span class="kw">&amp;&amp;</span> <span class="ex">!params.csv_input</span><span class="kw">){</span></span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'PE'</span><span class="kw">){</span></span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_READS_PE</span><span class="er">(</span><span class="ex">read_ch</span><span class="kw">)</span></span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch</span> = CONCATENATE_READS_PE.out.concat_fastq</span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1][0], <span class="st">'R1'</span>]}.set{r1}</span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1][1], <span class="st">'R2'</span>]}.set{r2}</span>
-<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>        <span class="ex">read_ch</span> = r1.mix<span class="er">(</span><span class="ex">r2</span><span class="kw">)</span></span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="kw">(</span><span class="ex">params.read_type</span> == <span class="st">'SE'</span><span class="kw">){</span></span>
-<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>        <span class="ex">CONCATENATE_READS_SE</span><span class="er">(</span><span class="ex">read_ch</span><span class="kw">)</span></span>
-<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch</span> = CONCATENATE_READS_SE.out.concat_fastq</span>
-<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>        <span class="ex">temp_read_ch.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1], <span class="st">'R1'</span>]}.set{read_ch}</span>
-<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
-<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="ex">RUN_EMASE</span><span class="er">(</span><span class="ex">read_ch</span><span class="kw">)</span></span>
-<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a><span class="ex">//</span> workflow found in: subworkflows/run-emase</span>
-<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">meta_ch</span><span class="kw">)</span> <span class="kw">{</span></span>
-<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RUN_EMASE.out.emase_genes_tpm.join</span><span class="er">(</span><span class="ex">meta_ch</span><span class="kw">)</span></span>
-<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1], it[2].sex, it[2].generation]}</span>
-<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.set{grbs_recon_input}</span></span>
-<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="cf">else</span> <span class="kw">{</span></span>
-<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RUN_EMASE.out.emase_genes_tpm</span></span>
-<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.map{it</span> <span class="at">-</span><span class="op">&gt;</span> [it[0], it[1], params.sample_sex, params.sample_generation]}</span>
-<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.set{grbs_recon_input}</span>              </span>
-<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_RECONSTRUCT</span><span class="er">(</span><span class="ex">grbs_recon_input</span><span class="kw">)</span></span>
-<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_QUANTIFY_GENOTYPES</span><span class="er">(</span><span class="ex">RUN_EMASE.out.compressed_emase_h5.join</span><span class="er">(</span><span class="ex">GBRS_RECONSTRUCT.out.genotypes_tsv</span><span class="kw">))</span></span>
-<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_INTERPOLATE</span><span class="er">(</span><span class="ex">GBRS_RECONSTRUCT.out.genoprobs_npz</span><span class="kw">)</span></span>
-<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_PLOT</span><span class="er">(</span><span class="ex">GBRS_INTERPOLATE.out.interpolated_genoprobs</span><span class="kw">)</span></span>
-<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a><span class="ex">GBRS_EXPORT</span><span class="er">(</span><span class="ex">GBRS_INTERPOLATE.out.interpolated_genoprobs</span><span class="kw">)</span></span></code></pre>
-</div>
-<p>}</p>
 <p>For Diversity Outbred (DO) mice, the reference files are stored in
 the reference data directories <code>/projects/omics_share</code> on
 <em>sumner2</em>. We will use these files as examples ot show you which
@@ -702,7 +630,7 @@ Here we will use only a few of the options:</p>
 <span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span>
 <span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
 <p>The first option specifies the job queue to use for this job. In this
-case, it is the “batch” queue on <em>sumner</em>.</p>
+case, it is the “batch” queue on <em>sumner2</em>.</p>
 <pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span></code></pre>
 <p>The next two options specify the number of nodes and number of CPUs
 (or cores) per node to use. In this case, we will use one node and one
