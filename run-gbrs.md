@@ -21,7 +21,7 @@ FASTQ files using GBRS.
 
 ## At the Jackson Laboratory (JAX)
 
-The GBRS Nextflow pipeline is configured to run on *sumner*, the High Performance 
+The GBRS Nextflow pipeline is configured to run on *sumner2*, the High Performance 
 Computing (HPC) cluster at JAX. 
 
 We will consider two scenarios:
@@ -167,7 +167,7 @@ only a few of the options:
 ```
 
 The first option specifies the job queue to use for this job. In this case, it
-is the "batch" queue on *sumner*.
+is the "batch" queue on *sumner2*.
 
 ```
 #SBATCH --qos=batch       # job queue
@@ -203,7 +203,7 @@ samples, depth of coverage, and the configuration and utilization of the cluster
 
 > DMG: TBD: Should we run 50, 100, 200 & 300 samples and include a time/samples plot? 
 I have 350 samples that we could use for this. It's not going to be linear with
-more sample, but it's something.
+more samples, but it's something.
 
 ```
 #SBATCH --time=48:00:00   # wall clock time (D-HH:MM)
@@ -395,78 +395,6 @@ If you have single-end data, you will need to make two changes.
 
 ### GBRS for Other Mouse Crosses
 
-workflow GBRS {
-    // Step 0: Download data and concat Fastq files if needed. 
-    meta_ch = null
-
-    if (params.download_data){
-        FILE_DOWNLOAD(ch_input_sample)
-
-        if (params.read_type == 'PE'){
-            FILE_DOWNLOAD.out.read_meta_ch.map{it -> [it[0], it[2][0], 'R1']}.set{r1}
-            FILE_DOWNLOAD.out.read_meta_ch.map{it -> [it[0], it[2][1], 'R2']}.set{r2}
-            read_ch = r1.mix(r2)
-        } else if (params.read_type == 'SE'){
-            FILE_DOWNLOAD.out.read_meta_ch.map{it -> [it[0], it[2][0], 'R1']}.set{read_ch}
-        }
-
-        FILE_DOWNLOAD.out.read_meta_ch.map{it -> [it[0], it[1]]}.set{meta_ch}
-    }
-
-    // Step 00: Concat local Fastq files from CSV input if required.
-    if (!params.download_data && params.csv_input){
-        CONCATENATE_LOCAL_FILES(ch_input_sample)
-        
-        if (params.read_type == 'PE'){
-            CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it -> [it[0], it[2][0], 'R1']}.set{r1}
-            CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it -> [it[0], it[2][1], 'R2']}.set{r2}
-            read_ch = r1.mix(r2)
-        } else if (params.read_type == 'SE'){
-            CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it -> [it[0], it[2][0], 'R1']}.set{read_ch}
-        }
-        CONCATENATE_LOCAL_FILES.out.read_meta_ch.map{it -> [it[0], it[1]]}.set{meta_ch}
-    }
-
-    // Step 00: Concatenate Fastq files if required. 
-    if (params.concat_lanes && !params.csv_input){
-        if (params.read_type == 'PE'){
-            CONCATENATE_READS_PE(read_ch)
-            temp_read_ch = CONCATENATE_READS_PE.out.concat_fastq
-            temp_read_ch.map{it -> [it[0], it[1][0], 'R1']}.set{r1}
-            temp_read_ch.map{it -> [it[0], it[1][1], 'R2']}.set{r2}
-            read_ch = r1.mix(r2)
-        } else if (params.read_type == 'SE'){
-            CONCATENATE_READS_SE(read_ch)
-            temp_read_ch = CONCATENATE_READS_SE.out.concat_fastq
-            temp_read_ch.map{it -> [it[0], it[1], 'R1']}.set{read_ch}
-        }
-    }
-
-    RUN_EMASE(read_ch)
-    // workflow found in: subworkflows/run-emase
-
-    if (meta_ch) {
-        RUN_EMASE.out.emase_genes_tpm.join(meta_ch)
-        .map{it -> [it[0], it[1], it[2].sex, it[2].generation]}
-        .set{grbs_recon_input}
-    } else {
-        RUN_EMASE.out.emase_genes_tpm
-        .map{it -> [it[0], it[1], params.sample_sex, params.sample_generation]}
-        .set{grbs_recon_input}              
-    }
-
-    GBRS_RECONSTRUCT(grbs_recon_input)
-
-    GBRS_QUANTIFY_GENOTYPES(RUN_EMASE.out.compressed_emase_h5.join(GBRS_RECONSTRUCT.out.genotypes_tsv))
-
-    GBRS_INTERPOLATE(GBRS_RECONSTRUCT.out.genoprobs_npz)
-
-    GBRS_PLOT(GBRS_INTERPOLATE.out.interpolated_genoprobs)
-
-    GBRS_EXPORT(GBRS_INTERPOLATE.out.interpolated_genoprobs)
-
-}
-
 For Diversity Outbred (DO) mice, the reference files are stored in the 
 reference data directories `/projects/omics_share` on *sumner2*. We will use 
 these files as examples ot show you which arguments to provide. 
@@ -509,7 +437,7 @@ only a few of the options:
 ```
 
 The first option specifies the job queue to use for this job. In this case, it
-is the "batch" queue on *sumner*.
+is the "batch" queue on *sumner2*.
 
 ```
 #SBATCH --qos=batch       # job queue
