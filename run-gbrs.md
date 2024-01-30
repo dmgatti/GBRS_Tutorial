@@ -31,7 +31,7 @@ We will consider two scenarios:
 
 ### GBRS for Diversity Outbred Mice
 
-The Next-Generaiong Operations (NGSOps) team has configured the default 
+The Next-Generation Operations (NGSOps) team has configured the default 
 arrguments for the GBRS Nextflow pipeline to use the reference files for GRCm39
 and Ensembl version 105. This means that the arguments that point GBRS to the 
 locations of the founder genomes, founder transcriptomes, and aligner indices
@@ -127,11 +127,11 @@ rm -rf ${TMP_DIR}
 
 
 For Diversity Outbred (DO) mice, the reference files are stored in the 
-reference data directories `/projects/omics_share` on *sumner*.
+reference data directories `/projects/omics_share` on *sumner2*.
 
 JAX uses [slurm](https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx)
 (NOTE: This is an internal JAX link which requires a JAX login.) to manage 
-computing jobs on *sumner*. There are several good tutorials on using *slurm*
+computing jobs on *sumner2*. There are several good tutorials on using *slurm*
 on the JAX [Research IT Documentation Library](https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx).
 
 #### *slurm* Options Block
@@ -385,6 +385,14 @@ can submit the script to the *slurm* queue. Save the script to a file called
 sbatch run_gbrs.sh
 ```
 
+#### Paired-end versus Single-end Data
+
+The default settings in GBRS assume that you have paired-end sequencing data.
+If you have single-end data, you will need to make two changes.
+
+1. Remove the "fast_2" column from your sample metadata file.
+2. Add the "--read_type SE" argument to your script.
+
 ### GBRS for Other Mouse Crosses
 
 workflow GBRS {
@@ -460,12 +468,12 @@ workflow GBRS {
 }
 
 For Diversity Outbred (DO) mice, the reference files are stored in the 
-reference data directories `/projects/omics_share` on *sumner*. We will use 
+reference data directories `/projects/omics_share` on *sumner2*. We will use 
 these files as examples ot show you which arguments to provide. 
 
 JAX uses [slurm](https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx)
 (NOTE: This is an internal JAX link which requires a JAX login.) to manage 
-computing jobs on *sumner*. There are several good tutorials on using *slurm*
+computing jobs on *sumner2*. There are several good tutorials on using *slurm*
 on the JAX [Research IT Documentation Library](https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx).
 
 #### *slurm* Options Block
