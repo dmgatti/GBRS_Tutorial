@@ -1,21 +1,21 @@
 ---
 title: "Running EMASE to Quantify Allele-Specific Transcript Expression"
-teaching: 10
-exercises: 2
+teaching: 60
+exercises: 20
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What is Genotyping by RNA Sequencing (GBRS)?
-- What analyses does GBRS provide?
-- What are the steps in a GBRS analysis?
+- What is Expectation Maximization for Allele-Specific Expression (EMASE)?
+- What analyses does EMASE provide?
+- What are the steps in an EMASE analysis?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain what GBRS does.
-- List the steps in a GBRS analysis.
+- Explain what EMASE does.
+- Perofrm an EMASE analysis using Nextflow.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -73,21 +73,63 @@ workflow EMASE {
 
 ## Introduction
 
-This is a lesson created via The Carpentries Workbench. It is written in
-[Pandoc-flavored Markdown](https://pandoc.org/MANUAL.txt) for static files and
-[R Markdown][r-markdown] for dynamic files that can render code into output. 
-Please refer to the [Introduction to The Carpentries 
-Workbench](https://carpentries.github.io/sandpaper-docs/) for full documentation.
+Expectation Maximization for Allele-Specific Expression (EMASE) is 
+a method for estimating allele-specific transcript expression in organisms 
+with diploid genomes. It was developed with The [Diversity Outbred](https://www.jax.org/strain/009376) 
+mice in mind, but also works in other organisms. 
 
-What you need to know is that there are three sections required for a valid
-Carpentries lesson:
+Briefly, in a mouse cross comprised of many different inbred founder strains,
+RNASeq reads may map to multiple genes, mulitple isoforms, and/or to multiple
+founder alleles (termed "multi-mapping reads"). Previous transcript estimation methods 
+either discarded multi-mapping reads or treated different types of multi-mapping 
+reads equivalently. EMASE uses a hierarchical approach to allocate 
+read counts by first allocating reads among genes, then among isoforms, and finally
+between alleles. This method improves transcript and isoform abundance estimates
+over methods which handle multi-mapping reads differently. For full details,
+please refer to 
+[the publication](https://academic.oup.com/bioinformatics/article/34/13/2177/4850941).
 
- 1. `questions` are displayed at the beginning of the episode to prime the
-    learner for the content.
- 2. `objectives` are the learning objectives for an episode displayed with
-    the questions.
- 3. `keypoints` are displayed at the end of the episode to reinforce the
-    objectives.
+## At the Jackson Laboratory (JAX)
+
+The GBRS Nextflow pipeline is configured to run on sumner2, the High Performance Computing (HPC) cluster at JAX.
+
+We will consider two scenarios:
+
+    You are analyzing expression data from Diversity Outbred mice;
+    You are analyzing expression data from some other cross;
+
+### GBRS for Diversity Outbred Mice
+
+The Next-Generation Operations (NGSOps) team has configured the default arrguments for the GBRS Nextflow pipeline to use the reference files for GRCm39 and Ensembl version 105. This means that the arguments that point GBRS to the locations of the founder genomes, founder transcriptomes, and aligner indices are already set.
+
+Here is the entire script:
+
+```
+#!/bin/bash
+#SBATCH --mail-user=first.last@jax.org
+#SBATCH --job-name=emase_mouse
+#SBATCH --mail-type=END,FAIL
+#SBATCH -p compute
+#SBATCH -q batch
+#SBATCH -t 72:00:00
+#SBATCH --mem=1G
+#SBATCH --ntasks=1
+
+cd $SLURM_SUBMIT_DIR
+
+# LOAD NEXTFLOW
+module use --append /projects/omics_share/meta/modules
+module load nextflow
+
+# RUN PIPELINE
+nextflow ../main.nf \
+-profile sumner \
+--workflow emase \
+--pubdir "/flashscratch/${USER}/outputDir" \
+-w /flashscratch/${USER}/outputDir/work \
+--sample_folder <PATH_TO_YOUR_SEQUENCES> \
+--comment "This script will run emase analysis on mouse samples"
+```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
