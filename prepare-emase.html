@@ -260,7 +260,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Prepare EMASE to ???</h1>
-        <p>Last updated on 2023-10-03 |
+        <p>Last updated on 2024-03-25 |
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-emase.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -303,6 +303,32 @@ BOWTIE_BUILD(EMASE_PREPARE_EMASE.out.pooled_transcript_fasta,
 absent from certain haplotypes.
 CLEAN_TRANSCRIPT_LISTS(EMASE_PREPARE_EMASE.out.pooled_transcript_info)
 }</p>
+<pre><code>#!/bin/bash
+#SBATCH --mail-user=first.last@jax.org
+#SBATCH --job-name=gbrs_mouse
+#SBATCH --mail-type=END,FAIL
+#SBATCH -p compute
+#SBATCH -q batch
+#SBATCH -t 72:00:00
+#SBATCH --mem=1G
+#SBATCH --ntasks=1
+
+cd $SLURM_SUBMIT_DIR
+
+# LOAD NEXTFLOW
+module use --append /projects/omics_share/meta/modules
+module load nextflow
+
+# RUN PIPELINE
+nextflow ../main.nf \
+-profile sumner \
+--workflow prepare_emase \
+--pubdir "/flashscratch/${USER}/outputDir" \
+-w /flashscratch/${USER}/outputDir/work \
+--genome_file_list "/path/to/genome/A.fa,/path/to/genome/B.fa,..." \
+--gtf_file_list "/path/to/gtf/A.gtf,/path/to/gtf/B.gtf,..." \
+--haplotype_list "A,B,..." \
+--comment "This script will run prepare_emase to generate multiway references based on default parameters"</code></pre>
 <section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width"><p>This is a lesson created via The Carpentries Workbench. It is written
@@ -331,7 +357,7 @@ reinforce the objectives.</li>
 </h3>
 <div class="callout-content">
 <p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -345,7 +371,7 @@ reinforce the objectives.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Output</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -374,7 +400,7 @@ challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -492,8 +518,8 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/prepare-emase.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/prepare-emase.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2023-10-03",
-  "datePublished": "2024-03-19"
+  "dateModified": "2024-03-25",
+  "datePublished": "2024-03-25"
 }
 
   </script><script>
