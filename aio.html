@@ -217,7 +217,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="prepare-emase.html">4. Prepare EMASE to ???</a>
+        <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -684,7 +684,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-prepare-pseudo-reference"><p>Content from <a href="prepare-pseudo-reference.html">Preparing GBRS Pseudo-References</a></p>
 <hr>
-<p>Last updated on 2023-10-02 |
+<p>Last updated on 2024-03-27 |
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-pseudo-reference.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -721,14 +721,14 @@ any links that you are not going to use.
 </h2>
 <hr class="half-width">
 <p><a href="https://github.com/churchill-lab/g2gtools" class="external-link">Genome-to-Genome
-Tools</a>, (g2gtools) is a suite of tools which incorporates SNPS and
+Tools</a>, (g2gtools) is a suite of tools which incorporates SNPs and
 indels from mouse strains into the reference genome. Inserting these
 variants may lead to changes in the length of the genome and g2gtools is
 able to map positions between the reference genome and the modified
 genome.</p>
-<p>In this tutorial, we will show you how to use the pre-build
+<p>In this tutorial, we will show you how to use the pre-built
 <code>nextflow</code> pipeline to build a pseudo-reference on the JAX
-computing cluster (sumner). Then, we will show you how each step work.
+computing cluster (sumner2). Then, we will show you how each step work.
 We expect that most users will use the <code>nextflow</code> pipeline
 and have included the step-by-step pipeline for advanced users who may
 want to use non-standard pipeline options.</p>
@@ -741,11 +741,11 @@ Diversity Outbred mice easy. You can run the commands with minimal
 arguments.</p>
 <p>There is a Quick Start Guide for JAX users at <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Pipeline-Documentation#quick-start-for-jax-users" class="external-link uri">https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Pipeline-Documentation#quick-start-for-jax-users</a>.
 This describes the essentials of running a <code>nextflow</code>
-pipeline on sumner at JAX.</p>
+pipeline on sumner2 at JAX.</p>
 <p>The documentation for the GBRS <code>nextflow</code> pipeline is at
 <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Generate-Pseudoreference-Pipeline-ReadMe" class="external-link uri">https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Generate-Pseudoreference-Pipeline-ReadMe</a>.
 This page lists the default values, which point reference files on
-sumner and list the eight Diversity Outbred founder strains by default.
+sumner2 and list the eight Diversity Outbred founder strains by default.
 Some of the default files are listed in the table below.</p>
 <table class="table">
 <colgroup>
@@ -806,26 +806,26 @@ founder strains as a comma separated list:</p>
 </tr></tbody>
 </table>
 <p>To run the <code>nextflow</code> pipeline to generate a
-pseudo-reference for DO mice on sumner, use the following commands.</p>
+pseudo-reference for DO mice on sumner2, use the following commands.</p>
 <p>First, we load the <code>nextflow</code> module.</p>
 <pre><code>module use --append /projects/omics_share/meta/modules
 module load nextflow</code></pre>
 <p>Next, change into a directory where you will be working. We suggest
-using /fastscratch and creating a directory for this.</p>
-<p>Create a variable for your user ID on sumner:</p>
+using /flashscratch and creating a directory for this.</p>
+<p>Create a variable for your user ID on sumner2:</p>
 <pre><code>USERID=&lt;your User ID&gt;</code></pre>
-<pre><code>cd /fastscratch/${USERID}</code></pre>
+<pre><code>cd /flashscratch/${USERID}</code></pre>
 <p>Then use <code>git</code> to clone the cs-nf-pipelines
 repository.</p>
 <pre><code>git clone https://github.com/TheJacksonLaboratory/cs-nf-pipelines.git</code></pre>
 <p>Next, we need to create a variable for the output directory name and
 create the directory.</p>
-<pre><code>OUTPUT_DIR=/fastscratch/${USERID}/gbrs
+<pre><code>OUTPUT_DIR=/flashscratch/${USERID}/gbrs
 mkdir -p ${OUTPUT_DIR}</code></pre>
 <p>The last step before running the pipeline is to create a temporary
-working directory. This should be on /fastscratch since many large files
-are created.</p>
-<pre><code>WORKING_DIR=/fastscratch/${USERID}/tmp
+working directory. This should be on /flashscratch since many large
+files are created.</p>
+<pre><code>WORKING_DIR=/flashscratch/${USERID}/tmp
 mkdir -p ${WORKING_DIR}</code></pre>
 <p>There are two types of arguments in the <code>nextflow</code> call
 below. Arguments to <code>nextflow</code> have a single ‘-’. These
@@ -844,8 +844,8 @@ are:</p>
 <tbody>
 <tr class="odd">
 <td>-profile</td>
-<td>sumner</td>
-<td>This sets the resource values for the JAX sumner computing
+<td>sumner2</td>
+<td>This sets the resource values for the JAX sumner2 computing
 cluster</td>
 </tr>
 <tr class="even">
@@ -884,7 +884,7 @@ pipeline. These are:</p>
 <p>With this preparation, we can run the <code>nextflow</code>
 pipeline.</p>
 <pre><code>nextflow cs-nf-pipelines/main.nf \
-         -profile sumner \
+         -profile sumner2 \
          -w ${WORKING_DIR} \
          --workflow generate_pseudoreference \
          --pubdir ${OUTPUT_DIR}</code></pre>
@@ -906,10 +906,10 @@ GENERATE PSEUDOREFERENCE PARAMETER LOG
 
 --comment:
 
-Results Published to: /fastscratch/dgatti/gbrs
+Results Published to: /flashscratch/dgatti/gbrs
 ______________________________________________________
 --workflow                      generate_pseudoreference
--w                              /fastscratch/dgatti/tmp
+-w                              /flashscratch/dgatti/tmp
 -c                              config/generate_pseudoreference.config
 --snp_vcf                       /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz
 --indel_vcf                     /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
@@ -928,10 +928,10 @@ ______________________________________________________
 
 --keep_intermediate             false
 
-Project Directory: /gpfs/ctgs0/fastscratch/dgatti/nextflow/cs-nf-pipelines
+Project Directory: /gpfs/ctgs0/flashscratch/dgatti/nextflow/cs-nf-pipelines
 
 Command line call:
-nextflow cs-nf-pipelines/main.nf -profile sumner -w /fastscratch/dgatti/tmp --workflow generate_pseudoreference --pubdir /fastscratch/dgatti/gbrs
+nextflow cs-nf-pipelines/main.nf -profile sumner2 -w /flashscratch/dgatti/tmp --workflow generate_pseudoreference --pubdir /flashscratch/dgatti/gbrs
 ______________________________________________________
 
 executor &gt;  slurm (72)
@@ -1115,7 +1115,7 @@ strains inserted into the reference genome.</p>
 <h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h3>
 <p>We will use the g2gtools container stored in the public reference
-area on sumner.</p>
+area on sumner2.</p>
 <pre><code>G2GTOOLS=/projects/omics_share/meta/containers/quay.io-jaxcompsci-g2gtools-74926ad.img</code></pre>
 <p>We will also use a tool called <a href="http://www.htslib.org/doc/samtools.html" class="external-link">samtools</a> to query and
 modify sequence and annotation files.</p>
@@ -1232,11 +1232,12 @@ query the VCF to find their names.</p>
 </div>
 </div>
 </div>
-<p>We will work on the sumner /fastscratch area. Create a directory with
-your user ID. Then create a directory called ‘gbrs’. For example:</p>
-<pre><code>mkdir -p /fastscratch/dgatti/gbrs/${STRAIN}</code></pre>
+<p>We will work on the sumner2 /flashscratch area. Create a directory
+with your user ID. Then create a directory called ‘gbrs’. For
+example:</p>
+<pre><code>mkdir -p /flashscratch/dgatti/gbrs/${STRAIN}</code></pre>
 <p>Then change into the directory that you just created.</p>
-<pre><code><span><span class="va">cd</span> <span class="op">/</span><span class="va">fastscratch</span><span class="op">/</span><span class="va">dgatti</span><span class="op">/</span><span class="va">gbrs</span></span></code></pre>
+<pre><code><span><span class="va">cd</span> <span class="op">/</span><span class="va">flashscratch</span><span class="op">/</span><span class="va">dgatti</span><span class="op">/</span><span class="va">gbrs</span></span></code></pre>
 <p>Load in the Singularity software.</p>
 <pre><code>module load singularity</code></pre>
 </div>
@@ -1505,7 +1506,7 @@ g2gtools extract --exons       -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}
 <div class="callout-content">
 <ul>
 <li>Use the default <code>nextflow</code> pipeline if working with DO
-mice on sumner.</li>
+mice on sumner2.</li>
 <li>You can query the VCFs and get the strain names using
 <code>tabix</code>.</li>
 <li>You can specify another set of strains and use the default reference
@@ -1521,9 +1522,9 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
  -->
 </div>
-</section></section><section id="aio-prepare-emase"><p>Content from <a href="prepare-emase.html">Prepare EMASE to ???</a></p>
+</section></section><section id="aio-prepare-emase"><p>Content from <a href="prepare-emase.html">Prepare EMASE Reference Files</a></p>
 <hr>
-<p>Last updated on 2024-03-25 |
+<p>Last updated on 2024-03-27 |
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-emase.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1537,9 +1538,9 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>What is Genotyping by RNA Sequencing (GBRS)?</li>
-<li>What analyses does GBRS provide?</li>
-<li>What are the steps in a GBRS analysis?</li>
+<li>What does EMASE do?</li>
+<li>What input files are required for the EMASE reference?</li>
+<li>What output files are created by the prepare EMASE process?</li>
 </ul>
 </div>
 </div>
@@ -1549,21 +1550,128 @@ any links that you are not going to use.
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Explain what GBRS does.</li>
-<li>List the steps in a GBRS analysis.</li>
+<li>Explain what analysis EMASE performs.</li>
+<li>Understand the files needed to prepare an EMASE reference.</li>
+<li>Understand the files produced by the Prepare EMASE process.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p>workflow PREPARE_EMASE { // Prepare emase reference, given list of
-genomes and gtf files. EMASE_PREPARE_EMASE()
-BOWTIE_BUILD(EMASE_PREPARE_EMASE.out.pooled_transcript_fasta,
-‘bowtie.transcripts’) // clean transcript lists to add transcripts
-absent from certain haplotypes.
-CLEAN_TRANSCRIPT_LISTS(EMASE_PREPARE_EMASE.out.pooled_transcript_info)
-}</p>
+<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<hr class="half-width">
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6022640/" class="external-link">Expectation
+Maximization for Allele-Specific Expression</a> (EMASE) is software
+which estimates allele-specific transcript expression in genetically
+diverse populations. It was designed to be used with genetically diverse
+mice whose genomes are comprised of two or more inbred strains. EMASE
+uses the reference genome, strain-specific genomes, and GTF files to
+create strain-specific transcriptomes.</p>
+<p>Before running EMASE, we must prepare the reference files which EMASE
+needs. Prepare EMASE will take each founder strain genome and its
+corresponding GTF file and will create a <a href="https://bowtie-bio.sourceforge.net/index.shtml" class="external-link">bowtie</a> index
+and a pooled transcript list.</p>
+<blockquote>
+<p>DMG: Need more detailed explanation above.</p>
+</blockquote>
+<p>On sumner2, the GRCm39 strain-specific genome FASTA files are in:
+/projects/compsci/omics_share/mouse/GRCm39/genome/sequence/imputed/rel_2112_v8.
+These files contain the genome sequence of each strain with the
+strain-specific SNPs and Indels inserted. These were created by the
+“prepare-pseudo-reference” process.</p>
+<p>The corresponding GTFs, which were also created by the
+“prepare-pseudo-reference” process, are in:
+/projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/imputed/rel_2112_v8</p>
+<p>We will create two variables for these paths:</p>
+<pre><code>GENOME_REF_DIR=/projects/compsci/omics_share/mouse/GRCm39/genome/sequence/imputed/rel_2112_v8
+
+GTF_REF_DIR=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/imputed/rel_2112_v8</code></pre>
+<p>The Prepare EMASE process requires the following files:</p>
+<table class="table">
+<colgroup>
+<col width="22%">
+<col width="30%">
+<col width="22%">
+<col width="26%">
+</colgroup>
+<thead><tr class="header">
+<th>File Type</th>
+<th>Argument Name</th>
+<th>File Path</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Genome FASTA files</td>
+<td>–genome_file_list</td>
+<td>
+<span class="math inline">\({GENOME_REF_DIR}/A_J.39.fa,\)</span>{GENOME_REF_DIR}/C57BL_6J.39.fa,<span class="math inline">\({GENOME_REF_DIR}/129S1_SvImJ.39.fa,,\)</span>{GENOME_REF_DIR}/NOD_ShiLtJ.39.fa,<span class="math inline">\({GENOME_REF_DIR}/NZO_HlLtJ.39.fa,\)</span>{GENOME_REF_DIR}/CAST_EiJ.39.fa,<span class="math inline">\({GENOME_REF_DIR}/PWK_PhJ.39.fa,\)</span>{GENOME_REF_DIR}/WSB_EiJ.39.fa</td>
+<td>Comma-separated list of FASTA files for each input strain</td>
+</tr>
+<tr class="even">
+<td>Transcript GTF files</td>
+<td>–gtf_file_list</td>
+<td>
+<span class="math inline">\({GTF_REF_DIR}/A_J.39_DroppedChromAppended.gtf,\)</span>{GTF_REF_DIR}/Mus_musculus.GRCm39.105.filtered.gtf,<span class="math inline">\({GTF_REF_DIR}/129S1_SvImJ.39_DroppedChromAppended.gtf,\)</span>{GTF_REF_DIR}/NOD_ShiLtJ.39_DroppedChromAppended.gtf,<span class="math inline">\({GTF_REF_DIR}/NZO_HlLtJ.39_DroppedChromAppended.gtf,\)</span>{GTF_REF_DIR}/CAST_EiJ.39_DroppedChromAppended.gtf,<span class="math inline">\({GTF_REF_DIR}/PWK_PhJ.39_DroppedChromAppended.gtf,\)</span>{GTF_REF_DIR}/WSB_EiJ.39_DroppedChromAppended.gtf</td>
+<td>Comma-separated list of GTF files for each input strain</td>
+</tr>
+</tbody>
+</table>
+<p>We also need to provide a set of letters that EMASE will use as short
+abbreviations for each strain. Note that the order of the strains above
+will match the order of the strains below.</p>
+<table class="table">
+<colgroup>
+<col width="42%">
+<col width="20%">
+<col width="37%">
+</colgroup>
+<thead><tr class="header">
+<th>Argument Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td>–haplotype_list</td>
+<td>A,B,C,D,E,F,G,H</td>
+<td>Comma-separated list of letters to be used as an abbreviation for
+each strain</td>
+</tr></tbody>
+</table>
+<p>The EMASE software has the following arguments:</p>
+<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────╮
+│ --genome-file      -G      FILE     Genome files, can seperate files by "," or have multiple -G      |
+|                                     [default: None] [required]                                       │
+│ --haplotype-char   -s      TEXT     haplotype, either one per -h option, i.e. -h A -h B -h C, or a   |
+|                                     shortcut -h A,B,C [default: None]                                │
+│ --gtf-file         -g      FILE     Gene Annotation File files, can seperate files by "," or have    |
+|                                     multiple -G [default: None]                                      │
+│ --out_dir          -o      TEXT     Output folder to store results (default: the current working     |
+|                                     directory) [default: None]                                       │
+│ --save-g2tmap      -m               saves gene id to transcript id list in a tab-delimited text file │
+│ --save-dbs         -d               save dbs                                                         │
+│ --no-bowtie-index  -m               skips building bowtie index                                      │
+│ --verbose          -v      INTEGER  specify multiple times for more verbose output [default: 0]      │
+│ --help                              Show this message and exit.                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
+<p>Below is an example of the Prepare EMASE command using these
+arguments:</p>
+<pre><code>emase prepare --genome-file ${genome_file_list} \
+              --gtf-file ${gtf_file_list} \
+              --haplotype-char ${haplotype_list} \
+              --save-g2tmap 
+              --out_dir ./ \
+              --save-g2tmap \
+              --no-bowtie-index</code></pre>
+<pre><code>workflow PREPARE_EMASE {
+    // Prepare emase reference, given list of genomes and gtf files. 
+    EMASE_PREPARE_EMASE()
+    BOWTIE_BUILD(EMASE_PREPARE_EMASE.out.pooled_transcript_fasta, 'bowtie.transcripts')
+    // clean transcript lists to add transcripts absent from certain haplotypes.
+    CLEAN_TRANSCRIPT_LISTS(EMASE_PREPARE_EMASE.out.pooled_transcript_info)
+}</code></pre>
 <pre><code>#!/bin/bash
 #SBATCH --mail-user=first.last@jax.org
 #SBATCH --job-name=gbrs_mouse
@@ -1590,140 +1698,6 @@ nextflow ../main.nf \
 --gtf_file_list "/path/to/gtf/A.gtf,/path/to/gtf/B.gtf,..." \
 --haplotype_list "A,B,..." \
 --comment "This script will run prepare_emase to generate multiway references based on default parameters"</code></pre>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
-<hr class="half-width">
-<p>This is a lesson created via The Carpentries Workbench. It is written
-in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
-for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
-Markdown</a> for dynamic files that can render code into output. Please
-refer to the <a href="https://carpentries.github.io/sandpaper-docs/" class="external-link">Introduction to The
-Carpentries Workbench</a> for full documentation.</p>
-<p>What you need to know is that there are three sections required for a
-valid Carpentries lesson:</p>
-<ol style="list-style-type: decimal">
-<li>
-<code>questions</code> are displayed at the beginning of the episode
-to prime the learner for the content.</li>
-<li>
-<code>objectives</code> are the learning objectives for an episode
-displayed with the questions.</li>
-<li>
-<code>keypoints</code> are displayed at the end of the episode to
-reinforce the objectives.</li>
-</ol>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
-<div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">Output</h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
-<div class="accordion-body">
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within
-challenge blocks?<a class="anchor" aria-label="anchor" href="#challenge-2-how-do-you-nest-solutions-within-challenge-blocks"></a>
-</h3>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
-<div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
-</div>
-</div>
-</div>
-</div>
-</section><section id="figures"><h2 class="section-heading">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
-</h2>
-<hr class="half-width">
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><div class="figcaption">You belong in The Carpentries!</div>
-</figure><div id="callout1" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</section><section id="math"><h2 class="section-heading">Math<a class="anchor" aria-label="anchor" href="#math"></a>
-</h2>
-<hr class="half-width">
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
-<div class="callout-content">
-<ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
-</ul>
-</div>
-</div>
-</div>
 <!-- 
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
@@ -2668,8 +2642,8 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/aio.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/aio.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2024-03-26",
-  "datePublished": "2024-03-26"
+  "dateModified": "2024-03-27",
+  "datePublished": "2024-03-27"
 }
 
   </script><script>

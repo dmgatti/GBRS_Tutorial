@@ -189,7 +189,7 @@ Strains</a></li>
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="prepare-emase.html">4. Prepare EMASE to ???</a>
+        <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -256,13 +256,13 @@ Strains</a></li>
           Previous: Installing GBRS
         </a>
         <a class="chapter-link float-end" href="../instructor/prepare-emase.html" rel="next">
-          Next: Prepare EMASE to ???... 
+          Next: Prepare EMASE... 
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Preparing GBRS Pseudo-References</h1>
-        <p>Last updated on 2023-10-02 |
+        <p>Last updated on 2024-03-27 |
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-pseudo-reference.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -302,14 +302,14 @@ Strains</a></li>
 <section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width"><p><a href="https://github.com/churchill-lab/g2gtools" class="external-link">Genome-to-Genome
-Tools</a>, (g2gtools) is a suite of tools which incorporates SNPS and
+Tools</a>, (g2gtools) is a suite of tools which incorporates SNPs and
 indels from mouse strains into the reference genome. Inserting these
 variants may lead to changes in the length of the genome and g2gtools is
 able to map positions between the reference genome and the modified
 genome.</p>
-<p>In this tutorial, we will show you how to use the pre-build
+<p>In this tutorial, we will show you how to use the pre-built
 <code>nextflow</code> pipeline to build a pseudo-reference on the JAX
-computing cluster (sumner). Then, we will show you how each step work.
+computing cluster (sumner2). Then, we will show you how each step work.
 We expect that most users will use the <code>nextflow</code> pipeline
 and have included the step-by-step pipeline for advanced users who may
 want to use non-standard pipeline options.</p>
@@ -321,11 +321,11 @@ Diversity Outbred mice easy. You can run the commands with minimal
 arguments.</p>
 <p>There is a Quick Start Guide for JAX users at <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Pipeline-Documentation#quick-start-for-jax-users" class="external-link uri">https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Pipeline-Documentation#quick-start-for-jax-users</a>.
 This describes the essentials of running a <code>nextflow</code>
-pipeline on sumner at JAX.</p>
+pipeline on sumner2 at JAX.</p>
 <p>The documentation for the GBRS <code>nextflow</code> pipeline is at
 <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Generate-Pseudoreference-Pipeline-ReadMe" class="external-link uri">https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Generate-Pseudoreference-Pipeline-ReadMe</a>.
 This page lists the default values, which point reference files on
-sumner and list the eight Diversity Outbred founder strains by default.
+sumner2 and list the eight Diversity Outbred founder strains by default.
 Some of the default files are listed in the table below.</p>
 <table class="table"><colgroup><col width="22%"><col width="30%"><col width="22%"><col width="26%"></colgroup><thead><tr class="header"><th>File Type</th>
 <th>Argument Name</th>
@@ -356,26 +356,26 @@ founder strains as a comma separated list:</p>
 </tr></thead><tbody><tr class="odd"><td>–strain</td>
 <td>129S1_SvImJ,A_J,CAST_EiJ,NOD_ShiLtJ,NZO_HlLtJ,PWK_PhJ,WSB_EiJ</td>
 </tr></tbody></table><p>To run the <code>nextflow</code> pipeline to generate a
-pseudo-reference for DO mice on sumner, use the following commands.</p>
+pseudo-reference for DO mice on sumner2, use the following commands.</p>
 <p>First, we load the <code>nextflow</code> module.</p>
 <pre><code>module use --append /projects/omics_share/meta/modules
 module load nextflow</code></pre>
 <p>Next, change into a directory where you will be working. We suggest
-using /fastscratch and creating a directory for this.</p>
-<p>Create a variable for your user ID on sumner:</p>
+using /flashscratch and creating a directory for this.</p>
+<p>Create a variable for your user ID on sumner2:</p>
 <pre><code>USERID=&lt;your User ID&gt;</code></pre>
-<pre><code>cd /fastscratch/${USERID}</code></pre>
+<pre><code>cd /flashscratch/${USERID}</code></pre>
 <p>Then use <code>git</code> to clone the cs-nf-pipelines
 repository.</p>
 <pre><code>git clone https://github.com/TheJacksonLaboratory/cs-nf-pipelines.git</code></pre>
 <p>Next, we need to create a variable for the output directory name and
 create the directory.</p>
-<pre><code>OUTPUT_DIR=/fastscratch/${USERID}/gbrs
+<pre><code>OUTPUT_DIR=/flashscratch/${USERID}/gbrs
 mkdir -p ${OUTPUT_DIR}</code></pre>
 <p>The last step before running the pipeline is to create a temporary
-working directory. This should be on /fastscratch since many large files
-are created.</p>
-<pre><code>WORKING_DIR=/fastscratch/${USERID}/tmp
+working directory. This should be on /flashscratch since many large
+files are created.</p>
+<pre><code>WORKING_DIR=/flashscratch/${USERID}/tmp
 mkdir -p ${WORKING_DIR}</code></pre>
 <p>There are two types of arguments in the <code>nextflow</code> call
 below. Arguments to <code>nextflow</code> have a single ‘-’. These
@@ -384,8 +384,8 @@ are:</p>
 <th>Value</th>
 <th>Description</th>
 </tr></thead><tbody><tr class="odd"><td>-profile</td>
-<td>sumner</td>
-<td>This sets the resource values for the JAX sumner computing
+<td>sumner2</td>
+<td>This sets the resource values for the JAX sumner2 computing
 cluster</td>
 </tr><tr class="even"><td>-w</td>
 <td>${WORKING_DIR}</td>
@@ -404,7 +404,7 @@ pipeline. These are:</p>
 </tr></tbody></table><p>With this preparation, we can run the <code>nextflow</code>
 pipeline.</p>
 <pre><code>nextflow cs-nf-pipelines/main.nf \
-         -profile sumner \
+         -profile sumner2 \
          -w ${WORKING_DIR} \
          --workflow generate_pseudoreference \
          --pubdir ${OUTPUT_DIR}</code></pre>
@@ -426,10 +426,10 @@ GENERATE PSEUDOREFERENCE PARAMETER LOG
 
 --comment:
 
-Results Published to: /fastscratch/dgatti/gbrs
+Results Published to: /flashscratch/dgatti/gbrs
 ______________________________________________________
 --workflow                      generate_pseudoreference
--w                              /fastscratch/dgatti/tmp
+-w                              /flashscratch/dgatti/tmp
 -c                              config/generate_pseudoreference.config
 --snp_vcf                       /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz
 --indel_vcf                     /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
@@ -448,10 +448,10 @@ ______________________________________________________
 
 --keep_intermediate             false
 
-Project Directory: /gpfs/ctgs0/fastscratch/dgatti/nextflow/cs-nf-pipelines
+Project Directory: /gpfs/ctgs0/flashscratch/dgatti/nextflow/cs-nf-pipelines
 
 Command line call:
-nextflow cs-nf-pipelines/main.nf -profile sumner -w /fastscratch/dgatti/tmp --workflow generate_pseudoreference --pubdir /fastscratch/dgatti/gbrs
+nextflow cs-nf-pipelines/main.nf -profile sumner2 -w /flashscratch/dgatti/tmp --workflow generate_pseudoreference --pubdir /flashscratch/dgatti/gbrs
 ______________________________________________________
 
 executor &gt;  slurm (72)
@@ -632,7 +632,7 @@ strains inserted into the reference genome.</p>
 <div class="section level3">
 <h3 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h3>
 <p>We will use the g2gtools container stored in the public reference
-area on sumner.</p>
+area on sumner2.</p>
 <pre><code>G2GTOOLS=/projects/omics_share/meta/containers/quay.io-jaxcompsci-g2gtools-74926ad.img</code></pre>
 <p>We will also use a tool called <a href="http://www.htslib.org/doc/samtools.html" class="external-link">samtools</a> to query and
 modify sequence and annotation files.</p>
@@ -762,11 +762,12 @@ query the VCF to find their names.</p>
 </div>
 </div>
 </div>
-<p>We will work on the sumner /fastscratch area. Create a directory with
-your user ID. Then create a directory called ‘gbrs’. For example:</p>
-<pre><code>mkdir -p /fastscratch/dgatti/gbrs/${STRAIN}</code></pre>
+<p>We will work on the sumner2 /flashscratch area. Create a directory
+with your user ID. Then create a directory called ‘gbrs’. For
+example:</p>
+<pre><code>mkdir -p /flashscratch/dgatti/gbrs/${STRAIN}</code></pre>
 <p>Then change into the directory that you just created.</p>
-<pre><code><span><span class="va">cd</span> <span class="op">/</span><span class="va">fastscratch</span><span class="op">/</span><span class="va">dgatti</span><span class="op">/</span><span class="va">gbrs</span></span></code></pre>
+<pre><code><span><span class="va">cd</span> <span class="op">/</span><span class="va">flashscratch</span><span class="op">/</span><span class="va">dgatti</span><span class="op">/</span><span class="va">gbrs</span></span></code></pre>
 <p>Load in the Singularity software.</p>
 <pre><code>module load singularity</code></pre>
 </div>
@@ -1027,7 +1028,7 @@ g2gtools extract --exons       -i ${STRAIN}/${STRAIN}.fa -db ${STRAIN}/${STRAIN}
 </h3>
 <div class="callout-content">
 <ul><li>Use the default <code>nextflow</code> pipeline if working with DO
-mice on sumner.</li>
+mice on sumner2.</li>
 <li>You can query the VCFs and get the strain names using
 <code>tabix</code>.</li>
 <li>You can specify another set of strains and use the default reference
@@ -1054,7 +1055,7 @@ any links that you are not going to use.
           Previous: Installing GBRS
         </a>
         <a class="chapter-link float-end" href="../instructor/prepare-emase.html" rel="next">
-          Next: Prepare EMASE to ???... 
+          Next: Prepare EMASE... 
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -1100,8 +1101,8 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/instructor/prepare-pseudo-reference.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/instructor/prepare-pseudo-reference.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2023-10-02",
-  "datePublished": "2024-03-26"
+  "dateModified": "2024-03-27",
+  "datePublished": "2024-03-27"
 }
 
   </script><script>
