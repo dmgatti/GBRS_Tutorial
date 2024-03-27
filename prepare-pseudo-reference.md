@@ -21,13 +21,13 @@ exercises: 15
 ## Introduction
 
 [Genome-to-Genome Tools](https://github.com/churchill-lab/g2gtools), (g2gtools) 
-is a suite of tools which incorporates SNPS and indels from mouse strains into
+is a suite of tools which incorporates SNPs and indels from mouse strains into
 the reference genome. Inserting these variants may lead to changes in the length
 of the genome and g2gtools is able to map positions between the reference
 genome and the modified genome.
 
-In this tutorial, we will show you how to use the pre-build `nextflow` pipeline
-to build a pseudo-reference on the JAX computing cluster (sumner). Then, we will
+In this tutorial, we will show you how to use the pre-built `nextflow` pipeline
+to build a pseudo-reference on the JAX computing cluster (sumner2). Then, we will
 show you how each step work. We expect that most users will use the `nextflow`
 pipeline and have included the step-by-step pipeline for advanced users who
 may want to use non-standard pipeline options.
@@ -39,10 +39,10 @@ values to make pseudo-reference generation for Diversity Outbred mice easy. You
 can run the commands with minimal arguments. 
   
 There is a Quick Start Guide for JAX users at <https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Pipeline-Documentation#quick-start-for-jax-users>. 
-This describes the essentials of running a `nextflow` pipeline on sumner at JAX.
+This describes the essentials of running a `nextflow` pipeline on sumner2 at JAX.
   
 The documentation for the GBRS `nextflow` pipeline is at <https://github.com/TheJacksonLaboratory/cs-nf-pipelines/wiki/Generate-Pseudoreference-Pipeline-ReadMe>.
-This page lists the default values, which point reference files on sumner
+This page lists the default values, which point reference files on sumner2
 and list the eight Diversity Outbred founder strains by default. Some of the 
 default files are listed in the table below.
 
@@ -61,7 +61,7 @@ separated list:
 | --strain | 129S1_SvImJ,A_J,CAST_EiJ,NOD_ShiLtJ,NZO_HlLtJ,PWK_PhJ,WSB_EiJ |
 
 To run the `nextflow` pipeline to generate a pseudo-reference for DO mice on 
-sumner, use the following commands.
+sumner2, use the following commands.
   
 First, we load the `nextflow` module.
   
@@ -71,16 +71,16 @@ module load nextflow
 ```
   
 Next, change into a directory where you will be working. We suggest using 
-/fastscratch and creating a directory for this.
+/flashscratch and creating a directory for this.
   
-Create a variable for your user ID on sumner:
+Create a variable for your user ID on sumner2:
   
 ```
 USERID=<your User ID>
 ```
   
 ```
-cd /fastscratch/${USERID}
+cd /flashscratch/${USERID}
 ```
 
 Then use `git` to clone the cs-nf-pipelines repository.
@@ -93,15 +93,15 @@ Next, we need to create a variable for the output directory name and create the
 directory.
   
 ```
-OUTPUT_DIR=/fastscratch/${USERID}/gbrs
+OUTPUT_DIR=/flashscratch/${USERID}/gbrs
 mkdir -p ${OUTPUT_DIR}
 ```
   
 The last step before running the pipeline is to create a temporary working
-directory. This should be on /fastscratch since many large files are created.
+directory. This should be on /flashscratch since many large files are created.
   
 ```
-WORKING_DIR=/fastscratch/${USERID}/tmp
+WORKING_DIR=/flashscratch/${USERID}/tmp
 mkdir -p ${WORKING_DIR}
 ```
   
@@ -110,7 +110,7 @@ There are two types of arguments in the `nextflow` call below. Arguments to
 
 | Argument | Value  | Description |
 |----------|--------|-------------|
-| -profile | sumner | This sets the resource values for the JAX sumner computing cluster |
+| -profile | sumner2 | This sets the resource values for the JAX sumner2 computing cluster |
 | -w       | ${WORKING_DIR} | The working directory for temporary files |
   
 Arguments which start with '--' go to the `nextflow` pipeline. These 
@@ -125,7 +125,7 @@ With this preparation, we can run the `nextflow` pipeline.
   
 ```
 nextflow cs-nf-pipelines/main.nf \
-         -profile sumner \
+         -profile sumner2 \
          -w ${WORKING_DIR} \
          --workflow generate_pseudoreference \
          --pubdir ${OUTPUT_DIR}
@@ -149,10 +149,10 @@ GENERATE PSEUDOREFERENCE PARAMETER LOG
 
 --comment:
 
-Results Published to: /fastscratch/dgatti/gbrs
+Results Published to: /flashscratch/dgatti/gbrs
 ______________________________________________________
 --workflow                      generate_pseudoreference
--w                              /fastscratch/dgatti/tmp
+-w                              /flashscratch/dgatti/tmp
 -c                              config/generate_pseudoreference.config
 --snp_vcf                       /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz
 --indel_vcf                     /projects/compsci/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
@@ -171,10 +171,10 @@ ______________________________________________________
 
 --keep_intermediate             false
 
-Project Directory: /gpfs/ctgs0/fastscratch/dgatti/nextflow/cs-nf-pipelines
+Project Directory: /gpfs/ctgs0/flashscratch/dgatti/nextflow/cs-nf-pipelines
 
 Command line call:
-nextflow cs-nf-pipelines/main.nf -profile sumner -w /fastscratch/dgatti/tmp --workflow generate_pseudoreference --pubdir /fastscratch/dgatti/gbrs
+nextflow cs-nf-pipelines/main.nf -profile sumner2 -w /flashscratch/dgatti/tmp --workflow generate_pseudoreference --pubdir /flashscratch/dgatti/gbrs
 ______________________________________________________
 
 executor >  slurm (72)
@@ -359,7 +359,7 @@ into the reference genome.
 
 ### Setup
 
-We will use the g2gtools container stored in the public reference area on sumner. 
+We will use the g2gtools container stored in the public reference area on sumner2. 
 
 ```
 G2GTOOLS=/projects/omics_share/meta/containers/quay.io-jaxcompsci-g2gtools-74926ad.img
@@ -496,17 +496,17 @@ cross comprised of other strains, you would query the VCF to find their names.
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
   
-We will work on the sumner /fastscratch area. Create a directory with your 
+We will work on the sumner2 /flashscratch area. Create a directory with your 
 user ID. Then create a directory called 'gbrs'. For example:
 
 ```
-mkdir -p /fastscratch/dgatti/gbrs/${STRAIN}
+mkdir -p /flashscratch/dgatti/gbrs/${STRAIN}
 ```
 
 Then change into the directory that you just created.
 
 ```
-cd /fastscratch/dgatti/gbrs
+cd /flashscratch/dgatti/gbrs
 ```
 
 Load in the Singularity software.
@@ -828,7 +828,7 @@ A_J.39.vci.gz.tbi
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use the default `nextflow` pipeline if working with DO mice on sumner.
+- Use the default `nextflow` pipeline if working with DO mice on sumner2.
 - You can query the VCFs and get the strain names using `tabix`.
 - You can specify another set of strains and use the default reference genome.
 - Advanced users can run the pipeline line-by-line and specify different options.
