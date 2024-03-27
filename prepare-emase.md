@@ -56,8 +56,8 @@ The Prepare EMASE process requires the following files:
 
 | File Type | Argument Name | File Path | Description | 
 |-----------|---------------|-----------|-------------|
-| Genome FASTA files | --genome_file_list | ${GENOME_REF_DIR}/A_J.39.fa,${GENOME_REF_DIR}/C57BL_6J.39.fa,${GENOME_REF_DIR}/129S1_SvImJ.39.fa,,${GENOME_REF_DIR}/NOD_ShiLtJ.39.fa,${GENOME_REF_DIR}/NZO_HlLtJ.39.fa,${GENOME_REF_DIR}/CAST_EiJ.39.fa,${GENOME_REF_DIR}/PWK_PhJ.39.fa,${GENOME_REF_DIR}/WSB_EiJ.39.fa | Comma-separated list of FASTA files for each input strain |
-| Transcript GTF files | --gtf_file_list | ${GTF_REF_DIR}/A_J.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/Mus_musculus.GRCm39.105.filtered.gtf,${GTF_REF_DIR}/129S1_SvImJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/NOD_ShiLtJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/NZO_HlLtJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/CAST_EiJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/PWK_PhJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/WSB_EiJ.39_DroppedChromAppended.gtf | Comma-separated list of GTF files for each input strain |
+| Genome FASTA files | --genome_file_list | `${GENOME_REF_DIR}/A_J.39.fa,${GENOME_REF_DIR}/C57BL_6J.39.fa,${GENOME_REF_DIR}/129S1_SvImJ.39.fa,,${GENOME_REF_DIR}/NOD_ShiLtJ.39.fa,${GENOME_REF_DIR}/NZO_HlLtJ.39.fa,${GENOME_REF_DIR}/CAST_EiJ.39.fa,${GENOME_REF_DIR}/PWK_PhJ.39.fa,${GENOME_REF_DIR}/WSB_EiJ.39.fa` | Comma-separated list of FASTA files for each input strain |
+| Transcript GTF files | --gtf_file_list | `${GTF_REF_DIR}/A_J.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/Mus_musculus.GRCm39.105.filtered.gtf,${GTF_REF_DIR}/129S1_SvImJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/NOD_ShiLtJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/NZO_HlLtJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/CAST_EiJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/PWK_PhJ.39_DroppedChromAppended.gtf,${GTF_REF_DIR}/WSB_EiJ.39_DroppedChromAppended.gtf` | Comma-separated list of GTF files for each input strain |
 
 We also need to provide a set of letters that EMASE will use as short 
 abbreviations for each strain. Note that the order of the strains above will
