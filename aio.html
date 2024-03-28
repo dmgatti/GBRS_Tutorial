@@ -1028,7 +1028,7 @@ SNP VCF header and find the strain names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Output</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -1157,7 +1157,7 @@ SNP VCF header and find the strain names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Output</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -1439,7 +1439,7 @@ an entire script on your compute instance to run the commands above</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Output</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1524,7 +1524,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-prepare-emase"><p>Content from <a href="prepare-emase.html">Prepare EMASE Reference Files</a></p>
 <hr>
-<p>Last updated on 2024-03-27 |
+<p>Last updated on 2024-03-28 |
         
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-emase.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1538,9 +1538,9 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>What does EMASE do?</li>
-<li>What input files are required for the EMASE reference?</li>
-<li>What output files are created by the prepare EMASE process?</li>
+<li>What does the Prepare EMASE process do?</li>
+<li>What input files are required to prepare the EMASE reference?</li>
+<li>What output files are created by the Prepare EMASE process?</li>
 </ul>
 </div>
 </div>
@@ -1550,9 +1550,11 @@ any links that you are not going to use.
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Explain what analysis EMASE performs.</li>
-<li>Understand the files needed to prepare an EMASE reference.</li>
-<li>Understand the files produced by the Prepare EMASE process.</li>
+<li>Explain what tasks Prepare EMASE performs.</li>
+<li>Understand the input files needed to prepare an EMASE
+reference.</li>
+<li>Understand the output files produced by the Prepare EMASE
+process.</li>
 </ul>
 </div>
 </div>
@@ -1567,23 +1569,30 @@ Maximization for Allele-Specific Expression</a> (EMASE) is software
 which estimates allele-specific transcript expression in genetically
 diverse populations. It was designed to be used with genetically diverse
 mice whose genomes are comprised of two or more inbred strains. EMASE
-uses the reference genome, strain-specific genomes, and GTF files to
-create strain-specific transcriptomes.</p>
+uses strain-specific genomes and GTF files to create strain-specific
+transcriptomes.</p>
 <p>Before running EMASE, we must prepare the reference files which EMASE
-needs. Prepare EMASE will take each founder strain genome and its
-corresponding GTF file and will create a <a href="https://bowtie-bio.sourceforge.net/index.shtml" class="external-link">bowtie</a> index
+needs. In the “prepare-pseudo-reference” process, we used the reference
+genome and strain-specific VCFs to create strain-specific genomes and
+GTF files, which contain strain-specific sequences and transcript
+annotation. The Prepare EMASE process will take each founder strain
+genome and its corresponding GTF file and will create a <a href="https://bowtie-bio.sourceforge.net/index.shtml" class="external-link">bowtie</a> index
 and a pooled transcript list.</p>
-<blockquote>
-<p>DMG: Need more detailed explanation above.</p>
-</blockquote>
+</section><section id="input-files"><h2 class="section-heading">Input Files<a class="anchor" aria-label="anchor" href="#input-files"></a>
+</h2>
+<hr class="half-width">
+<p>Prepare EMASE requires strain-specific genome sequences and
+transcript annotation files. Genome sequences are stored in <a href="https://www.ncbi.nlm.nih.gov/genbank/fastaformat/" class="external-link">FASTA</a> files
+and transcript annotation is stored in <a href="https://www.ensembl.org/info/website/upload/gff.html?redirect=no" class="external-link">Gene
+Transfer Format</a> (GTF) files.</p>
 <p>On sumner2, the GRCm39 strain-specific genome FASTA files are in:
-/projects/compsci/omics_share/mouse/GRCm39/genome/sequence/imputed/rel_2112_v8.
+<code>/projects/compsci/omics_share/mouse/GRCm39/genome/sequence/imputed/rel_2112_v8</code>.
 These files contain the genome sequence of each strain with the
 strain-specific SNPs and Indels inserted. These were created by the
 “prepare-pseudo-reference” process.</p>
 <p>The corresponding GTFs, which were also created by the
 “prepare-pseudo-reference” process, are in:
-/projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/imputed/rel_2112_v8</p>
+<code>/projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/imputed/rel_2112_v8</code></p>
 <p>We will create two variables for these paths:</p>
 <pre><code>GENOME_REF_DIR=/projects/compsci/omics_share/mouse/GRCm39/genome/sequence/imputed/rel_2112_v8
 
@@ -1606,7 +1615,7 @@ GTF_REF_DIR=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/
 <tr class="odd">
 <td>Genome FASTA files</td>
 <td>–genome_file_list</td>
-<td><code>${GENOME_REF_DIR}/A_J.39.fa,${GENOME_REF_DIR}/C57BL_6J.39.fa,${GENOME_REF_DIR}/129S1_SvImJ.39.fa,,${GENOME_REF_DIR}/NOD_ShiLtJ.39.fa,${GENOME_REF_DIR}/NZO_HlLtJ.39.fa,${GENOME_REF_DIR}/CAST_EiJ.39.fa,${GENOME_REF_DIR}/PWK_PhJ.39.fa,${GENOME_REF_DIR}/WSB_EiJ.39.fa</code></td>
+<td><code>${GENOME_REF_DIR}/A_J.39.fa,${GENOME_REF_DIR}/C57BL_6J.39.fa,${GENOME_REF_DIR}/129S1_SvImJ.39.fa,${GENOME_REF_DIR}/NOD_ShiLtJ.39.fa,${GENOME_REF_DIR}/NZO_HlLtJ.39.fa,${GENOME_REF_DIR}/CAST_EiJ.39.fa,${GENOME_REF_DIR}/PWK_PhJ.39.fa,${GENOME_REF_DIR}/WSB_EiJ.39.fa</code></td>
 <td>Comma-separated list of FASTA files for each input strain</td>
 </tr>
 <tr class="even">
@@ -1618,8 +1627,10 @@ GTF_REF_DIR=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/annotation/
 </tbody>
 </table>
 <p>We also need to provide a set of letters that EMASE will use as short
-abbreviations for each strain. Note that the order of the strains above
-will match the order of the strains below.</p>
+abbreviations for each strain. These abbreviations are used to annotate
+transcripts which come from each founder strain. Note that the order of
+the strains in the arguments above must match the order of the strain
+letters below.</p>
 <table class="table">
 <colgroup>
 <col width="42%">
@@ -1637,39 +1648,11 @@ will match the order of the strains below.</p>
 <td>Comma-separated list of letters to be used as an abbreviation for
 each strain</td>
 </tr></tbody>
-</table>
-<p>The EMASE software has the following arguments:</p>
-<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────╮
-│ --genome-file      -G      FILE     Genome files, can seperate files by "," or have multiple -G      |
-|                                     [default: None] [required]                                       │
-│ --haplotype-char   -s      TEXT     haplotype, either one per -h option, i.e. -h A -h B -h C, or a   |
-|                                     shortcut -h A,B,C [default: None]                                │
-│ --gtf-file         -g      FILE     Gene Annotation File files, can seperate files by "," or have    |
-|                                     multiple -G [default: None]                                      │
-│ --out_dir          -o      TEXT     Output folder to store results (default: the current working     |
-|                                     directory) [default: None]                                       │
-│ --save-g2tmap      -m               saves gene id to transcript id list in a tab-delimited text file │
-│ --save-dbs         -d               save dbs                                                         │
-│ --no-bowtie-index  -m               skips building bowtie index                                      │
-│ --verbose          -v      INTEGER  specify multiple times for more verbose output [default: 0]      │
-│ --help                              Show this message and exit.                                      │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
-<p>Below is an example of the Prepare EMASE command using these
-arguments:</p>
-<pre><code>emase prepare --genome-file ${genome_file_list} \
-              --gtf-file ${gtf_file_list} \
-              --haplotype-char ${haplotype_list} \
-              --save-g2tmap 
-              --out_dir ./ \
-              --save-g2tmap \
-              --no-bowtie-index</code></pre>
-<pre><code>workflow PREPARE_EMASE {
-    // Prepare emase reference, given list of genomes and gtf files. 
-    EMASE_PREPARE_EMASE()
-    BOWTIE_BUILD(EMASE_PREPARE_EMASE.out.pooled_transcript_fasta, 'bowtie.transcripts')
-    // clean transcript lists to add transcripts absent from certain haplotypes.
-    CLEAN_TRANSCRIPT_LISTS(EMASE_PREPARE_EMASE.out.pooled_transcript_info)
-}</code></pre>
+</table></section><section id="running-prepare-emase-using-nextflow"><h2 class="section-heading">Running Prepare EMASE using Nextflow<a class="anchor" aria-label="anchor" href="#running-prepare-emase-using-nextflow"></a>
+</h2>
+<hr class="half-width">
+<p>The JAX CS group has a sample script to run the Prepare EMASE
+process. The full script is listed below.</p>
 <pre><code>#!/bin/bash
 #SBATCH --mail-user=first.last@jax.org
 #SBATCH --job-name=gbrs_mouse
@@ -1687,7 +1670,7 @@ module use --append /projects/omics_share/meta/modules
 module load nextflow
 
 # RUN PIPELINE
-nextflow ../main.nf \
+nextflow TheJacksonLaboratory/cs-nf-pipelines \
 -profile sumner \
 --workflow prepare_emase \
 --pubdir "/flashscratch/${USER}/outputDir" \
@@ -1696,6 +1679,42 @@ nextflow ../main.nf \
 --gtf_file_list "/path/to/gtf/A.gtf,/path/to/gtf/B.gtf,..." \
 --haplotype_list "A,B,..." \
 --comment "This script will run prepare_emase to generate multiway references based on default parameters"</code></pre>
+</section><section id="running-prepare-emase"><h2 class="section-heading">Running Prepare EMASE<a class="anchor" aria-label="anchor" href="#running-prepare-emase"></a>
+</h2>
+<hr class="half-width">
+<p>Below is an example of the Prepare EMASE command using these
+arguments:</p>
+<pre><code>emase prepare --genome-file ${genome_file_list} \
+              --gtf-file ${gtf_file_list} \
+              --haplotype-char ${haplotype_list} \
+              --save-g2tmap 
+              --out_dir ./ \
+              --save-g2tmap \
+              --no-bowtie-index</code></pre>
+<p>We used a subset of the EMASE arguments above. Below, we list the
+arguments:</p>
+<pre><code>╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────╮
+│ --genome-file      -G      FILE     Genome files, can seperate files by "," or have multiple -G      |
+|                                     [default: None] [required]                                       │
+│ --haplotype-char   -s      TEXT     haplotype, either one per -h option, i.e. -h A -h B -h C, or a   |
+|                                     shortcut -h A,B,C [default: None]                                │
+│ --gtf-file         -g      FILE     Gene Annotation File files, can seperate files by "," or have    |
+|                                     multiple -G [default: None]                                      │
+│ --out_dir          -o      TEXT     Output folder to store results (default: the current working     |
+|                                     directory) [default: None]                                       │
+│ --save-g2tmap      -m               saves gene id to transcript id list in a tab-delimited text file │
+│ --save-dbs         -d               save dbs                                                         │
+│ --no-bowtie-index  -m               skips building bowtie index                                      │
+│ --verbose          -v      INTEGER  specify multiple times for more verbose output [default: 0]      │
+│ --help                              Show this message and exit.                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
+<pre><code>workflow PREPARE_EMASE {
+    // Prepare emase reference, given list of genomes and gtf files. 
+    EMASE_PREPARE_EMASE()
+    BOWTIE_BUILD(EMASE_PREPARE_EMASE.out.pooled_transcript_fasta, 'bowtie.transcripts')
+    // clean transcript lists to add transcripts absent from certain haplotypes.
+    CLEAN_TRANSCRIPT_LISTS(EMASE_PREPARE_EMASE.out.pooled_transcript_info)
+}</code></pre>
 <!-- 
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
@@ -2640,8 +2659,8 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/aio.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/aio.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2024-03-27",
-  "datePublished": "2024-03-27"
+  "dateModified": "2024-03-28",
+  "datePublished": "2024-03-28"
 }
 
   </script><script>
