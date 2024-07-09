@@ -27,7 +27,7 @@
             <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
           </abbr>
         </span>
-        
+
       </div>
     </div>
     <div class="selector-container">
@@ -56,7 +56,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -180,7 +180,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -199,7 +199,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -208,7 +208,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="introduction.html">1. Genotyping by RNA Sequencing</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -217,7 +217,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="installation.html">2. Installing GBRS</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -226,7 +226,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -235,7 +235,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -249,13 +249,13 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#at-the-jackson-laboratory-jax">At the Jackson Laboratory (JAX)</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -287,10 +287,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -318,13 +318,13 @@
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running GBRS</h1>
         <p>Last updated on 2024-03-25 |
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 120 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -356,8 +356,8 @@ analyze FASTQ files using GBRS.</li>
 </div>
 </div>
 </div>
-<section id="at-the-jackson-laboratory-jax"><h2 class="section-heading">At the Jackson Laboratory (JAX)<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
-</h2>
+<section><h2 class="section-heading" id="at-the-jackson-laboratory-jax">At the Jackson Laboratory (JAX)<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
+<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a></h2>
 <hr class="half-width"><p>The GBRS Nextflow pipeline is configured to run on <em>sumner2</em>,
 the High Performance Computing (HPC) cluster at JAX.</p>
 <p>We will consider two scenarios:</p>
@@ -371,11 +371,11 @@ files for GRCm39 and Ensembl version 105. This means that the arguments
 that point GBRS to the locations of the founder genomes, founder
 transcriptomes, and aligner indices are already set.</p>
 <p>Here is the entire script:</p>
-<pre><code>#!/bin/bash 
-#SBATCH --qos=batch # job queue 
-#SBATCH --ntasks=1 # number of nodes 
-#SBATCH --cpus-per-task=1 # number of cores 
-#SBATCH --mem=1G # memory pool for all cores 
+<pre><code>#!/bin/bash
+#SBATCH --qos=batch # job queue
+#SBATCH --ntasks=1 # number of nodes
+#SBATCH --cpus-per-task=1 # number of cores
+#SBATCH --mem=1G # memory pool for all cores
 #SBATCH --time=48:00:00 # wall clock time (D-HH:MM)
 
 ################################################################################
@@ -421,14 +421,14 @@ GBRS_VERSION=v0.4.2
 ##### MAIN #####
 
 
-mkdir -p ${OUT_DIR} 
-mkdir -p ${DEST_DIR} 
-mkdir -p ${TMP_DIR} 
-#mkdir -p ${NXF_SINGULARITY_CACHEDIR} 
+mkdir -p ${OUT_DIR}
+mkdir -p ${DEST_DIR}
+mkdir -p ${TMP_DIR}
+#mkdir -p ${NXF_SINGULARITY_CACHEDIR}
 
-module load singularity 
+module load singularity
 
-cd ${TMP_DIR} 
+cd ${TMP_DIR}
 
 nextflow run ${GBRS_GITHUB_PATH} \
          -r ${GBRS_VERSION} \
@@ -442,7 +442,7 @@ nextflow run ${GBRS_GITHUB_PATH} \
 # Copy output files from OUT_DIR to DEST_DIR.
 DIRS=`(ls ${OUT_DIR})`
 
-for i in ${DIRS} 
+for i in ${DIRS}
 do
 
   cp ${OUT_DIR}/${i}/stats/* ${DEST_DIR}
@@ -565,7 +565,7 @@ GENOME_FASTA=/path/to/another/file
 ANNOTATION_GTF=/really/long/path/to/yet/another/file
 
 # Paths to the forward and reverse FASTQ files.
-FASTQ_FILE1=/path/to/mystery/file/number1 
+FASTQ_FILE1=/path/to/mystery/file/number1
 FASTQ_FILE2=/path/to/mystery/file/number2
 
 # Path to temporary directory for analysis_tool.
@@ -762,7 +762,7 @@ GENOME_FASTA=/path/to/another/file
 ANNOTATION_GTF=/really/long/path/to/yet/another/file
 
 # Paths to the forward and reverse FASTQ files.
-FASTQ_FILE1=/path/to/mystery/file/number1 
+FASTQ_FILE1=/path/to/mystery/file/number1
 FASTQ_FILE2=/path/to/mystery/file/number2
 
 # Path to temporary directory for analysis_tool.
@@ -913,7 +913,7 @@ which it downloads during the analysis run.</p>
 <h4 id="entire-gbrs-script">Entire GBRS Script<a class="anchor" aria-label="anchor" href="#entire-gbrs-script"></a></h4>
 <p>Here is the whole script in one piece.</p>
 <pre><code>#!/bin/bash
-#SBATCH --qos=batch       # job queue 
+#SBATCH --qos=batch       # job queue
 #SBATCH --ntasks=1        # number of nodes
 #SBATCH --cpus-per-task=1 # number of cores
 #SBATCH --mem=1G          # memory pool for all cores
@@ -1149,9 +1149,9 @@ transcriptomes. The “locus_uniq” column contains ????.</p>
 </ul></div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </div>
 </div>
@@ -1178,18 +1178,18 @@ any links that you are not going to use.
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/dmgatti/GBRS_Tutorial/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/dmgatti/GBRS_Tutorial/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/dmgatti/GBRS_Tutorial/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:dan.gatti@jax.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -1214,7 +1214,7 @@ any links that you are not going to use.
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/instructor/run-gbrs.html",
   "dateCreated": "2023-08-10",
   "dateModified": "2024-03-25",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-09"
 }
 
   </script><script>

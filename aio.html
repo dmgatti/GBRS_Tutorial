@@ -43,7 +43,7 @@
             <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
           </abbr>
         </span>
-        
+
       </div>
     </div>
     <div class="selector-container">
@@ -74,7 +74,7 @@
           </ul>
 </li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Learner View <i data-feather="chevron-down"></i>
@@ -212,7 +212,7 @@
 <!--div.sidenav-view-selector -->
             </div>
 <!--/div.col -->
-      
+
             <hr>
 </div>
 <!--/div.mobile-row -->
@@ -234,7 +234,7 @@
         <a href="index.html">Summary and Setup</a>
     </div>
 <!--/div.accordion-header-->
-        
+
   </div>
 <!--/div.accordion-item-->
 </div>
@@ -246,7 +246,7 @@
         <a href="introduction.html">1. Genotyping by RNA Sequencing</a>
     </div>
 <!--/div.accordion-header-->
-        
+
   </div>
 <!--/div.accordion-item-->
 </div>
@@ -258,7 +258,7 @@
         <a href="installation.html">2. Installing GBRS</a>
     </div>
 <!--/div.accordion-header-->
-        
+
   </div>
 <!--/div.accordion-item-->
 </div>
@@ -270,7 +270,7 @@
         <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
     </div>
 <!--/div.accordion-header-->
-        
+
   </div>
 <!--/div.accordion-item-->
 </div>
@@ -282,7 +282,7 @@
         <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
     </div>
 <!--/div.accordion-header-->
-        
+
   </div>
 <!--/div.accordion-item-->
 </div>
@@ -294,7 +294,7 @@
         <a href="run-gbrs.html">5. Running GBRS</a>
     </div>
 <!--/div.accordion-header-->
-        
+
   </div>
 <!--/div.accordion-item-->
 </div>
@@ -332,11 +332,11 @@
             </div>
             <hr class="half-width resources">
 <a href="aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none">
 <div class="d-grid gap-1">
-            
+
             </div>
           </div>
 <!-- /div.accordion -->
@@ -357,7 +357,7 @@
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Genotyping by RNA Sequencing</a></p>
 <hr>
 <p>Last updated on 2023-09-14 |
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -392,7 +392,8 @@ quantification.</li>
 </div>
 </div>
 </div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
 <p>Genotyping by RNA Sequencing (<strong>GBRS</strong>) is a suite of
@@ -402,7 +403,8 @@ by used to analyze transcript expression in other organisms, but this
 tutorial will focus on mouse crosses. We have configured GBRS to use the
 <a href="https://www.nextflow.io/" class="external-link">Nextflow</a> workflow software and <a href="https://docs.sylabs.io/guides/3.5/user-guide/introduction.html" class="external-link">Singularity</a>
 containers.</p>
-</section><section id="prerequisites"><h2 class="section-heading">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+</section><section><h2 class="section-heading" id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
 </h2>
 <hr class="half-width">
 <p>This tutorial assumes that you have a background in genetics and are
@@ -426,7 +428,8 @@ paths;</li>
 <li>you can create and use bash variables;</li>
 <li>you understand what a software container is and know how to use
 one.</li>
-</ol></section><section id="background"><h2 class="section-heading">Background<a class="anchor" aria-label="anchor" href="#background"></a>
+</ol></section><section><h2 class="section-heading" id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
+<a class="anchor" aria-label="anchor" href="#background"></a>
 </h2>
 <hr class="half-width">
 <p>There are many tool chains that can align RNASeq reads and quantify
@@ -472,7 +475,8 @@ cell.</p>
 <blockquote>
 <p>DMG: What else do we need? Is this enough detail? Is it correct?</p>
 </blockquote>
-</section><section id="organization-of-this-tutorial"><h2 class="section-heading">Organization of this Tutorial<a class="anchor" aria-label="anchor" href="#organization-of-this-tutorial"></a>
+</section><section><h2 class="section-heading" id="organization-of-this-tutorial">Organization of this Tutorial<a class="anchor" aria-label="anchor" href="#organization-of-this-tutorial"></a>
+<a class="anchor" aria-label="anchor" href="#organization-of-this-tutorial"></a>
 </h2>
 <hr class="half-width">
 <p>This tutorial is intended to cover all aspects of GBRS, from building
@@ -528,14 +532,14 @@ download the reference files.</li>
 </div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </section></section><section id="aio-installation"><p>Content from <a href="installation.html">Installing GBRS</a></p>
 <hr>
 <p>Last updated on 2023-10-03 |
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/installation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -570,14 +574,16 @@ mice.</li>
 </div>
 </div>
 </div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
 <p>Genotyping by RNA Sequencing (<strong>GBRS</strong>) uses several
 pieces of supporting software to run. We use the <a href="https://www.nextflow.io/" class="external-link">Nextflow</a> workflow software and <a href="https://docs.sylabs.io/guides/3.5/user-guide/introduction.html" class="external-link">Singularity</a>
 containers. Your computing cluster will also have a job submission
 system. Examples of this are <a href="https://slurm.schedmd.com/documentation.html" class="external-link">slurm</a> or <a href="https://www.openpbs.org/" class="external-link">PBS</a>.</p>
-</section><section id="install-nextflow"><h2 class="section-heading">Install Nextflow<a class="anchor" aria-label="anchor" href="#install-nextflow"></a>
+</section><section><h2 class="section-heading" id="install-nextflow">Install Nextflow<a class="anchor" aria-label="anchor" href="#install-nextflow"></a>
+<a class="anchor" aria-label="anchor" href="#install-nextflow"></a>
 </h2>
 <hr class="half-width">
 <p>Many computing clusters will have <code>nextflow</code> installed.
@@ -590,7 +596,8 @@ if <code>nextflow</code> is already installed and, if so, how to access
 it. Sometimes you need to add software with an explicit command
 like:</p>
 <pre><code>module load nextflow</code></pre>
-</section><section id="install-singularity"><h2 class="section-heading">Install Singularity<a class="anchor" aria-label="anchor" href="#install-singularity"></a>
+</section><section><h2 class="section-heading" id="install-singularity">Install Singularity<a class="anchor" aria-label="anchor" href="#install-singularity"></a>
+<a class="anchor" aria-label="anchor" href="#install-singularity"></a>
 </h2>
 <hr class="half-width">
 <p>There are several software container systems that are in popular use,
@@ -604,7 +611,8 @@ access it.</p>
 <blockquote>
 <p>DMG: Add an installation test?</p>
 </blockquote>
-</section><section id="nextflow-pipeline-repository"><h2 class="section-heading">Nextflow Pipeline Repository<a class="anchor" aria-label="anchor" href="#nextflow-pipeline-repository"></a>
+</section><section><h2 class="section-heading" id="nextflow-pipeline-repository">Nextflow Pipeline Repository<a class="anchor" aria-label="anchor" href="#nextflow-pipeline-repository"></a>
+<a class="anchor" aria-label="anchor" href="#nextflow-pipeline-repository"></a>
 </h2>
 <hr class="half-width">
 <p>The Computational Sciences group at The Jackson Laboratory has
@@ -624,7 +632,8 @@ ssh), your command may look something like this:</p>
 <blockquote>
 <p>DMG: Add an installation test?</p>
 </blockquote>
-</section><section id="cluster-profile-configuration-file"><h2 class="section-heading">Cluster Profile Configuration File<a class="anchor" aria-label="anchor" href="#cluster-profile-configuration-file"></a>
+</section><section><h2 class="section-heading" id="cluster-profile-configuration-file">Cluster Profile Configuration File<a class="anchor" aria-label="anchor" href="#cluster-profile-configuration-file"></a>
+<a class="anchor" aria-label="anchor" href="#cluster-profile-configuration-file"></a>
 </h2>
 <hr class="half-width">
 <p>There are sample profile configuration files on <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/tree/main/config/profiles" class="external-link">Github</a>.
@@ -657,7 +666,8 @@ executor</a> documentation for more information.</p>
 }</code></pre>
 <p>If your cluster does not use <code>slurm</code>, then you will need
 to modify the block above.</p>
-</section><section id="reference-data-files"><h2 class="section-heading">Reference Data Files<a class="anchor" aria-label="anchor" href="#reference-data-files"></a>
+</section><section><h2 class="section-heading" id="reference-data-files">Reference Data Files<a class="anchor" aria-label="anchor" href="#reference-data-files"></a>
+<a class="anchor" aria-label="anchor" href="#reference-data-files"></a>
 </h2>
 <hr class="half-width">
 <p>The reference files for Diversity Outbred mice are stored on <a href="https://zenodo.org/record/8186981" class="external-link">Zenodo</a>. Create a directory
@@ -740,14 +750,14 @@ mice.</li>
 </div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </section></section><section id="aio-prepare-pseudo-reference"><p>Content from <a href="prepare-pseudo-reference.html">Preparing GBRS Pseudo-References</a></p>
 <hr>
 <p>Last updated on 2024-03-27 |
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-pseudo-reference.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -779,7 +789,8 @@ any links that you are not going to use.
 </div>
 </div>
 </div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
 <p><a href="https://github.com/churchill-lab/g2gtools" class="external-link">Genome-to-Genome
@@ -794,7 +805,8 @@ computing cluster (sumner2). Then, we will show you how each step work.
 We expect that most users will use the <code>nextflow</code> pipeline
 and have included the step-by-step pipeline for advanced users who may
 want to use non-standard pipeline options.</p>
-</section><section id="creating-a-pseudo-reference-for-diversity-outbred-mice"><h2 class="section-heading">Creating a Pseudo-Reference for Diversity Outbred Mice<a class="anchor" aria-label="anchor" href="#creating-a-pseudo-reference-for-diversity-outbred-mice"></a>
+</section><section><h2 class="section-heading" id="creating-a-pseudo-reference-for-diversity-outbred-mice">Creating a Pseudo-Reference for Diversity Outbred Mice<a class="anchor" aria-label="anchor" href="#creating-a-pseudo-reference-for-diversity-outbred-mice"></a>
+<a class="anchor" aria-label="anchor" href="#creating-a-pseudo-reference-for-diversity-outbred-mice"></a>
 </h2>
 <hr class="half-width">
 <p>The <code>nextflow</code> pipeline developed by Computational
@@ -1060,8 +1072,9 @@ NOD_ShiLtJ.39.exons.fa                           WSB_EiJ.39.transcripts.fa
 NOD_ShiLtJ.39.fa                                 WSB_EiJ.39.vci.gz
 NOD_ShiLtJ.39.fa.fai                             WSB_EiJ.39.vci.gz.tbi</code></pre>
 </div>
-</section><section id="creating-pseudo-reference-genomes-and-transcriptomes-for-other-strains"><h2 class="section-heading">Creating Pseudo-Reference Genomes and Transcriptomes for Other
+</section><section><h2 class="section-heading" id="creating-pseudo-reference-genomes-and-transcriptomes-for-other-strains">Creating Pseudo-Reference Genomes and Transcriptomes for Other
 Strains<a class="anchor" aria-label="anchor" href="#creating-pseudo-reference-genomes-and-transcriptomes-for-other-strains"></a>
+<a class="anchor" aria-label="anchor" href="#creating-pseudo-reference-genomes-and-transcriptomes-for-other-strains"></a>
 </h2>
 <hr class="half-width">
 <p>If you are working with a cross comprised of other strains, you can
@@ -1089,7 +1102,7 @@ SNP VCF header and find the strain names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Output </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -1163,7 +1176,8 @@ query the VCF to find their names.</p>
 </div>
 </div>
 </div>
-</section><section id="step-by-step-pseudo-reference-generation"><h2 class="section-heading">Step-by-Step Pseudo-Reference Generation<a class="anchor" aria-label="anchor" href="#step-by-step-pseudo-reference-generation"></a>
+</section><section><h2 class="section-heading" id="step-by-step-pseudo-reference-generation">Step-by-Step Pseudo-Reference Generation<a class="anchor" aria-label="anchor" href="#step-by-step-pseudo-reference-generation"></a>
+<a class="anchor" aria-label="anchor" href="#step-by-step-pseudo-reference-generation"></a>
 </h2>
 <hr class="half-width">
 <p>In general, most users will not use this strategy. We have included
@@ -1217,7 +1231,7 @@ SNP VCF header and find the strain names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Output </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -1498,7 +1512,7 @@ an entire script on your compute instance to run the commands above</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Output </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1576,15 +1590,15 @@ different options.</li>
 </div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </div>
 </section></section><section id="aio-prepare-emase"><p>Content from <a href="prepare-emase.html">Prepare EMASE Reference Files</a></p>
 <hr>
 <p>Last updated on 2024-03-28 |
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-emase.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -1620,7 +1634,8 @@ process.</li>
 </div>
 </div>
 </div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6022640/" class="external-link">Expectation
@@ -1637,7 +1652,8 @@ GTF files, which contain strain-specific sequences and transcript
 annotation. The Prepare EMASE process will take each founder strain
 genome and its corresponding GTF file and will create a <a href="https://bowtie-bio.sourceforge.net/index.shtml" class="external-link">bowtie</a> index
 and a pooled transcript list.</p>
-</section><section id="input-files"><h2 class="section-heading">Input Files<a class="anchor" aria-label="anchor" href="#input-files"></a>
+</section><section><h2 class="section-heading" id="input-files">Input Files<a class="anchor" aria-label="anchor" href="#input-files"></a>
+<a class="anchor" aria-label="anchor" href="#input-files"></a>
 </h2>
 <hr class="half-width">
 <p>Prepare EMASE requires strain-specific genome sequences and
@@ -1707,7 +1723,8 @@ letters below.</p>
 <td>Comma-separated list of letters to be used as an abbreviation for
 each strain</td>
 </tr></tbody>
-</table></section><section id="running-prepare-emase-using-nextflow"><h2 class="section-heading">Running Prepare EMASE using Nextflow<a class="anchor" aria-label="anchor" href="#running-prepare-emase-using-nextflow"></a>
+</table></section><section><h2 class="section-heading" id="running-prepare-emase-using-nextflow">Running Prepare EMASE using Nextflow<a class="anchor" aria-label="anchor" href="#running-prepare-emase-using-nextflow"></a>
+<a class="anchor" aria-label="anchor" href="#running-prepare-emase-using-nextflow"></a>
 </h2>
 <hr class="half-width">
 <p>The JAX CS group has a sample script to run the Prepare EMASE
@@ -1738,7 +1755,8 @@ nextflow TheJacksonLaboratory/cs-nf-pipelines \
 --gtf_file_list "/path/to/gtf/A.gtf,/path/to/gtf/B.gtf,..." \
 --haplotype_list "A,B,..." \
 --comment "This script will run prepare_emase to generate multiway references based on default parameters"</code></pre>
-</section><section id="running-prepare-emase"><h2 class="section-heading">Running Prepare EMASE<a class="anchor" aria-label="anchor" href="#running-prepare-emase"></a>
+</section><section><h2 class="section-heading" id="running-prepare-emase">Running Prepare EMASE<a class="anchor" aria-label="anchor" href="#running-prepare-emase"></a>
+<a class="anchor" aria-label="anchor" href="#running-prepare-emase"></a>
 </h2>
 <hr class="half-width">
 <p>Below is an example of the Prepare EMASE command using these
@@ -1746,7 +1764,7 @@ arguments:</p>
 <pre><code>emase prepare --genome-file ${genome_file_list} \
               --gtf-file ${gtf_file_list} \
               --haplotype-char ${haplotype_list} \
-              --save-g2tmap 
+              --save-g2tmap
               --out_dir ./ \
               --save-g2tmap \
               --no-bowtie-index</code></pre>
@@ -1768,20 +1786,20 @@ arguments:</p>
 │ --help                              Show this message and exit.                                      │
 ╰─────────────────────────────────────────────────────────────────────────────────────────────────────╯</code></pre>
 <pre><code>workflow PREPARE_EMASE {
-    // Prepare emase reference, given list of genomes and gtf files. 
+    // Prepare emase reference, given list of genomes and gtf files.
     EMASE_PREPARE_EMASE()
     BOWTIE_BUILD(EMASE_PREPARE_EMASE.out.pooled_transcript_fasta, 'bowtie.transcripts')
     // clean transcript lists to add transcripts absent from certain haplotypes.
     CLEAN_TRANSCRIPT_LISTS(EMASE_PREPARE_EMASE.out.pooled_transcript_info)
 }</code></pre>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </section></section><section id="aio-run-gbrs"><p>Content from <a href="run-gbrs.html">Running GBRS</a></p>
 <hr>
 <p>Last updated on 2024-03-25 |
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -1815,7 +1833,8 @@ analyze FASTQ files using GBRS.</li>
 </div>
 </div>
 </div>
-<section id="at-the-jackson-laboratory-jax"><h2 class="section-heading">At the Jackson Laboratory (JAX)<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
+<section><h2 class="section-heading" id="at-the-jackson-laboratory-jax">At the Jackson Laboratory (JAX)<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
+<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
 </h2>
 <hr class="half-width">
 <p>The GBRS Nextflow pipeline is configured to run on <em>sumner2</em>,
@@ -1834,11 +1853,11 @@ files for GRCm39 and Ensembl version 105. This means that the arguments
 that point GBRS to the locations of the founder genomes, founder
 transcriptomes, and aligner indices are already set.</p>
 <p>Here is the entire script:</p>
-<pre><code>#!/bin/bash 
-#SBATCH --qos=batch # job queue 
-#SBATCH --ntasks=1 # number of nodes 
-#SBATCH --cpus-per-task=1 # number of cores 
-#SBATCH --mem=1G # memory pool for all cores 
+<pre><code>#!/bin/bash
+#SBATCH --qos=batch # job queue
+#SBATCH --ntasks=1 # number of nodes
+#SBATCH --cpus-per-task=1 # number of cores
+#SBATCH --mem=1G # memory pool for all cores
 #SBATCH --time=48:00:00 # wall clock time (D-HH:MM)
 
 ################################################################################
@@ -1884,14 +1903,14 @@ GBRS_VERSION=v0.4.2
 ##### MAIN #####
 
 
-mkdir -p ${OUT_DIR} 
-mkdir -p ${DEST_DIR} 
-mkdir -p ${TMP_DIR} 
-#mkdir -p ${NXF_SINGULARITY_CACHEDIR} 
+mkdir -p ${OUT_DIR}
+mkdir -p ${DEST_DIR}
+mkdir -p ${TMP_DIR}
+#mkdir -p ${NXF_SINGULARITY_CACHEDIR}
 
-module load singularity 
+module load singularity
 
-cd ${TMP_DIR} 
+cd ${TMP_DIR}
 
 nextflow run ${GBRS_GITHUB_PATH} \
          -r ${GBRS_VERSION} \
@@ -1905,7 +1924,7 @@ nextflow run ${GBRS_GITHUB_PATH} \
 # Copy output files from OUT_DIR to DEST_DIR.
 DIRS=`(ls ${OUT_DIR})`
 
-for i in ${DIRS} 
+for i in ${DIRS}
 do
 
   cp ${OUT_DIR}/${i}/stats/* ${DEST_DIR}
@@ -2032,7 +2051,7 @@ GENOME_FASTA=/path/to/another/file
 ANNOTATION_GTF=/really/long/path/to/yet/another/file
 
 # Paths to the forward and reverse FASTQ files.
-FASTQ_FILE1=/path/to/mystery/file/number1 
+FASTQ_FILE1=/path/to/mystery/file/number1
 FASTQ_FILE2=/path/to/mystery/file/number2
 
 # Path to temporary directory for analysis_tool.
@@ -2236,7 +2255,7 @@ GENOME_FASTA=/path/to/another/file
 ANNOTATION_GTF=/really/long/path/to/yet/another/file
 
 # Paths to the forward and reverse FASTQ files.
-FASTQ_FILE1=/path/to/mystery/file/number1 
+FASTQ_FILE1=/path/to/mystery/file/number1
 FASTQ_FILE2=/path/to/mystery/file/number2
 
 # Path to temporary directory for analysis_tool.
@@ -2388,7 +2407,7 @@ which it downloads during the analysis run.</p>
 </h4>
 <p>Here is the whole script in one piece.</p>
 <pre><code>#!/bin/bash
-#SBATCH --qos=batch       # job queue 
+#SBATCH --qos=batch       # job queue
 #SBATCH --ntasks=1        # number of nodes
 #SBATCH --cpus-per-task=1 # number of cores
 #SBATCH --mem=1G          # memory pool for all cores
@@ -2664,9 +2683,9 @@ transcriptomes. The “locus_uniq” column contains ????.</p>
 </div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </div>
 </div>
@@ -2682,18 +2701,18 @@ any links that you are not going to use.
 <div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/README.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/dmgatti/GBRS_Tutorial/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/dmgatti/GBRS_Tutorial/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/dmgatti/GBRS_Tutorial/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:dan.gatti@jax.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -2718,8 +2737,8 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/aio.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/aio.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2024-07-02",
-  "datePublished": "2024-07-02"
+  "dateModified": "2024-07-09",
+  "datePublished": "2024-07-09"
 }
 
   </script><script>

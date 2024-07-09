@@ -27,7 +27,7 @@
             <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
           </abbr>
         </span>
-        
+
       </div>
     </div>
     <div class="selector-container">
@@ -56,7 +56,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -180,7 +180,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -199,7 +199,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -208,7 +208,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="introduction.html">1. Genotyping by RNA Sequencing</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -222,7 +222,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
@@ -233,7 +233,7 @@
 <li><a href="#reference-data-files">Reference Data Files</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -242,7 +242,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -251,7 +251,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -260,7 +260,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="run-gbrs.html">5. Running GBRS</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -292,10 +292,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -316,20 +316,20 @@
           Previous: Genotyping by RNA
         </a>
         <a class="chapter-link float-end" href="../instructor/prepare-pseudo-reference.html" rel="next">
-          Next: Preparing GBRS... 
+          Next: Preparing GBRS...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Installing GBRS</h1>
         <p>Last updated on 2023-10-03 |
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/installation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 35 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -362,14 +362,14 @@ mice.</li>
 </div>
 </div>
 </div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>Genotyping by RNA Sequencing (<strong>GBRS</strong>) uses several
 pieces of supporting software to run. We use the <a href="https://www.nextflow.io/" class="external-link">Nextflow</a> workflow software and <a href="https://docs.sylabs.io/guides/3.5/user-guide/introduction.html" class="external-link">Singularity</a>
 containers. Your computing cluster will also have a job submission
 system. Examples of this are <a href="https://slurm.schedmd.com/documentation.html" class="external-link">slurm</a> or <a href="https://www.openpbs.org/" class="external-link">PBS</a>.</p>
-</section><section id="install-nextflow"><h2 class="section-heading">Install Nextflow<a class="anchor" aria-label="anchor" href="#install-nextflow"></a>
-</h2>
+</section><section><h2 class="section-heading" id="install-nextflow">Install Nextflow<a class="anchor" aria-label="anchor" href="#install-nextflow"></a>
+<a class="anchor" aria-label="anchor" href="#install-nextflow"></a></h2>
 <hr class="half-width"><p>Many computing clusters will have <code>nextflow</code> installed.
 However, if it is not installed on your cluster, <code>nextflow</code>
 provides<br><a href="https://www.nextflow.io/docs/latest/getstarted.html" class="external-link">detailed
@@ -380,8 +380,8 @@ if <code>nextflow</code> is already installed and, if so, how to access
 it. Sometimes you need to add software with an explicit command
 like:</p>
 <pre><code>module load nextflow</code></pre>
-</section><section id="install-singularity"><h2 class="section-heading">Install Singularity<a class="anchor" aria-label="anchor" href="#install-singularity"></a>
-</h2>
+</section><section><h2 class="section-heading" id="install-singularity">Install Singularity<a class="anchor" aria-label="anchor" href="#install-singularity"></a>
+<a class="anchor" aria-label="anchor" href="#install-singularity"></a></h2>
 <hr class="half-width"><p>There are several software container systems that are in popular use,
 including <a href="https://docs.docker.com/get-docker/" class="external-link">Docker</a> and
 <a href="https://docs.sylabs.io/guides/3.5/admin-guide/installation.html" class="external-link">singularity</a>.
@@ -393,8 +393,8 @@ access it.</p>
 <blockquote>
 <p>DMG: Add an installation test?</p>
 </blockquote>
-</section><section id="nextflow-pipeline-repository"><h2 class="section-heading">Nextflow Pipeline Repository<a class="anchor" aria-label="anchor" href="#nextflow-pipeline-repository"></a>
-</h2>
+</section><section><h2 class="section-heading" id="nextflow-pipeline-repository">Nextflow Pipeline Repository<a class="anchor" aria-label="anchor" href="#nextflow-pipeline-repository"></a>
+<a class="anchor" aria-label="anchor" href="#nextflow-pipeline-repository"></a></h2>
 <hr class="half-width"><p>The Computational Sciences group at The Jackson Laboratory has
 created a suite of next-generation sequencing tools using
 <code>nextflow</code>. These are stored in a publicly available <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines" class="external-link">Github
@@ -412,8 +412,8 @@ ssh), your command may look something like this:</p>
 <blockquote>
 <p>DMG: Add an installation test?</p>
 </blockquote>
-</section><section id="cluster-profile-configuration-file"><h2 class="section-heading">Cluster Profile Configuration File<a class="anchor" aria-label="anchor" href="#cluster-profile-configuration-file"></a>
-</h2>
+</section><section><h2 class="section-heading" id="cluster-profile-configuration-file">Cluster Profile Configuration File<a class="anchor" aria-label="anchor" href="#cluster-profile-configuration-file"></a>
+<a class="anchor" aria-label="anchor" href="#cluster-profile-configuration-file"></a></h2>
 <hr class="half-width"><p>There are sample profile configuration files on <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/tree/main/config/profiles" class="external-link">Github</a>.
 These files are for the clusters at The Jackson Laboratory. You will
 need to modify the values in this file to configure the settings for
@@ -444,8 +444,8 @@ executor</a> documentation for more information.</p>
 }</code></pre>
 <p>If your cluster does not use <code>slurm</code>, then you will need
 to modify the block above.</p>
-</section><section id="reference-data-files"><h2 class="section-heading">Reference Data Files<a class="anchor" aria-label="anchor" href="#reference-data-files"></a>
-</h2>
+</section><section><h2 class="section-heading" id="reference-data-files">Reference Data Files<a class="anchor" aria-label="anchor" href="#reference-data-files"></a>
+<a class="anchor" aria-label="anchor" href="#reference-data-files"></a></h2>
 <hr class="half-width"><p>The reference files for Diversity Outbred mice are stored on <a href="https://zenodo.org/record/8186981" class="external-link">Zenodo</a>. Create a directory
 in which you will store the reference files and change into it.</p>
 <div id="callout1" class="callout">
@@ -510,9 +510,9 @@ mice.</li>
 </ul></div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
@@ -526,7 +526,7 @@ any links that you are not going to use.
           Previous: Genotyping by RNA
         </a>
         <a class="chapter-link float-end" href="../instructor/prepare-pseudo-reference.html" rel="next">
-          Next: Preparing GBRS... 
+          Next: Preparing GBRS...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -537,18 +537,18 @@ any links that you are not going to use.
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/installation.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/dmgatti/GBRS_Tutorial/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/dmgatti/GBRS_Tutorial/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/dmgatti/GBRS_Tutorial/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:dan.gatti@jax.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -573,7 +573,7 @@ any links that you are not going to use.
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/instructor/installation.html",
   "dateCreated": "2023-08-10",
   "dateModified": "2023-10-03",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-09"
 }
 
   </script><script>
