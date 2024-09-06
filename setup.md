@@ -27,10 +27,8 @@ You should also download the mouse SNP and Indel files from the [Mouse Genomes P
 
 ### Details
 
-Setup for different systems can be presented in dropdown menus via a `solution`
-tag. They will join to this discussion block, so you can give a general overview
-of the software used in this lesson here and fill out the individual operating
-systems (and potentially add more, e.g. online setup) in the solutions blocks.
+You will be using a terminal window to connect to your computing cluster via secure shell (ssh). See
+the links below for different operating systems to see which program to use.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -38,7 +36,8 @@ systems (and potentially add more, e.g. online setup) in the solutions blocks.
 
 ### Windows
 
-Use [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html).
+We recommend [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html) for connecting to 
+external systems.
 
 :::::::::::::::::::::::::
 
@@ -46,7 +45,7 @@ Use [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html).
 
 ### MacOS
 
-Use Terminal.app
+Mac/OS has a Terminal.app that can connect to external systems.
 
 :::::::::::::::::::::::::
 
@@ -55,7 +54,7 @@ Use Terminal.app
 
 ### Linux
 
-Use Terminal
+Linux systems have a terminal and should have ssh installed to connect to external systems.
 
 :::::::::::::::::::::::::
 
