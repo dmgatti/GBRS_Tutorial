@@ -94,7 +94,6 @@ GBRS is designed to work well with bulk RNASeq off with sufficient read depth
 to confidently call genetic variants. It does not work well with single-cell
 RNASeq because of the low sequencing depth in each cell.
 
-> DMG: What else do we need? Is this enough detail? Is it correct? 
 
 ## Organization of this Tutorial
 
@@ -127,9 +126,8 @@ We envision four types of users:
   lessons.
   
 
-Reference data for DO:  https://zenodo.org/record/8186981  
-  
-  
+<!-- Reference files for DO:  https://zenodo.org/record/8186981  -->
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

@@ -252,7 +252,7 @@ NOD_ShiLtJ.39.fa.fai                             WSB_EiJ.39.vci.gz.tbi
 ## Creating Pseudo-Reference Genomes and Transcriptomes for Other Strains
   
 If you are working with a cross comprised of other strains, you can change the
-'--strain
+"--strain" argument.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -389,7 +389,8 @@ VCF_SNPS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_21
 ```
 
 Next, we need to pass in the name of the strain for which we are creating the
-VCI file. In this case, we will use DBA/2J.
+VCI file. In this case, we will use DBA/2J. The strain name must exactly match 
+the strain name in the VCF.
 
 ```
 STRAIN=DBA_2J
@@ -748,7 +749,6 @@ We now have two key files that are used by GBRS:
 and
 - the strain-specific GTF file, which contains the strain's inferred annotation.
 
-> DMG: Stopped here.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 

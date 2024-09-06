@@ -55,7 +55,13 @@ from within containers.
 Again, you should contact your computing cluster administrator and ask 
 whether `Singularity` is installed and, if so, how to access it.
 
-> DMG: Add an installation test?
+## Install Nextflow
+
+[Nextflow](https://nextflow.io/) is a scripting language which runs 
+computational pipelines. It handles running jobs and tracking progress. Most 
+computing clusters should have this installed. If not, you will need to install
+it and make sure that it is in the PATH variable in your environment.
+
 
 ## Nextflow Pipeline Repository
 
@@ -84,7 +90,6 @@ or this:
 git clone git@github.com:TheJacksonLaboratory/cs-nf-pipelines.git
 ```
 
-> DMG: Add an installation test?
 
 ## Cluster Profile Configuration File
 
