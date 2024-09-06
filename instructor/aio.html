@@ -268,7 +268,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
+        <a href="run-gbrs.html">3. Running GBRS</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -280,7 +280,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
+        <a href="prepare-pseudo-reference.html">4. Preparing GBRS Pseudo-References</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -292,7 +292,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="run-gbrs.html">5. Running GBRS</a>
+        <a href="prepare-emase.html">5. Prepare EMASE Reference Files</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -358,7 +358,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Genotyping by RNA Sequencing</a></p>
 <hr>
-<p>Last updated on 2023-09-14 |
+<p>Last updated on 2024-09-06 |
 
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -472,9 +472,6 @@ haplotypes.</li>
 read depth to confidently call genetic variants. It does not work well
 with single-cell RNASeq because of the low sequencing depth in each
 cell.</p>
-<blockquote>
-<p>DMG: What else do we need? Is this enough detail? Is it correct?</p>
-</blockquote>
 </section><section><h2 class="section-heading" id="organization-of-this-tutorial">Organization of this Tutorial<a class="anchor" aria-label="anchor" href="#organization-of-this-tutorial"></a>
 </h2>
 <hr class="half-width">
@@ -510,8 +507,7 @@ in their GBRS scripts. This is described in the “Preparing GBRS
 Reference Genomes” and “Preparing GBRS Reference Transcriptomes”
 lessons.</li>
 </ul>
-<p>Reference data for DO: <a href="https://zenodo.org/record/8186981" class="external-link uri">https://zenodo.org/record/8186981</a></p>
-<div id="keypoints1" class="callout keypoints">
+<!-- Reference files for DO:  https://zenodo.org/record/8186981  --><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -536,7 +532,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-installation"><p>Content from <a href="installation.html">Installing GBRS</a></p>
 <hr>
-<p>Last updated on 2023-10-03 |
+<p>Last updated on 2024-09-06 |
 
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/installation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 35 minutes</p>
@@ -604,9 +600,14 @@ allow root access from within containers.</p>
 <p>Again, you should contact your computing cluster administrator and
 ask whether <code>Singularity</code> is installed and, if so, how to
 access it.</p>
-<blockquote>
-<p>DMG: Add an installation test?</p>
-</blockquote>
+</section><section><h2 class="section-heading" id="install-nextflow-1">Install Nextflow<a class="anchor" aria-label="anchor" href="#install-nextflow-1"></a>
+</h2>
+<hr class="half-width">
+<p><a href="https://nextflow.io/" class="external-link">Nextflow</a> is a scripting language
+which runs computational pipelines. It handles running jobs and tracking
+progress. Most computing clusters should have this installed. If not,
+you will need to install it and make sure that it is in the PATH
+variable in your environment.</p>
 </section><section><h2 class="section-heading" id="nextflow-pipeline-repository">Nextflow Pipeline Repository<a class="anchor" aria-label="anchor" href="#nextflow-pipeline-repository"></a>
 </h2>
 <hr class="half-width">
@@ -624,9 +625,6 @@ ssh), your command may look something like this:</p>
 <pre><code>git clone https://github.com/TheJacksonLaboratory/cs-nf-pipelines.git</code></pre>
 <p>or this:</p>
 <pre><code>git clone git@github.com:TheJacksonLaboratory/cs-nf-pipelines.git</code></pre>
-<blockquote>
-<p>DMG: Add an installation test?</p>
-</blockquote>
 </section><section><h2 class="section-heading" id="cluster-profile-configuration-file">Cluster Profile Configuration File<a class="anchor" aria-label="anchor" href="#cluster-profile-configuration-file"></a>
 </h2>
 <hr class="half-width">
@@ -745,9 +743,894 @@ mice.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</section></section><section id="aio-run-gbrs"><p>Content from <a href="run-gbrs.html">Running GBRS</a></p>
+<hr>
+<p>Last updated on 2024-09-06 |
+
+        <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 120 minutes</p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do I run GBRS on my FASTQ files at JAX?</li>
+<li>How do I run GBRS on my FASTQ files at another institution?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>At JAX: analyze FASTQ files using GBRS on the High Performance
+Computing cluster.</li>
+<li>At other institutions: configure Nexflow and the reference files and
+analyze FASTQ files using GBRS.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="at-the-jackson-laboratory-jax">At the Jackson Laboratory (JAX)<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
+</h2>
+<hr class="half-width">
+<p>The GBRS Nextflow pipeline is configured to run on <em>sumner2</em>,
+the High Performance Computing (HPC) cluster at JAX.</p>
+<p>We will consider two scenarios:</p>
+<ol style="list-style-type: decimal">
+<li>You are analyzing expression data from Diversity Outbred mice;</li>
+<li>You are analyzing expression data from some other cross;</li>
+</ol>
+<div class="section level3">
+<h3 id="gbrs-for-diversity-outbred-mice">GBRS for Diversity Outbred Mice<a class="anchor" aria-label="anchor" href="#gbrs-for-diversity-outbred-mice"></a>
+</h3>
+<p>The Next-Generation Operations (NGSOps) team has configured the
+default arrguments for the GBRS Nextflow pipeline to use the reference
+files for GRCm39 and Ensembl version 105. This means that the arguments
+that point GBRS to the locations of the founder genomes, founder
+transcriptomes, and aligner indices are already set.</p>
+<p>Here is the entire script:</p>
+<pre><code>#!/bin/bash
+#SBATCH --qos=batch # job queue
+#SBATCH --ntasks=1 # number of nodes
+#SBATCH --cpus-per-task=1 # number of cores
+#SBATCH --mem=1G # memory pool for all cores
+#SBATCH --time=48:00:00 # wall clock time (D-HH:MM)
+
+################################################################################
+# Run GBRS on each sample. GRCm39. Ensembl 105.
+#
+# Daniel Gatti
+# dan.gatti@jax.org
+# 2022-09-28
+################################################################################
+
+set -e -u -x -o pipefail
+
+
+##### VARIABLES #####
+
+# Base directory for project.
+BASE_DIR=/projects/research_lab_directory/diabetes
+
+# Sample metadata file.
+SAMPLE_META_FILE=${BASE_DIR}/data/gbrs_sample_metadata.csv
+
+# Base /flashscratch directory.
+FLASHSCRATCH=/flashscratch/dgatti
+
+# Temporary working directory.
+TMP_DIR=${FLASHSCRATCH}/tmp
+
+# Temporary output directory.
+OUT_DIR=${FLASHSCRATCH}/results
+
+# Final results directory (in backed up space)
+DEST_DIR=${BASE_DIR}/results
+
+# GBRS path.
+GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines
+
+# GBRS version on Github.
+GBRS_VERSION=v0.4.2
+
+# Singularity cache directory.
+#export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache
+
+##### MAIN #####
+
+
+mkdir -p ${OUT_DIR}
+mkdir -p ${DEST_DIR}
+mkdir -p ${TMP_DIR}
+#mkdir -p ${NXF_SINGULARITY_CACHEDIR}
+
+module load singularity
+
+cd ${TMP_DIR}
+
+nextflow run ${GBRS_GITHUB_PATH} \
+         -r ${GBRS_VERSION} \
+         -profile sumner \
+         -w ${TMP_DIR} \
+         --workflow gbrs \
+         --pubdir ${OUT_DIR} \
+         --csv_input ${SAMPLE_META_FILE} \
+         -resume
+
+# Copy output files from OUT_DIR to DEST_DIR.
+DIRS=`(ls ${OUT_DIR})`
+
+for i in ${DIRS}
+do
+
+  cp ${OUT_DIR}/${i}/stats/* ${DEST_DIR}
+  cp ${OUT_DIR}/${i}/gbrs/*_counts ${DEST_DIR}
+  cp ${OUT_DIR}/${i}/gbrs/*.tsv ${DEST_DIR}
+  cp ${OUT_DIR}/${i}/gbrs/*.pdf ${DEST_DIR}
+
+done
+
+# Clean up tmp directory.
+rm -rf ${TMP_DIR}</code></pre>
+<p>For Diversity Outbred (DO) mice, the reference files are stored in
+the reference data directories <code>/projects/omics_share</code> on
+<em>sumner2</em>.</p>
+<p>JAX uses <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx" class="external-link">slurm</a>
+(NOTE: This is an internal JAX link which requires a JAX login.) to
+manage computing jobs on <em>sumner2</em>. There are several good
+tutorials on using <em>slurm</em> on the JAX <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx" class="external-link">Research
+IT Documentation Library</a>.</p>
+<div class="section level4">
+<h4 id="slurm-options-block">
+<em>slurm</em> Options Block<a class="anchor" aria-label="anchor" href="#slurm-options-block"></a>
+</h4>
+<p><em>slurm</em> scripts are <em>bash</em> scripts, so they start
+with:</p>
+<pre><code><span><span class="co">#!/bin/bash</span></span></code></pre>
+<p>Next, we use a <em>slurm</em> options block to tell <em>slurm</em>
+what computing resources we would like to use. You could pass
+<em>slurm</em> options in at the command line, but we recommend using an
+options block in your script so that you have a record of the resources
+required to run your job.</p>
+<p>Each line in the <em>slurm</em> options block starts with:</p>
+<pre><code><span><span class="co">#SBATCH</span></span></code></pre>
+<p>This tells <em>slurm</em> that what follows on this line is a
+<em>slurm</em> option. There are many <em>slurm</em> options, which are
+exhaustively enumerated in the <a href="https://slurm.schedmd.com/sbatch.html" class="external-link">slurm documentation</a>.
+Here we will use only a few of the options:</p>
+<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span>
+<span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
+<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span>
+<span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span>
+<span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
+<p>The first option specifies the job queue to use for this job. In this
+case, it is the “batch” queue on <em>sumner2</em>.</p>
+<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span></code></pre>
+<p>The next two options specify the number of nodes and number of CPUs
+(or cores) per node to use. In this case, we will use one node and one
+CPU. This may seem confusing because we would like to use many nodes and
+cores to reduce the total run time of our job. But Nextflow handles
+resource request. This script just starts the Nextflow job, which does
+not require many resources. If you request more nodes and CPUs here, you
+will only be tying up resources that will sit idle while your job run.
+So <strong>one</strong> node and <strong>one</strong> CPU per node are
+sufficient.</p>
+<pre><code><span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
+<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span></code></pre>
+<p>The next option specifies the memory required for this task. We will
+request one Gigabyte (G). Again, this may seem like a small amount of
+memory for a large computational job, but this is only the memeory
+required to start and manage the Nextflow job. Nextflow will request the
+resources that it needs to run GBRS.</p>
+<pre><code><span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span></code></pre>
+<p>The last option that we will specify is the total wall-clock time
+needed to complete the job. This needs to be the total amount of time
+required to complete the job. This can be difficult to estimate and
+depends upon the number of samples, depth of coverage, and the
+configuration and utilization of the cluster.</p>
+<pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
+</div>
+<div class="section level4">
+<h4 id="header-section">Header Section<a class="anchor" aria-label="anchor" href="#header-section"></a>
+</h4>
+<pre><code><span><span class="co">################################################################################</span></span>
+<span><span class="co"># Run GBRS on each sample. GRCm39. Ensembl 105.</span></span>
+<span><span class="co">#</span></span>
+<span><span class="co"># Daniel Gatti</span></span>
+<span><span class="co"># dan.gatti@jax.org</span></span>
+<span><span class="co"># 2022-09-28</span></span>
+<span><span class="co">################################################################################</span></span></code></pre>
+<p>This section is not required, but it allows you to add some comments
+about what are doing. It is also a consistent place to put your name,
+contact information, and the date. Putting your name and contact
+information helps to keep you accountable for the code. Putting the date
+in the header helps you to remember when you wrote the script.</p>
+</div>
+<div class="section level4">
+<h4 id="error-handling">Error Handling<a class="anchor" aria-label="anchor" href="#error-handling"></a>
+</h4>
+<pre><code>set -e -u -x -o pipefail</code></pre>
+<p>This commands tells <em>bash</em> to exit if any line of the script
+fails (-e), to catch uninitialized variables (-u), to print commands as
+we run (-x), and to<br>
+output the last exit code (-o).</p>
+</div>
+<div class="section level4">
+<h4 id="variable-section">Variable Section<a class="anchor" aria-label="anchor" href="#variable-section"></a>
+</h4>
+<p>We strongly recommend that you use <em>bash</em> variables to build
+file paths and specify arguments to the GBRS script. The reason for this
+is that it is easier to remember what each varible is when it is given a
+meaningful name.</p>
+<p>Consider this script which runs the “analysis_tool_of_science”:</p>
+<pre><code>analysis_tool_of_science -t 8 \
+  -g /path/to/another/file \
+  -a /really/long/path/to/yet/another/file \
+  -i /path/to/mystery/file/number1 /path/to/mystery/file/number2 \
+  -x /path/to/some/directory/on/the/cluster
+  -o /path/to/another/directory/with/a/file/prefix</code></pre>
+<p>You can read the tool’s documentation to find out what each file is,
+but that requires extra time. This script would be easier to read if the
+paths had meaningful names. In the code block below, we give each file a
+meaningful variable name and provide a comment explaining what each file
+is. We also use this opportunity to specify the genome and annotation
+builds.</p>
+<pre><code># FASTA file containing genome sequence for GRCm39.
+GENOME_FASTA=/path/to/another/file
+
+# GTF file containing genome annotation for Ensembl 105.
+ANNOTATION_GTF=/really/long/path/to/yet/another/file
+
+# Paths to the forward and reverse FASTQ files.
+FASTQ_FILE1=/path/to/mystery/file/number1
+FASTQ_FILE2=/path/to/mystery/file/number2
+
+# Path to temporary directory for analysis_tool.
+TEMP_DIR=/path/to/some/directory/on/the/cluster
+
+# Path to output file, with a file prefix.
+OUTPUT_PATH=/path/to/another/directory/with/a/file/prefix
+
+analysis_tool_of_science -t 8 \
+  -g ${GENOME_FASTA} \
+  -a ${ANNOTATION_GTF} \
+  -i $(FASTQ_FILE1} ${FASTQ_FILE2} \
+  -x ${TEMP_DIR}
+  -o ${OUTPUT_PATH}</code></pre>
+<p>This makes the script much easier for yourself (a year from now) and
+others to read and understand.</p>
+<p>First, we will focus on variables that set the location of your files
+and working directories.</p>
+<pre><code># Base directory for project.
+BASE_DIR=/projects/research_lab_directory/diabetes</code></pre>
+<p>We like to set a “base directory”, which is the high-level directory
+for the project on which you are working. In this case, we are using a
+diabetes project as an example. We use the base directory to create
+other file paths which are below this directory.</p>
+<pre><code># Sample metadata file.
+SAMPLE_META_FILE=${BASE_DIR}/data/sodo_gbrs_metadata.csv</code></pre>
+<p>This is the path to the sample metadata file, which contains
+information about your samples. This includies the sample ID, sex,
+outbreeding generation, sequencer lane, and paths to the forward and
+reverse FASTQ files. Each row will contain information for one
+sample.</p>
+<p>The <code>sampleID</code> column should contain values that you use
+to identify the samples.</p>
+<p>The <code>sex</code> column should contain the mouse’s sex recorded
+as ‘F’ for females or ‘M’ for males.</p>
+<p>The <code>generation</code> column should contain the outbreeding
+generation for the mouse.</p>
+<p>The <code>lane</code> column should contain the lane number on which
+the sample was run. This can sometimes be found in the FASTQ file name.
+In the example below, it is recorded as ‘L004’ in the FASTQ file names
+and this is what we used in the <code>lane</code> column.</p>
+<p>The <code>fastq_1</code> and <code>fastq_2</code> columns contain the
+full path to the forward and reverse FASTQ files. In this case, we
+copied the files to /flashscratch, which is the temporary sratch storage
+space for large files.</p>
+<p>Below is an example of the top of a sample metadata file. It is
+comma-delimited and has column names as the top.</p>
+<pre><code>sampleID,sex,generation,lane,fastq_1,fastq_2
+D2,F,46,L004,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R2_001.fastq.gz
+D3,F,46,L001,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R2_001.fastq.gz
+D4,F,46,L001,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R2_001.fastq.gz
+D5,F,46,L001,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R2_001.fastq.gz</code></pre>
+<p>Notice that we have copied the FASTQ files over to /flashscratch.
+This isn’t required but we do this to simplify the file paths.</p>
+<pre><code># Base /flashscratch directory.
+FLASHSCRATCH=/flashscratch/username</code></pre>
+<p>This is the path to your directory on /flashscratch. You should
+create this before you begin your analysis. And you should replace
+‘username’ with your username.</p>
+<pre><code># Temporary directory.
+TMP_DIR=${FLASHSCRATCH}/tmp</code></pre>
+<p>This is the path to the temporary directory where Nextflow and GBRS
+can store temporary working files during the analysis.</p>
+<pre><code># Output directory.
+OUT_DIR=${FLASHSCRATCH}/results</code></pre>
+<p>This is the directory where you would like GBRS to write your
+results. You should place this on /flashscratch and then copy the files
+that you need over to /projects when the analysis is complete.</p>
+<pre><code># Final results directory (in backed up space)
+DEST_DIR=${BASE_DIR}/results/gbrs</code></pre>
+<p>This is the directory to which you will copy your final results. It
+should be a location that is backed up (like /projects). Remember,
+/flashscratch is not backed up and your files will be deleted without
+notice after 10 days.</p>
+<p>Once you have set all of the paths and created your sample metadata
+file, you can submit the script to the <em>slurm</em> queue. Save the
+script to a file called ‘run_gbrs.sh’, and then submit it using
+‘sbatch’.</p>
+<pre><code>sbatch run_gbrs.sh</code></pre>
+</div>
+<div class="section level4">
+<h4 id="paired-end-versus-single-end-data">Paired-end versus Single-end Data<a class="anchor" aria-label="anchor" href="#paired-end-versus-single-end-data"></a>
+</h4>
+<p>The default settings in GBRS assume that you have paired-end
+sequencing data. If you have single-end data, you will need to make two
+changes.</p>
+<ol style="list-style-type: decimal">
+<li>Remove the “fast_2” column from your sample metadata file.</li>
+<li>Add the “–read_type SE” argument to your script.</li>
+</ol>
+</div>
+</div>
+<div class="section level3">
+<h3 id="gbrs-for-other-mouse-crosses">GBRS for Other Mouse Crosses<a class="anchor" aria-label="anchor" href="#gbrs-for-other-mouse-crosses"></a>
+</h3>
+<p>For Diversity Outbred (DO) mice, the reference files are stored in
+the reference data directories <code>/projects/omics_share</code> on
+<em>sumner2</em>. We will use these files as examples ot show you which
+arguments to provide.</p>
+<p>JAX uses <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx" class="external-link">slurm</a>
+(NOTE: This is an internal JAX link which requires a JAX login.) to
+manage computing jobs on <em>sumner2</em>. There are several good
+tutorials on using <em>slurm</em> on the JAX <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx" class="external-link">Research
+IT Documentation Library</a>.</p>
+<div class="section level4">
+<h4 id="slurm-options-block-1">
+<em>slurm</em> Options Block<a class="anchor" aria-label="anchor" href="#slurm-options-block-1"></a>
+</h4>
+<p><em>slurm</em> scripts are <em>bash</em> scripts, so they start
+with:</p>
+<pre><code><span><span class="co">#!/bin/bash</span></span></code></pre>
+<p>Next, we use a <em>slurm</em> options block to tell <em>slurm</em>
+what computing resources we would like to use. You could pass
+<em>slurm</em> options in at the command line, but we recommend using an
+options block in your script so that you have a record of the resources
+required to run your job.</p>
+<p>Each line in the <em>slurm</em> options block starts with:</p>
+<pre><code><span><span class="co">#SBATCH</span></span></code></pre>
+<p>This tells <em>slurm</em> that what follows on this line is a
+<em>slurm</em> option. There are many <em>slurm</em> options, which are
+exhaustively enumerated in the <a href="https://slurm.schedmd.com/sbatch.html" class="external-link">slurm documentation</a>.
+Here we will use only a few of the options:</p>
+<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span>
+<span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
+<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span>
+<span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span>
+<span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
+<p>The first option specifies the job queue to use for this job. In this
+case, it is the “batch” queue on <em>sumner2</em>.</p>
+<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span></code></pre>
+<p>The next two options specify the number of nodes and number of CPUs
+(or cores) per node to use. In this case, we will use one node and one
+CPU. This may seem confusing because we would like to use many nodes and
+cores to reduce the total run time of our job. But Nextflow handles
+resource request. This script just starts the Nextflow job, which does
+not require many resources. If you request more nodes and CPUs here, you
+will only be tying up resources that will sit idle while your job run.
+So <strong>one</strong> node and <strong>one</strong> CPU per node are
+sufficient.</p>
+<pre><code><span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
+<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span></code></pre>
+<p>The next option specifies the memory required for this task. We will
+request one Gigabyte (G). Again, this may seem like a small amount of
+memory for a large computational job, but this is only the memeory
+required to start and manage the Nextflow job. Nextflow will request the
+resources that it needs to run GBRS.</p>
+<pre><code><span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span></code></pre>
+<p>The last option that we will specify is the total wall-clock time
+needed to complete the job. This needs to be the total amount of time
+required to complete the job. This can be difficult to estimate and
+depends upon the number of samples, depth of coverage, and the
+configuration and utilization of the cluster.</p>
+<pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
+</div>
+<div class="section level4">
+<h4 id="header-section-1">Header Section<a class="anchor" aria-label="anchor" href="#header-section-1"></a>
+</h4>
+<p>This section is not required, but it allows you to add some comments
+about what are doing. It is also a consistent place to put your name,
+contact information, and the date. Putting your name and contact
+information helps to keep you accountable for the code. Putting the date
+in the header helps you to remember when you wrote the script.</p>
+<pre><code><span><span class="co">################################################################################</span></span>
+<span><span class="co"># Run GBRS on each sample.</span></span>
+<span><span class="co"># GRCm39. Ensembl 105.</span></span>
+<span><span class="co">#</span></span>
+<span><span class="co"># Daniel Gatti</span></span>
+<span><span class="co"># dan.gatti@jax.org</span></span>
+<span><span class="co"># 2022-09-28</span></span>
+<span><span class="co">################################################################################</span></span></code></pre>
+</div>
+<div class="section level4">
+<h4 id="variable-section-1">Variable Section<a class="anchor" aria-label="anchor" href="#variable-section-1"></a>
+</h4>
+<p>We strongly recommend that you use <em>bash</em> variables to build
+file paths and specify arguments to the GBRS script. The reason for this
+is that it is easier to remember what each varible is when it is given a
+meaningful name.</p>
+<p>Consider this script which runs the “analysis_tool_of_science”:</p>
+<pre><code>analysis_tool_of_science -t 8 \
+  -g /path/to/another/file \
+  -a /really/long/path/to/yet/another/file \
+  -i /path/to/mystery/file/number1 /path/to/mystery/file/number2 \
+  -x /path/to/some/directory/on/the/cluster
+  -o /path/to/another/directory/with/a/file/prefix</code></pre>
+<p>You can read the tool’s documentation to find out what each file is,
+but that requires extra time. It would be easier to read if the paths
+had meaningful names. In the code block below, we give each file a
+meaningful variable name and prrovide a comment explaining what each
+file is. We also use this opportunity to specify the genome and
+annotation builds.</p>
+<pre><code># FASTA file containing genome sequence for GRCm39.
+GENOME_FASTA=/path/to/another/file
+
+# GTF file containing genome annotation for Ensembl 105.
+ANNOTATION_GTF=/really/long/path/to/yet/another/file
+
+# Paths to the forward and reverse FASTQ files.
+FASTQ_FILE1=/path/to/mystery/file/number1
+FASTQ_FILE2=/path/to/mystery/file/number2
+
+# Path to temporary directory for analysis_tool.
+TEMP_DIR=/path/to/some/directory/on/the/cluster
+
+# Path to output file, with a file prefix.
+OUTPUT_PATH=/path/to/another/directory/with/a/file/prefix
+
+analysis_tool_of_science -t 8 \
+  -g ${GENOME_FASTA} \
+  -a ${ANNOTATION_GTF} \
+  -i $(FASTQ_FILE1} ${FASTQ_FILE2} \
+  -x ${TEMP_DIR}
+  -o ${OUTPUT_PATH}</code></pre>
+<p>This makes the script much easier for yourself (a year from now) and
+others to read and understand.</p>
+<p>The GBRS script has a lot of variables. We will explain each one so
+that you know what to use for your samples.</p>
+<p>In this first section, we will focus on variables that set the
+location of your files and working directories.</p>
+<pre><code># Base directory for project.
+BASE_DIR=/projects/research_lab_directory/diabetes</code></pre>
+<p>We like to set a “base directory”, which is the high-level directory
+for the project which you are working on. In this case, we are using a
+diabetes project as an example. We use the base directory to create
+other file paths which are below this directory.</p>
+<pre><code># Sample metadata file.
+SAMPLE_META_FILE=${BASE_DIR}/data/sodo_gbrs_metadata.csv</code></pre>
+<p>This is the path to the sample metadata file. This file contains
+information about your samples, including the sample ID, sex,
+outbreeding generation, sequencer lane, and paths to the forward and
+reverse FASTQ files. Each row will contain information for one
+sample.</p>
+<p>The <code>sampleID</code> should contain values that you use to
+identify the samples.</p>
+<p>The <code>sex</code> column should contain the mouse’s sex recorded
+as ‘F’ for females or ‘M’ for males.</p>
+<p>The <code>generation</code> column should contain the outbreeding
+generation for the mouse.</p>
+<p>The <code>lane</code> column should contain the lane number on which
+the sample was run. This can sometimes be found in the FASTQ file name.
+In the example below, it is recorded as ‘L004’ in the FASTQ file names
+and this is what we used in the <code>lane</code> column.</p>
+<p>The <code>fastq_1</code> and <code>fastq_2</code> columns contain the
+full path to the forward and reverse FASTQ files. In this case, we
+copied the files to /flashscratch, which is the temporary scratch
+storage space for large files.</p>
+<pre><code>sampleID,sex,generation,lane,fastq_1,fastq_2
+D2,F,46,L004,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R2_001.fastq.gz
+D3,F,46,L001,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R2_001.fastq.gz
+D4,F,46,L001,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R2_001.fastq.gz
+D5,F,46,L001,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R2_001.fastq.gz</code></pre>
+<pre><code># Base /flashscratch directory.
+FLASHSCRATCH=/flashscratch/username</code></pre>
+<p>This is the path to your directory on /flashscratch. You should
+create this before you begin your analysis.</p>
+<pre><code># Temporary directory.
+TMP_DIR=${FLASHSCRATCH}/tmp</code></pre>
+<p>This is the path to the temporary directory where Nextflow and GBRS
+can store temporary working files during the analysis.</p>
+<pre><code># Output directory.
+OUT_DIR=${FLASHSCRATCH}/results</code></pre>
+<p>This is the directory where you would like GBRS to write your
+results. You should place this on /flashscratch and then copy the files
+that you need over to /projects when the analysis is complete.</p>
+<pre><code># Final results directory (in backed up space)
+DEST_DIR=${BASE_DIR}/results/gbrs</code></pre>
+<p>This is the directory to which you will copy your final results. It
+should be a location that is backed up (like /projects). Remember,
+/flashscratch is not backed up and your files will be deleted without
+notice after 10 days.</p>
+<p>In the next section, we will focus on the reference files that are
+required by GBRS.</p>
+<pre><code># GBRS Reference File Directory
+GBRS_REF_DIR=/projects/omics_share/mouse/GRCm39/supporting_files/emase_gbrs/rel_2112_v8</code></pre>
+<p>This is the directory where the GBRS reference files are stored.
+These are a series of files which contain information about genes and
+transcripts in the eight DO founder strains. The numbers in the
+directory refere to the <a href="https://www.sanger.ac.uk/data/mouse-genomes-project/" class="external-link">Sanger Mouse
+Genomes Project</a> release. “2112” refers to the 12th month of 2021.
+“v8” refers to version 8 of their genetic variant release.</p>
+<p>There are eight arguments that point to the reference files used by
+GBRS.</p>
+<pre><code># GBRS Transcripts.
+GBRS_TRANSCRIPTS=${GBRS_REF_DIR}/emase.fullTranscripts.info</code></pre>
+<p>This file contains the list of transcripts in Ensembl 105 that GBRS
+will quantify.</p>
+<pre><code># GBRS/EMASE gene to transcript file.
+GBRS_GENE2TRANS=${GBRS_REF_DIR}/emase.gene2transcripts.tsv</code></pre>
+<p>This file contains the list of transcripts which map to each gene.
+Each row contains one gene, followed by its associated Ensembl
+transcripts.</p>
+<pre><code># GBRS Full Transcript.
+GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info</code></pre>
+<p>This file contains a list of transcript lengths in each of the eight
+DO founders.</p>
+<pre><code># GBRS Emission Probs.
+GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz</code></pre>
+<p>This file contains the allele emission probabilities for the hidden
+Markov model. These are used at each gene to estimate the probability
+that a given allele is obsered, given that the model is in a certain
+genotype state.</p>
+<pre><code># GBRS Transmission Probs.
+GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities</code></pre>
+<p>This directory contains the transmission probabilities for the hidden
+Markov model. There are many files in this directory, one for each DO
+outbreeding generation. Each file contains the probability of changing
+genotype state between each gene at a given DO outbreeding
+generation.</p>
+<pre><code># Ensembl 105 gene positions.
+ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz</code></pre>
+<p>This file contains the Ensembl 105 gene positions in a python
+format.</p>
+<pre><code># GBRS 69K Marker Grid.
+MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv</code></pre>
+<p>This file contains the pseudomarker genome grid which is used to
+report results. Each tissue expresses different gene, which leads GBRS
+to estimate genotypes at different genomic positions in each tissue. In
+order to standardize results, GBRS interpolates its founder haplotype
+estimates to a common grid of 74,165 positions.</p>
+<pre><code># Bowtie index for GBRS.
+BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts</code></pre>
+<p>This is the path to the bowtie index files. There are multiple files
+and this variable should contain the directory and the file prefix for
+the index files. In this case, the file prefix is “bowtie.transcripts”
+and the files are named “bowtie.transcripts.1.ewbt”,
+“bowtie.transcripts.2.ewbt”, etc.</p>
+<pre><code><span><span class="co"># GBRS path.</span></span>
+<span><span class="va">GBRS_GITHUB_PATH</span><span class="op">=</span><span class="va">TheJacksonLaboratory</span><span class="op">/</span><span class="va">cs</span><span class="op">-</span><span class="va">nf</span><span class="op">-</span><span class="va">pipelines</span></span></code></pre>
+<p>This is the Github path to the Computational Science
+<code>nextflow</code> pipelines.</p>
+<pre><code># Singularity cache directory.
+export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache</code></pre>
+<p>This is the cache directory where Singularity will store containers
+which it downloads during the analysis run.</p>
+</div>
+<div class="section level4">
+<h4 id="entire-gbrs-script">Entire GBRS Script<a class="anchor" aria-label="anchor" href="#entire-gbrs-script"></a>
+</h4>
+<p>Here is the whole script in one piece.</p>
+<pre><code>#!/bin/bash
+#SBATCH --qos=batch       # job queue
+#SBATCH --ntasks=1        # number of nodes
+#SBATCH --cpus-per-task=1 # number of cores
+#SBATCH --mem=1G          # memory pool for all cores
+#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)
+
+################################################################################
+# Run GBRS on each sample.
+# GRCm39. Ensembl 105.
+#
+# Daniel Gatti
+# dan.gatti@jax.org
+# 2022-09-28
+################################################################################
+
+
+##### VARIABLES #####
+
+# Base directory for project.
+BASE_DIR=/projects/bolcun-filas-lab/DO_Superovulation
+
+# Sample metadata file.
+SAMPLE_META_FILE=${BASE_DIR}/gbrs_sample_metadata.csv
+
+# Base /flashscratch directory.
+FLASHSCRATCH=/flashscratch/dgatti
+
+# Temporary directory.
+TMP_DIR=${FLASHSCRATCH}/tmp
+
+# Output directory.
+OUT_DIR=${FLASHSCRATCH}/results
+
+# Final results directory (in backed up space)
+DEST_DIR=${BASE_DIR}/results/gbrs/grcm39
+
+# GBRS Reference File Directory
+GBRS_REF_DIR=/projects/churchill-lab/projects/GBRS_GRCm39
+
+# GBRS Transcripts.
+GBRS_TRANSCRIPTS=${GBRS_REF_DIR}/emase.fullTranscripts.info
+
+# GBRS/EMASE gene to transcript file.
+GBRS_GENE2TRANS=${GBRS_REF_DIR}/emase.gene2transcripts.tsv
+
+# GBRS Full Transcript.
+GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info
+
+# GBRS Emission Probs.
+GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz
+
+# GBRS Transmission Probs.
+GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities
+
+# Ensembl 105 gene positions.
+ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz
+
+# GBRS 69K Marker Grid.
+MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv
+
+# Bowtie index for GBRS.
+BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts
+
+# GBRS path.
+GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines
+
+# Singularity cache directory.
+export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache
+
+
+##### MAIN #####
+
+mkdir -p ${OUT_DIR}
+mkdir -p ${DEST_DIR}
+mkdir -p ${TMP_DIR}
+mkdir -p ${NXF_SINGULARITY_CACHEDIR}
+
+module load singularity
+
+cd ${TMP_DIR}
+
+nextflow run ${GBRS_GITHUB_PATH} \
+         -profile sumner \
+         --workflow gbrs \
+         --pubdir ${OUT_DIR} \
+         -w ${TMP_DIR} \
+         --bowtie_index ${BOWTIE_INDEX} \
+         --csv_input ${SAMPLE_META_FILE} \
+         --transcripts_info ${GBRS_TRANSCRIPTS} \
+         --gene2transcript_csv ${GBRS_GENE2TRANS} \
+         --full_transcript_info ${GBRS_FULL_TRANSCRIPTS} \
+         --emission_prob_avecs ${GBRS_EMIS_PROBS} \
+         --trans_prob_dir ${GBRS_TRANS_PROBS} \
+         --gene_position_file ${ENSEMBL_105} \
+         --genotype_grid ${MARKER_GRID} \
+         -resume
+
+# Copy output files from OUT_DIR to DEST_DIR.
+DIRS=`ls ${OUT_DIR}`
+
+for i in ${DIRS}
+do
+
+  CURR_DEST_DIR=${DEST_DIR}/$i
+
+  mkdir -p ${CURR_DEST_DIR}
+  cp ${OUT_DIR}/${i}/stats/* ${CURR_DEST_DIR}
+  cp ${OUT_DIR}/${i}/gbrs/*_counts ${CURR_DEST_DIR}
+  cp ${OUT_DIR}/${i}/gbrs/*.tsv ${CURR_DEST_DIR}
+  cp ${OUT_DIR}/${i}/gbrs/*.pdf ${CURR_DEST_DIR}
+
+done</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="gbrs-output">GBRS Output<a class="anchor" aria-label="anchor" href="#gbrs-output"></a>
+</h3>
+<p>GBRS will create one output directory per sample. Each directory will
+be named with the sample ID and will contain <strong>NNN</strong> files.
+In the table below, we denote the sample ID as <sample>. The sample ID
+is prepended to each file name.</sample></p>
+<p>Each sample directory will contain three directories:</p>
+<ul>
+<li>emase</li>
+<li>gbrs</li>
+<li>stats</li>
+</ul>
+<p>We will look at the contents of each directory one at a time.</p>
+<div class="section level4">
+<h4 id="emase-directory">emase Directory<a class="anchor" aria-label="anchor" href="#emase-directory"></a>
+</h4>
+<pre><code>2.merged.compressed.emase.h5
+2.multiway.genes.alignment_counts
+2.multiway.genes.expected_read_counts
+2.multiway.genes.tpm
+2.multiway.isoforms.alignment_counts
+2.multiway.isoforms.expected_read_counts
+2.multiway.isoforms.tpm</code></pre>
+</div>
+<div class="section level4">
+<h4 id="gbrs-directory">gbrs Directory<a class="anchor" aria-label="anchor" href="#gbrs-directory"></a>
+</h4>
+<pre><code>2.merged.compressed.emase.h5
+2.multiway.genes.alignment_counts
+2.multiway.genes.expected_read_counts
+2.multiway.genes.tpm
+2.multiway.isoforms.alignment_counts
+2.multiway.isoforms.expected_read_counts
+2.multiway.isoforms.tpm
+[c-dgatti@sumner-log1 2]$ ls -1 gbrs/
+2.diploid.genes.alignment_counts
+2.diploid.genes.expected_read_counts
+2.diploid.genes.tpm
+2.diploid.isoforms.alignment_counts
+2.diploid.isoforms.expected_read_counts
+2.diploid.isoforms.tpm
+2.gbrs.interpolated.genoprobs.npz
+2.gbrs.interpolated.genoprobs.tsv
+2.gbrs.plotted.genome.pdf
+2.genotypes.tsv</code></pre>
+</div>
+<div class="section level4">
+<h4 id="stats-directory">stats Directory<a class="anchor" aria-label="anchor" href="#stats-directory"></a>
+</h4>
+<pre><code>&lt;SAMPLE&gt;.bowtie_R1.log
+&lt;SAMPLE&gt;.bowtie_R2.log</code></pre>
+<p>These are the alignment log files generated by the <a href="https://bowtie-bio.sourceforge.net/index.shtml" class="external-link">Bowtie 1</a>
+aligner. Each file contains alignment statistics, such as the number of
+reads processed and the number of alignments. An example file is shown
+below:</p>
+<pre><code># reads processed: 41617615
+# reads with at least one alignment: 35083649 (84.30%)
+# reads that failed to align: 6533966 (15.70%)
+Reported 415621849 alignments</code></pre>
+<p>In this case, there were a total of 41,617,615 reads. The corresponds
+to the number of reads in the input FASTQ file. 35,083,649 (84.30% of
+the total reads) aligned to at least one location in the genome. Note
+that some of these may have aligned to multiple locations. 6,533,966
+(15.70% of the total reads) did not align to the genome with sufficient
+accuracy to use. The total number of alignments was 415,621,849, which
+is an order or magnitude higher than the number of reads. This is
+because each read may align to the genome more than once.</p>
+<table class="table">
+<colgroup>
+<col width="29%">
+<col width="35%">
+<col width="35%">
+</colgroup>
+<thead><tr class="header">
+<th>File Name</th>
+<th>File Format</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><sample>.bowtie_R1.log</sample></td>
+<td>Text</td>
+<td>Bowtie 1 alignment log file for read 1</td>
+</tr>
+<tr class="even">
+<td><sample>.bowtie_R2.log</sample></td>
+<td>Text</td>
+<td>Bowtie 1 alignment log file for read 2</td>
+</tr>
+<tr class="odd">
+<td><sample>.diploid.genes.alignment_counts</sample></td>
+<td>Tab-delimited</td>
+<td>Founder allele-specific gene alignment counts</td>
+</tr>
+<tr class="even">
+<td><sample>.diploid.genes.expected_read_counts</sample></td>
+<td>Tab-delimited</td>
+<td>Founder allele-specific expected gene counts</td>
+</tr>
+<tr class="odd">
+<td><sample>.diploid.isoforms.alignment_counts</sample></td>
+<td>Tab-delimited</td>
+<td>Founder allele-specific transcript isoform alignment counts</td>
+</tr>
+<tr class="even">
+<td><sample>.diploid.isoforms.expected_read_counts</sample></td>
+<td>Tab-delimited</td>
+<td>Founder allele-specific expected transcript isoform counts</td>
+</tr>
+<tr class="odd">
+<td><sample>.gbrs.interpolated.genoprobs.tsv</sample></td>
+<td>Tab-delimited</td>
+<td>Estimated founder allele probabilities</td>
+</tr>
+<tr class="even">
+<td><sample>.gbrs.plotted.genome.pdf</sample></td>
+<td>PDF</td>
+<td>Karyogram of estimated founder allele probabilities</td>
+</tr>
+<tr class="odd">
+<td><sample>.genotypes.tsv</sample></td>
+<td>Tab-delimited</td>
+<td>Founder diplotype calls at each gene</td>
+</tr>
+<tr class="even">
+<td><sample>. BAM file</sample></td>
+<td>Binary alignment map</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Below, we review each output file in greater detail.</p>
+</div>
+<div class="section level4">
+<h4 id="founder-allele-specific-gene-alignment-counts">Founder Allele-specific Gene Alignment Counts<a class="anchor" aria-label="anchor" href="#founder-allele-specific-gene-alignment-counts"></a>
+</h4>
+<p><sample>.diploid.genes.alignment_counts</sample></p>
+<p>This file contains the counts for each of the eight DO founder
+alleles for each gene. There is one row per gene and 18 columns. An
+example of the top of one file is shown below.</p>
+<pre><code>locus   aln_A   aln_B   aln_C   aln_D   aln_E   aln_F   aln_G   aln_H   uniq_A  uniq_B  uniq_C  uniq_D  uniq_E  uniq_F  uniq_G  uniq_H  locus_uniq
+ENSMUSG00000000001      12124.0 12124.0 12124.0 12124.0 5066.0  9349.0  5751.0  12124.0 0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     12126.0
+ENSMUSG00000000003      0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0
+ENSMUSG00000000028      721.0   721.0   721.0   721.0   721.0   676.0   713.0   602.0   0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     721.0
+ENSMUSG00000000031      464.0   464.0   464.0   464.0   464.0   298.0   241.0   464.0   0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     464.0
+ENSMUSG00000000037      135.0   135.0   135.0   133.0   135.0   95.0    94.0    115.0   0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     137.0
+ENSMUSG00000000049      42.0    42.0    42.0    42.0    42.0    20.0    32.0    39.0    0.0     0.0     0.0     0.0     0.0     16.0    0.0     0.0     58.0
+ENSMUSG00000000056      1453.0  1453.0  1324.0  1453.0  1453.0  844.0   776.0   1454.0  0.0     0.0     0.0     0.0     0.0     0.0     4.0     39.0    1506.0
+ENSMUSG00000000058      1750.0  1972.0  1802.0  1972.0  1750.0  1055.0  674.0   252.0   0.0     0.0     0.0     0.0     0.0     2.0     0.0     0.0     1977.0
+ENSMUSG00000000078      4255.0  4255.0  4255.0  4255.0  3951.0  4093.0  3189.0  3398.0  0.0     0.0     0.0     0.0     633.0   0.0     9.0     12.0    5134.0</code></pre>
+<p>For each gene, the number of gene counts for each founder allele is
+shown in the columns which start with “aln”. The “aln” columns contains
+the estimated gene counts for reads which aligned to each of the 8
+founder transcriptomes. The columns which begin wit “uniq” contains gene
+counts for reads which aligned uniquely to one of the 8 founder
+transcriptomes. The “locus_uniq” column contains ????.</p>
+</div>
+<div class="section level4">
+<h4 id="section"></h4>
+<pre><code>&lt;SAMPLE&gt;.diploid.genes.expected_read_counts</code></pre>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul>
+<li>GBRS produces several output file for each sample.</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</div>
+</div>
 </section></section><section id="aio-prepare-pseudo-reference"><p>Content from <a href="prepare-pseudo-reference.html">Preparing GBRS Pseudo-References</a></p>
 <hr>
-<p>Last updated on 2024-03-27 |
+<p>Last updated on 2024-09-06 |
 
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-pseudo-reference.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 75 minutes</p>
@@ -1067,7 +1950,7 @@ Strains<a class="anchor" aria-label="anchor" href="#creating-pseudo-reference-ge
 </h2>
 <hr class="half-width">
 <p>If you are working with a cross comprised of other strains, you can
-change the ’–strain</p>
+change the “–strain” argument.</p>
 <div id="challenge-1-viewing-strain-names-in-a-vcf" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1090,7 +1973,7 @@ SNP VCF header and find the strain names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Output </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -1192,14 +2075,15 @@ cross.</p>
 <pre><code>VCF_INDELS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
 VCF_SNPS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz</code></pre>
 <p>Next, we need to pass in the name of the strain for which we are
-creating the VCI file. In this case, we will use DBA/2J.</p>
+creating the VCI file. In this case, we will use DBA/2J. The strain name
+must exactly match the strain name in the VCF.</p>
 <pre><code><span><span class="va">STRAIN</span><span class="op">=</span><span class="va">DBA_2J</span></span></code></pre>
 <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>This Challenge is used in above as well in “Creating Pseudo-Reference
 Genomes and Transcriptomes for Other Strains”.</p>
@@ -1229,7 +2113,7 @@ SNP VCF header and find the strain names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Output </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -1488,9 +2372,6 @@ sequence, and</li>
 <li>the strain-specific GTF file, which contains the strain’s inferred
 annotation.</li>
 </ul>
-<blockquote>
-<p>DMG: Stopped here.</p>
-</blockquote>
 <div id="challenge-3-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1509,7 +2390,7 @@ an entire script on your compute instance to run the commands above</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Output </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1789,898 +2670,6 @@ arguments:</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-run-gbrs"><p>Content from <a href="run-gbrs.html">Running GBRS</a></p>
-<hr>
-<p>Last updated on 2024-03-25 |
-
-        <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 120 minutes</p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>How do I run GBRS on my FASTQ files at JAX?</li>
-<li>How do I run GBRS on my FASTQ files at another institution?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>At JAX: analyze FASTQ files using GBRS on the High Performance
-Computing cluster.</li>
-<li>At other institutions: configure Nexflow and the reference files and
-analyze FASTQ files using GBRS.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section><h2 class="section-heading" id="at-the-jackson-laboratory-jax">At the Jackson Laboratory (JAX)<a class="anchor" aria-label="anchor" href="#at-the-jackson-laboratory-jax"></a>
-</h2>
-<hr class="half-width">
-<p>The GBRS Nextflow pipeline is configured to run on <em>sumner2</em>,
-the High Performance Computing (HPC) cluster at JAX.</p>
-<p>We will consider two scenarios:</p>
-<ol style="list-style-type: decimal">
-<li>You are analyzing expression data from Diversity Outbred mice;</li>
-<li>You are analyzing expression data from some other cross;</li>
-</ol>
-<div class="section level3">
-<h3 id="gbrs-for-diversity-outbred-mice">GBRS for Diversity Outbred Mice<a class="anchor" aria-label="anchor" href="#gbrs-for-diversity-outbred-mice"></a>
-</h3>
-<p>The Next-Generation Operations (NGSOps) team has configured the
-default arrguments for the GBRS Nextflow pipeline to use the reference
-files for GRCm39 and Ensembl version 105. This means that the arguments
-that point GBRS to the locations of the founder genomes, founder
-transcriptomes, and aligner indices are already set.</p>
-<p>Here is the entire script:</p>
-<pre><code>#!/bin/bash
-#SBATCH --qos=batch # job queue
-#SBATCH --ntasks=1 # number of nodes
-#SBATCH --cpus-per-task=1 # number of cores
-#SBATCH --mem=1G # memory pool for all cores
-#SBATCH --time=48:00:00 # wall clock time (D-HH:MM)
-
-################################################################################
-# Run GBRS on each sample. GRCm39. Ensembl 105.
-#
-# Daniel Gatti
-# dan.gatti@jax.org
-# 2022-09-28
-################################################################################
-
-set -e -u -x -o pipefail
-
-
-##### VARIABLES #####
-
-# Base directory for project.
-BASE_DIR=/projects/research_lab_directory/diabetes
-
-# Sample metadata file.
-SAMPLE_META_FILE=${BASE_DIR}/data/gbrs_sample_metadata.csv
-
-# Base /flashscratch directory.
-FLASHSCRATCH=/flashscratch/dgatti
-
-# Temporary working directory.
-TMP_DIR=${FLASHSCRATCH}/tmp
-
-# Temporary output directory.
-OUT_DIR=${FLASHSCRATCH}/results
-
-# Final results directory (in backed up space)
-DEST_DIR=${BASE_DIR}/results
-
-# GBRS path.
-GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines
-
-# GBRS version on Github.
-GBRS_VERSION=v0.4.2
-
-# Singularity cache directory.
-#export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache
-
-##### MAIN #####
-
-
-mkdir -p ${OUT_DIR}
-mkdir -p ${DEST_DIR}
-mkdir -p ${TMP_DIR}
-#mkdir -p ${NXF_SINGULARITY_CACHEDIR}
-
-module load singularity
-
-cd ${TMP_DIR}
-
-nextflow run ${GBRS_GITHUB_PATH} \
-         -r ${GBRS_VERSION} \
-         -profile sumner \
-         -w ${TMP_DIR} \
-         --workflow gbrs \
-         --pubdir ${OUT_DIR} \
-         --csv_input ${SAMPLE_META_FILE} \
-         -resume
-
-# Copy output files from OUT_DIR to DEST_DIR.
-DIRS=`(ls ${OUT_DIR})`
-
-for i in ${DIRS}
-do
-
-  cp ${OUT_DIR}/${i}/stats/* ${DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*_counts ${DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*.tsv ${DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*.pdf ${DEST_DIR}
-
-done
-
-# Clean up tmp directory.
-rm -rf ${TMP_DIR}</code></pre>
-<p>For Diversity Outbred (DO) mice, the reference files are stored in
-the reference data directories <code>/projects/omics_share</code> on
-<em>sumner2</em>.</p>
-<p>JAX uses <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx" class="external-link">slurm</a>
-(NOTE: This is an internal JAX link which requires a JAX login.) to
-manage computing jobs on <em>sumner2</em>. There are several good
-tutorials on using <em>slurm</em> on the JAX <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx" class="external-link">Research
-IT Documentation Library</a>.</p>
-<div class="section level4">
-<h4 id="slurm-options-block">
-<em>slurm</em> Options Block<a class="anchor" aria-label="anchor" href="#slurm-options-block"></a>
-</h4>
-<p><em>slurm</em> scripts are <em>bash</em> scripts, so they start
-with:</p>
-<pre><code><span><span class="co">#!/bin/bash</span></span></code></pre>
-<p>Next, we use a <em>slurm</em> options block to tell <em>slurm</em>
-what computing resources we would like to use. You could pass
-<em>slurm</em> options in at the command line, but we recommend using an
-options block in your script so that you have a record of the resources
-required to run your job.</p>
-<p>Each line in the <em>slurm</em> options block starts with:</p>
-<pre><code><span><span class="co">#SBATCH</span></span></code></pre>
-<p>This tells <em>slurm</em> that what follows on this line is a
-<em>slurm</em> option. There are many <em>slurm</em> options, which are
-exhaustively enumerated in the <a href="https://slurm.schedmd.com/sbatch.html" class="external-link">slurm documentation</a>.
-Here we will use only a few of the options:</p>
-<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span>
-<span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
-<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span>
-<span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span>
-<span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
-<p>The first option specifies the job queue to use for this job. In this
-case, it is the “batch” queue on <em>sumner2</em>.</p>
-<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span></code></pre>
-<p>The next two options specify the number of nodes and number of CPUs
-(or cores) per node to use. In this case, we will use one node and one
-CPU. This may seem confusing because we would like to use many nodes and
-cores to reduce the total run time of our job. But Nextflow handles
-resource request. This script just starts the Nextflow job, which does
-not require many resources. If you request more nodes and CPUs here, you
-will only be tying up resources that will sit idle while your job run.
-So <strong>one</strong> node and <strong>one</strong> CPU per node are
-sufficient.</p>
-<pre><code><span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
-<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span></code></pre>
-<p>The next option specifies the memory required for this task. We will
-request one Gigabyte (G). Again, this may seem like a small amount of
-memory for a large computational job, but this is only the memeory
-required to start and manage the Nextflow job. Nextflow will request the
-resources that it needs to run GBRS.</p>
-<pre><code><span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span></code></pre>
-<p>The last option that we will speicify is the total wall-clock time
-needed to complete the job. This needs to be the total amount of time
-required to complete the job. This can be difficult to estimate and
-depends upon the number of samples, depth of coverage, and the
-configuration and utilization of the cluster.</p>
-<blockquote>
-<p>DMG: TBD: Should we run 50, 100, 200 &amp; 300 samples and include a
-time/samples plot? I have 350 samples that we could use for this. It’s
-not going to be linear with more samples, but it’s something.</p>
-</blockquote>
-<pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="header-section">Header Section<a class="anchor" aria-label="anchor" href="#header-section"></a>
-</h4>
-<pre><code><span><span class="co">################################################################################</span></span>
-<span><span class="co"># Run GBRS on each sample. GRCm39. Ensembl 105.</span></span>
-<span><span class="co">#</span></span>
-<span><span class="co"># Daniel Gatti</span></span>
-<span><span class="co"># dan.gatti@jax.org</span></span>
-<span><span class="co"># 2022-09-28</span></span>
-<span><span class="co">################################################################################</span></span></code></pre>
-<p>This section is not required, but it allows you to add some comments
-about what are doing. It is also a consistent place to put your name,
-contact information, and the date. Putting your name and contact
-information helps to keep you accountable for the code. Putting the date
-in the header helps you to remember when you wrote the script.</p>
-</div>
-<div class="section level4">
-<h4 id="error-handling">Error Handling<a class="anchor" aria-label="anchor" href="#error-handling"></a>
-</h4>
-<pre><code>set -e -u -x -o pipefail</code></pre>
-<p>This commands tells <em>bash</em> to exit if any line of the script
-fails (-e), to catch uninitialized variables (-u), to print commands as
-we run (-x), and to<br>
-output the last exit code (-o).</p>
-</div>
-<div class="section level4">
-<h4 id="variable-section">Variable Section<a class="anchor" aria-label="anchor" href="#variable-section"></a>
-</h4>
-<p>We strongly recommend that you use <em>bash</em> variables to build
-file paths and specify arguments to the GBRS script. The reason for this
-is that it is easier to remember what each varible is when it is given a
-meaningful name.</p>
-<p>Consider this script which runs the “analysis_tool_of_science”:</p>
-<pre><code>analysis_tool_of_science -t 8 \
-  -g /path/to/another/file \
-  -a /really/long/path/to/yet/another/file \
-  -i /path/to/mystery/file/number1 /path/to/mystery/file/number2 \
-  -x /path/to/some/directory/on/the/cluster
-  -o /path/to/another/directory/with/a/file/prefix</code></pre>
-<p>You can read the tool’s documentation to find out what each file is,
-but that requires extra time. This script would be easier to read if the
-paths had meaningful names. In the code block below, we give each file a
-meaningful variable name and provide a comment explaining what each file
-is. We also use this opportunity to specify the genome and annotation
-builds.</p>
-<pre><code># FASTA file containing genome sequence for GRCm39.
-GENOME_FASTA=/path/to/another/file
-
-# GTF file containing genome annotation for Ensembl 105.
-ANNOTATION_GTF=/really/long/path/to/yet/another/file
-
-# Paths to the forward and reverse FASTQ files.
-FASTQ_FILE1=/path/to/mystery/file/number1
-FASTQ_FILE2=/path/to/mystery/file/number2
-
-# Path to temporary directory for analysis_tool.
-TEMP_DIR=/path/to/some/directory/on/the/cluster
-
-# Path to output file, with a file prefix.
-OUTPUT_PATH=/path/to/another/directory/with/a/file/prefix
-
-analysis_tool_of_science -t 8 \
-  -g ${GENOME_FASTA} \
-  -a ${ANNOTATION_GTF} \
-  -i $(FASTQ_FILE1} ${FASTQ_FILE2} \
-  -x ${TEMP_DIR}
-  -o ${OUTPUT_PATH}</code></pre>
-<p>This makes the script much easier for yourself (a year from now) and
-others to read and understand.</p>
-<p>First, we will focus on variables that set the location of your files
-and working directories.</p>
-<pre><code># Base directory for project.
-BASE_DIR=/projects/research_lab_directory/diabetes</code></pre>
-<p>We like to set a “base directory”, which is the high-level directory
-for the project on which you are working. In this case, we are using a
-diabetes project as an example. We use the base directory to create
-other file paths which are below this directory.</p>
-<pre><code># Sample metadata file.
-SAMPLE_META_FILE=${BASE_DIR}/data/sodo_gbrs_metadata.csv</code></pre>
-<p>This is the path to the sample metadata file, which contains
-information about your samples. This includies the sample ID, sex,
-outbreeding generation, sequencer lane, and paths to the forward and
-reverse FASTQ files. Each row will contain information for one
-sample.</p>
-<p>The <code>sampleID</code> column should contain values that you use
-to identify the samples.</p>
-<p>The <code>sex</code> column should contain the mouse’s sex recorded
-as ‘F’ for females or ‘M’ for males.</p>
-<p>The <code>generation</code> column should contain the outbreeding
-generation for the mouse.</p>
-<p>The <code>lane</code> column should contain the lane number on which
-the sample was run. This can sometimes be found in the FASTQ file name.
-In the example below, it is recorded as ‘L004’ in the FASTQ file names
-and this is what we used in the <code>lane</code> column.</p>
-<p>The <code>fastq_1</code> and <code>fastq_2</code> columns contain the
-full path to the forward and reverse FASTQ files. In this case, we
-copied the files to /flashscratch, which is the temporary sratch storage
-space for large files.</p>
-<p>Below is an example of the top of a sample metadata file. It is
-comma-delimited and has column names as the top.</p>
-<pre><code>sampleID,sex,generation,lane,fastq_1,fastq_2
-D2,F,46,L004,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R2_001.fastq.gz
-D3,F,46,L001,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R2_001.fastq.gz
-D4,F,46,L001,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R2_001.fastq.gz
-D5,F,46,L001,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R2_001.fastq.gz</code></pre>
-<p>Notice that we have copied the FASTQ files over to /flashscratch.
-This isn’t required but we do this to simplify the file paths.</p>
-<pre><code># Base /flashscratch directory.
-FLASHSCRATCH=/flashscratch/username</code></pre>
-<p>This is the path to your directory on /flashscratch. You should
-create this before you begin your analysis. And you should replace
-‘username’ with your username.</p>
-<pre><code># Temporary directory.
-TMP_DIR=${FLASHSCRATCH}/tmp</code></pre>
-<p>This is the path to the temporary directory where Nextflow and GBRS
-can store temporary working files during the analysis.</p>
-<pre><code># Output directory.
-OUT_DIR=${FLASHSCRATCH}/results</code></pre>
-<p>This is the directory where you would like GBRS to write your
-results. You should place this on /flashscratch and then copy the files
-that you need over to /projects when the analysis is complete.</p>
-<pre><code># Final results directory (in backed up space)
-DEST_DIR=${BASE_DIR}/results/gbrs</code></pre>
-<p>This is the directory to which you will copy your final results. It
-should be a location that is backed up (like /projects). Remember,
-/flashscratch is not backed up and your files will be deleted without
-notice after 10 days.</p>
-<p>Once you have set all of the paths and created your sample metadata
-file, you can submit the script to the <em>slurm</em> queue. Save the
-script to a file called ‘run_gbrs.sh’, and then submit it using
-‘sbatch’.</p>
-<pre><code>sbatch run_gbrs.sh</code></pre>
-</div>
-<div class="section level4">
-<h4 id="paired-end-versus-single-end-data">Paired-end versus Single-end Data<a class="anchor" aria-label="anchor" href="#paired-end-versus-single-end-data"></a>
-</h4>
-<p>The default settings in GBRS assume that you have paired-end
-sequencing data. If you have single-end data, you will need to make two
-changes.</p>
-<ol style="list-style-type: decimal">
-<li>Remove the “fast_2” column from your sample metadata file.</li>
-<li>Add the “–read_type SE” argument to your script.</li>
-</ol>
-</div>
-</div>
-<div class="section level3">
-<h3 id="gbrs-for-other-mouse-crosses">GBRS for Other Mouse Crosses<a class="anchor" aria-label="anchor" href="#gbrs-for-other-mouse-crosses"></a>
-</h3>
-<p>For Diversity Outbred (DO) mice, the reference files are stored in
-the reference data directories <code>/projects/omics_share</code> on
-<em>sumner2</em>. We will use these files as examples ot show you which
-arguments to provide.</p>
-<p>JAX uses <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Submitting-Basic-Jobs-with-SLURM.aspx" class="external-link">slurm</a>
-(NOTE: This is an internal JAX link which requires a JAX login.) to
-manage computing jobs on <em>sumner2</em>. There are several good
-tutorials on using <em>slurm</em> on the JAX <a href="https://jacksonlaboratory.sharepoint.com/sites/ResearchIT/SitePages/Documentation.aspx" class="external-link">Research
-IT Documentation Library</a>.</p>
-<div class="section level4">
-<h4 id="slurm-options-block-1">
-<em>slurm</em> Options Block<a class="anchor" aria-label="anchor" href="#slurm-options-block-1"></a>
-</h4>
-<p><em>slurm</em> scripts are <em>bash</em> scripts, so they start
-with:</p>
-<pre><code><span><span class="co">#!/bin/bash</span></span></code></pre>
-<p>Next, we use a <em>slurm</em> options block to tell <em>slurm</em>
-what computing resources we would like to use. You could pass
-<em>slurm</em> options in at the command line, but we recommend using an
-options block in your script so that you have a record of the resources
-required to run your job.</p>
-<p>Each line in the <em>slurm</em> options block starts with:</p>
-<pre><code><span><span class="co">#SBATCH</span></span></code></pre>
-<p>This tells <em>slurm</em> that what follows on this line is a
-<em>slurm</em> option. There are many <em>slurm</em> options, which are
-exhaustively enumerated in the <a href="https://slurm.schedmd.com/sbatch.html" class="external-link">slurm documentation</a>.
-Here we will use only a few of the options:</p>
-<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span>
-<span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
-<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span>
-<span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span>
-<span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
-<p>The first option specifies the job queue to use for this job. In this
-case, it is the “batch” queue on <em>sumner2</em>.</p>
-<pre><code><span><span class="co">#SBATCH --qos=batch       # job queue</span></span></code></pre>
-<p>The next two options specify the number of nodes and number of CPUs
-(or cores) per node to use. In this case, we will use one node and one
-CPU. This may seem confusing because we would like to use many nodes and
-cores to reduce the total run time of our job. But Nextflow handles
-resource request. This script just starts the Nextflow job, which does
-not require many resources. If you request more nodes and CPUs here, you
-will only be tying up resources that will sit idle while your job run.
-So <strong>one</strong> node and <strong>one</strong> CPU per node are
-sufficient.</p>
-<pre><code><span><span class="co">#SBATCH --ntasks=1        # number of nodes</span></span>
-<span><span class="co">#SBATCH --cpus-per-task=1 # number of cores</span></span></code></pre>
-<p>The next option specifies the memory required for this task. We will
-request one Gigabyte (G). Again, this may seem like a small amount of
-memory for a large computational job, but this is only the memeory
-required to start and manage the Nextflow job. Nextflow will request the
-resources that it needs to run GBRS.</p>
-<pre><code><span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span></code></pre>
-<p>The last option that we will speicify is the total wall-clock time
-needed to complete the job. This needs to be the total amount of time
-required to complete the job. This can be difficult to estimate and
-depends upon the number of samples, depth of coverage, and the
-configuration and utilization of the cluster.</p>
-<blockquote>
-<p>DMG: TBD: Should we run 50, 100, 200 &amp; 300 samples and include a
-time/samples plot? I have 350 samples that we could use for this. It’s
-not going to be linear with more sample, but it’s something.</p>
-</blockquote>
-<pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="header-section-1">Header Section<a class="anchor" aria-label="anchor" href="#header-section-1"></a>
-</h4>
-<p>This section is not required, but it allows you to add some comments
-about what are doing. It is also a consistent place to put your name,
-contact information, and the date. Putting your name and contact
-information helps to keep you accountable for the code. Putting the date
-in the header helps you to remember when you wrote the script.</p>
-<pre><code><span><span class="co">################################################################################</span></span>
-<span><span class="co"># Run GBRS on each sample.</span></span>
-<span><span class="co"># GRCm39. Ensembl 105.</span></span>
-<span><span class="co">#</span></span>
-<span><span class="co"># Daniel Gatti</span></span>
-<span><span class="co"># dan.gatti@jax.org</span></span>
-<span><span class="co"># 2022-09-28</span></span>
-<span><span class="co">################################################################################</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="variable-section-1">Variable Section<a class="anchor" aria-label="anchor" href="#variable-section-1"></a>
-</h4>
-<p>We strongly recommend that you use <em>bash</em> variables to build
-file paths and specify arguments to the GBRS script. The reason for this
-is that it is easier to remember what each varible is when it is given a
-meaningful name.</p>
-<p>Consider this script which runs the “analysis_tool_of_science”:</p>
-<pre><code>analysis_tool_of_science -t 8 \
-  -g /path/to/another/file \
-  -a /really/long/path/to/yet/another/file \
-  -i /path/to/mystery/file/number1 /path/to/mystery/file/number2 \
-  -x /path/to/some/directory/on/the/cluster
-  -o /path/to/another/directory/with/a/file/prefix</code></pre>
-<p>You can read the tool’s documentation to find out what each file is,
-but that requires extra time. It would be easier to read if the paths
-had meaningful names. In the code block below, we give each file a
-meaningful variable name and prrovide a comment explaining what each
-file is. We also use this opportunity to specify the genome and
-annotation builds.</p>
-<pre><code># FASTA file containing genome sequence for GRCm39.
-GENOME_FASTA=/path/to/another/file
-
-# GTF file containing genome annotation for Ensembl 105.
-ANNOTATION_GTF=/really/long/path/to/yet/another/file
-
-# Paths to the forward and reverse FASTQ files.
-FASTQ_FILE1=/path/to/mystery/file/number1
-FASTQ_FILE2=/path/to/mystery/file/number2
-
-# Path to temporary directory for analysis_tool.
-TEMP_DIR=/path/to/some/directory/on/the/cluster
-
-# Path to output file, with a file prefix.
-OUTPUT_PATH=/path/to/another/directory/with/a/file/prefix
-
-analysis_tool_of_science -t 8 \
-  -g ${GENOME_FASTA} \
-  -a ${ANNOTATION_GTF} \
-  -i $(FASTQ_FILE1} ${FASTQ_FILE2} \
-  -x ${TEMP_DIR}
-  -o ${OUTPUT_PATH}</code></pre>
-<p>This makes the script much easier for yourself (a year from now) and
-others to read and understand.</p>
-<p>The GBRS script has a lot of variables. We will explain each one so
-that you know what to use for your samples.</p>
-<p>In this first section, we will focus on variables that set the
-location of your files and working directories.</p>
-<pre><code># Base directory for project.
-BASE_DIR=/projects/research_lab_directory/diabetes</code></pre>
-<p>We like to set a “base directory”, which is the high-level directory
-for the project which you are working on. In this case, we are using a
-diabetes project as an example. We use the base directory to create
-other file paths which are below this directory.</p>
-<pre><code># Sample metadata file.
-SAMPLE_META_FILE=${BASE_DIR}/data/sodo_gbrs_metadata.csv</code></pre>
-<p>This is the path to the sample metadata file. This file contains
-information about your samples, including the sample ID, sex,
-outbreeding generation, sequencer lane, and paths to the forward and
-reverse FASTQ files. Each row will contain information for one
-sample.</p>
-<p>The <code>sampleID</code> should contain values that you use to
-identify the samples.</p>
-<p>The <code>sex</code> column should contain the mouse’s sex recorded
-as ‘F’ for females or ‘M’ for males.</p>
-<p>The <code>generation</code> column should contain the outbreeding
-generation for the mouse.</p>
-<p>The <code>lane</code> column should contain the lane number on which
-the sample was run. This can sometimes be found in the FASTQ file name.
-In the example below, it is recorded as ‘L004’ in the FASTQ file names
-and this is what we used in the <code>lane</code> column.</p>
-<p>The <code>fastq_1</code> and <code>fastq_2</code> columns contain the
-full path to the forward and reverse FASTQ files. In this case, we
-copied the files to /flashscratch, which is the temporary sratch storage
-space for large files.</p>
-<blockquote>
-<p>DMG: TBD: explain why we should copy the files over to /flashscrath
-instead of using them from /projects.</p>
-</blockquote>
-<pre><code>sampleID,sex,generation,lane,fastq_1,fastq_2
-D2,F,46,L004,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R2_001.fastq.gz
-D3,F,46,L001,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R2_001.fastq.gz
-D4,F,46,L001,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D4_GT22-11670_TACGCTAC-CGTGTGAT_S65_L001_R2_001.fastq.gz
-D5,F,46,L001,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D5_GT22-11708_GAGCAGTA-TGAGCTGT_S57_L001_R2_001.fastq.gz</code></pre>
-<pre><code># Base /flashscratch directory.
-FLASHSCRATCH=/flashscratch/username</code></pre>
-<p>This is the path to your directory on /flashscratch. You should
-create this before you begin your analysis.</p>
-<pre><code># Temporary directory.
-TMP_DIR=${FLASHSCRATCH}/tmp</code></pre>
-<p>This is the path to the temporary directory where Nextflow and GBRS
-can store temporary working files during the analysis.</p>
-<pre><code># Output directory.
-OUT_DIR=${FLASHSCRATCH}/results</code></pre>
-<p>This is the directory where you would like GBRS to write your
-results. You should place this on /flashscratch and then copy the files
-that you need over to /projects when the analysis is complete.</p>
-<pre><code># Final results directory (in backed up space)
-DEST_DIR=${BASE_DIR}/results/gbrs</code></pre>
-<p>This is the directory to which you will copy your final results. It
-should be a location that is backed up (like /projects). Remember,
-/flashscratch is not backed up and your files will be deleted without
-notice after 10 days.</p>
-<p>In the next section, we will focus on the reference files that are
-required by GBRS.</p>
-<pre><code># GBRS Reference File Directory
-GBRS_REF_DIR=/projects/omics_share/mouse/GRCm39/supporting_files/emase_gbrs/rel_2112_v8</code></pre>
-<p>This is the directory where the GBRS reference files are stored.
-These are a series of files which contain information about genes and
-transcripts in the eight DO founder strains. The numbers in the
-directory refere to the <a href="https://www.sanger.ac.uk/data/mouse-genomes-project/" class="external-link">Sanger Mouse
-Genomes Project</a> release. “2112” refers to the 12th month of 2021.
-“v8” refers to version 8 of their genetic variant release.</p>
-<p>There are eight arguments that point to the reference files used by
-GBRS.</p>
-<pre><code># GBRS Transcripts.
-GBRS_TRANSCRIPTS=${GBRS_REF_DIR}/emase.fullTranscripts.info</code></pre>
-<p>This file contains the list of transcripts in Ensembl 105 that GBRS
-will quantify.</p>
-<pre><code># GBRS/EMASE gene to transcript file.
-GBRS_GENE2TRANS=${GBRS_REF_DIR}/emase.gene2transcripts.tsv</code></pre>
-<p>This file contains the list of transcripts which map to each gene.
-Each row contains one gene, followed by its associated Ensembl
-transcripts.</p>
-<pre><code># GBRS Full Transcript.
-GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info</code></pre>
-<p>This file contains a list of transcript lengths in each of the eight
-DO founders.</p>
-<blockquote>
-<p>DMG: Confirm this with Mike.</p>
-</blockquote>
-<pre><code># GBRS Emission Probs.
-GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz</code></pre>
-<p>This file contains the allele emission probabilities for the hidden
-Markov model. These are used at each gene to estimate the probability
-that a given allele is obsered, given that the model is in a certain
-genotype state.</p>
-<pre><code># GBRS Transmission Probs.
-GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities</code></pre>
-<p>This directory contains the transmission probabilities for the hidden
-Markov model. There are many files in this directory, one for each DO
-outbreeding generation. Each file contains the probability of changing
-genotype state between each gene at a given DO outbreeding
-generation.</p>
-<pre><code># Ensembl 105 gene positions.
-ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz</code></pre>
-<p>This file contains the Ensembl 105 gene positions in a python
-format.</p>
-<pre><code># GBRS 69K Marker Grid.
-MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv</code></pre>
-<p>This file contains the pseudomarker genome grid which is used to
-report results. Each tissue expresses different gene, which leads GBRS
-to estimate genotypes at different genomic positions in each tissue. In
-order to standardize results, GBRS interpolates its founder haplotype
-estimates to a common grid of 74,165 positions.</p>
-<pre><code># Bowtie index for GBRS.
-BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts</code></pre>
-<p>This is the path to the bowtie index files. There are multiple files
-and this variable should contain the directory and the file prefix for
-the index files. In this case, the file prefix is “bowtie.transcripts”
-and the files are named “bowtie.transcripts.1.ewbt”,
-“bowtie.transcripts.2.ewbt”, etc.</p>
-<pre><code><span><span class="co"># GBRS path.</span></span>
-<span><span class="va">GBRS_GITHUB_PATH</span><span class="op">=</span><span class="va">TheJacksonLaboratory</span><span class="op">/</span><span class="va">cs</span><span class="op">-</span><span class="va">nf</span><span class="op">-</span><span class="va">pipelines</span></span></code></pre>
-<p>This is the Github path to the Computational Science
-<code>nextflow</code> pipelines.</p>
-<pre><code># Singularity cache directory.
-export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache</code></pre>
-<p>This is the cache directory where Singularity will store containers
-which it downloads during the analysis run.</p>
-<blockquote>
-<p>DMG: confirm with Mike.</p>
-</blockquote>
-</div>
-<div class="section level4">
-<h4 id="entire-gbrs-script">Entire GBRS Script<a class="anchor" aria-label="anchor" href="#entire-gbrs-script"></a>
-</h4>
-<p>Here is the whole script in one piece.</p>
-<pre><code>#!/bin/bash
-#SBATCH --qos=batch       # job queue
-#SBATCH --ntasks=1        # number of nodes
-#SBATCH --cpus-per-task=1 # number of cores
-#SBATCH --mem=1G          # memory pool for all cores
-#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)
-
-################################################################################
-# Run GBRS on each sample.
-# GRCm39. Ensembl 105.
-#
-# Daniel Gatti
-# dan.gatti@jax.org
-# 2022-09-28
-################################################################################
-
-
-##### VARIABLES #####
-
-# Base directory for project.
-BASE_DIR=/projects/bolcun-filas-lab/DO_Superovulation
-
-# Sample metadata file.
-SAMPLE_META_FILE=${BASE_DIR}/gbrs_sample_metadata.csv
-
-# Base /flashscratch directory.
-FLASHSCRATCH=/flashscratch/dgatti
-
-# Temporary directory.
-TMP_DIR=${FLASHSCRATCH}/tmp
-
-# Output directory.
-OUT_DIR=${FLASHSCRATCH}/results
-
-# Final results directory (in backed up space)
-DEST_DIR=${BASE_DIR}/results/gbrs/grcm39
-
-# GBRS Reference File Directory
-GBRS_REF_DIR=/projects/churchill-lab/projects/GBRS_GRCm39
-
-# GBRS Transcripts.
-GBRS_TRANSCRIPTS=${GBRS_REF_DIR}/emase.fullTranscripts.info
-
-# GBRS/EMASE gene to transcript file.
-GBRS_GENE2TRANS=${GBRS_REF_DIR}/emase.gene2transcripts.tsv
-
-# GBRS Full Transcript.
-GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info
-
-# GBRS Emission Probs.
-GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz
-
-# GBRS Transmission Probs.
-GBRS_TRANS_PROBS=${GBRS_REF_DIR}/transition_probabilities
-
-# Ensembl 105 gene positions.
-ENSEMBL_105=${GBRS_REF_DIR}/ref.gene_pos.ordered_ensBuild_105.npz
-
-# GBRS 69K Marker Grid.
-MARKER_GRID=${GBRS_REF_DIR}/ref.genome_grid.GRCm39.tsv
-
-# Bowtie index for GBRS.
-BOWTIE_INDEX=/projects/compsci/omics_share/mouse/GRCm39/transcriptome/indices/imputed/rel_2112_v8/bowtie/bowtie.transcripts
-
-# GBRS path.
-GBRS_GITHUB_PATH=TheJacksonLaboratory/cs-nf-pipelines
-
-# Singularity cache directory.
-export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache
-
-
-##### MAIN #####
-
-mkdir -p ${OUT_DIR}
-mkdir -p ${DEST_DIR}
-mkdir -p ${TMP_DIR}
-mkdir -p ${NXF_SINGULARITY_CACHEDIR}
-
-module load singularity
-
-cd ${TMP_DIR}
-
-nextflow run ${GBRS_GITHUB_PATH} \
-         -profile sumner \
-         --workflow gbrs \
-         --pubdir ${OUT_DIR} \
-         -w ${TMP_DIR} \
-         --bowtie_index ${BOWTIE_INDEX} \
-         --csv_input ${SAMPLE_META_FILE} \
-         --transcripts_info ${GBRS_TRANSCRIPTS} \
-         --gene2transcript_csv ${GBRS_GENE2TRANS} \
-         --full_transcript_info ${GBRS_FULL_TRANSCRIPTS} \
-         --emission_prob_avecs ${GBRS_EMIS_PROBS} \
-         --trans_prob_dir ${GBRS_TRANS_PROBS} \
-         --gene_position_file ${ENSEMBL_105} \
-         --genotype_grid ${MARKER_GRID} \
-         -resume
-
-# Copy output files from OUT_DIR to DEST_DIR.
-DIRS=`ls ${OUT_DIR}`
-
-for i in ${DIRS}
-do
-
-  CURR_DEST_DIR=${DEST_DIR}/$i
-
-  mkdir -p ${CURR_DEST_DIR}
-  cp ${OUT_DIR}/${i}/stats/* ${CURR_DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*_counts ${CURR_DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*.tsv ${CURR_DEST_DIR}
-  cp ${OUT_DIR}/${i}/gbrs/*.pdf ${CURR_DEST_DIR}
-
-done</code></pre>
-</div>
-</div>
-<div class="section level3">
-<h3 id="gbrs-output">GBRS Output<a class="anchor" aria-label="anchor" href="#gbrs-output"></a>
-</h3>
-<p>GBRS will create one output directory per sample. Each directory will
-be named with the sample ID and will contain <strong>NNN</strong> files.
-In the table below, we denote the sample ID as <sample>. The sample ID
-is prepended to each file name.</sample></p>
-<p>Each sample directory will contain three directories:</p>
-<ul>
-<li>emase</li>
-<li>gbrs</li>
-<li>stats</li>
-</ul>
-<p>We will look at the contents of each directory one at a time.</p>
-<div class="section level4">
-<h4 id="emase-directory">emase Directory<a class="anchor" aria-label="anchor" href="#emase-directory"></a>
-</h4>
-<p>2.merged.compressed.emase.h5 2.multiway.genes.alignment_counts
-2.multiway.genes.expected_read_counts 2.multiway.genes.tpm
-2.multiway.isoforms.alignment_counts
-2.multiway.isoforms.expected_read_counts 2.multiway.isoforms.tpm</p>
-</div>
-<div class="section level4">
-<h4 id="gbrs-directory">gbrs Directory<a class="anchor" aria-label="anchor" href="#gbrs-directory"></a>
-</h4>
-<p>2.merged.compressed.emase.h5 2.multiway.genes.alignment_counts
-2.multiway.genes.expected_read_counts 2.multiway.genes.tpm
-2.multiway.isoforms.alignment_counts
-2.multiway.isoforms.expected_read_counts 2.multiway.isoforms.tpm [<a href="mailto:c-dgatti@sumner-log1" class="email">c-dgatti@sumner-log1</a> 2]$ ls -1 gbrs/
-2.diploid.genes.alignment_counts 2.diploid.genes.expected_read_counts
-2.diploid.genes.tpm 2.diploid.isoforms.alignment_counts
-2.diploid.isoforms.expected_read_counts 2.diploid.isoforms.tpm
-2.gbrs.interpolated.genoprobs.npz 2.gbrs.interpolated.genoprobs.tsv
-2.gbrs.plotted.genome.pdf 2.genotypes.tsv</p>
-</div>
-<div class="section level4">
-<h4 id="stats-directory">stats Directory<a class="anchor" aria-label="anchor" href="#stats-directory"></a>
-</h4>
-<p><sample>.bowtie_R1.log <sample>.bowtie_R2.log</sample></sample></p>
-<p>These are the alignment log files generated by the <a href="https://bowtie-bio.sourceforge.net/index.shtml" class="external-link">Bowtie 1</a>
-aligner. Each file contains alignment statistics, such as the number of
-reads processed and the number of alignments. An example file is shown
-below:</p>
-<pre><code># reads processed: 41617615
-# reads with at least one alignment: 35083649 (84.30%)
-# reads that failed to align: 6533966 (15.70%)
-Reported 415621849 alignments</code></pre>
-<p>In this case, there were a total of 41,617,615 reads. The corresponds
-to the number of reads in the input FASTQ file. 35,083,649 (84.30% of
-the total reads) aligned to at least one location in the genome. Note
-that some of these may have aligned to multiple locations. 6,533,966
-(15.70% of the total reads) did not align to the genome with sufficient
-accuracy to use. The total number of alignments was 415,621,849, which
-is an order or magnitude higher than the number of reads. This is
-because each read may align to the genome more than once.</p>
-<table class="table">
-<colgroup>
-<col width="29%">
-<col width="35%">
-<col width="35%">
-</colgroup>
-<thead><tr class="header">
-<th>File Name</th>
-<th>File Format</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td><sample>.bowtie_R1.log</sample></td>
-<td>Text</td>
-<td>Bowtie 1 alignment log file for read 1</td>
-</tr>
-<tr class="even">
-<td><sample>.bowtie_R2.log</sample></td>
-<td>Text</td>
-<td>Bowtie 1 alignment log file for read 2</td>
-</tr>
-<tr class="odd">
-<td><sample>.diploid.genes.alignment_counts</sample></td>
-<td>Tab-delimited</td>
-<td>Founder allele-specific gene alignment counts</td>
-</tr>
-<tr class="even">
-<td><sample>.diploid.genes.expected_read_counts</sample></td>
-<td>Tab-delimited</td>
-<td>Founder allele-specific expected gene counts</td>
-</tr>
-<tr class="odd">
-<td><sample>.diploid.isoforms.alignment_counts</sample></td>
-<td>Tab-delimited</td>
-<td>Founder allele-specific transcript isoform alignment counts</td>
-</tr>
-<tr class="even">
-<td><sample>.diploid.isoforms.expected_read_counts</sample></td>
-<td>Tab-delimited</td>
-<td>Founder allele-specific expected transcript isoform counts</td>
-</tr>
-<tr class="odd">
-<td><sample>.gbrs.interpolated.genoprobs.tsv</sample></td>
-<td>Tab-delimited</td>
-<td>Estimated founder allele probabilities</td>
-</tr>
-<tr class="even">
-<td><sample>.gbrs.plotted.genome.pdf</sample></td>
-<td>PDF</td>
-<td>Karyogram of estimated founder allele probabilities</td>
-</tr>
-<tr class="odd">
-<td><sample>.genotypes.tsv</sample></td>
-<td>Tab-delimited</td>
-<td>Founder diplotype calls at each gene</td>
-</tr>
-<tr class="even">
-<td><sample>. BAM file</sample></td>
-<td>Binary alignment map</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Below, we review each output file in greater detail.</p>
-</div>
-<div class="section level4">
-<h4 id="founder-allele-specific-gene-alignment-counts">Founder Allele-specific Gene Alignment Counts<a class="anchor" aria-label="anchor" href="#founder-allele-specific-gene-alignment-counts"></a>
-</h4>
-<p><sample>.diploid.genes.alignment_counts</sample></p>
-<p>This file contains the counts for each of the eight DO founder
-alleles for each gene. There is one row per gene and 18 columns. An
-example of the top of one file is shown below.</p>
-<pre><code>locus   aln_A   aln_B   aln_C   aln_D   aln_E   aln_F   aln_G   aln_H   uniq_A  uniq_B  uniq_C  uniq_D  uniq_E  uniq_F  uniq_G  uniq_H  locus_uniq
-ENSMUSG00000000001      12124.0 12124.0 12124.0 12124.0 5066.0  9349.0  5751.0  12124.0 0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     12126.0
-ENSMUSG00000000003      0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0
-ENSMUSG00000000028      721.0   721.0   721.0   721.0   721.0   676.0   713.0   602.0   0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     721.0
-ENSMUSG00000000031      464.0   464.0   464.0   464.0   464.0   298.0   241.0   464.0   0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     464.0
-ENSMUSG00000000037      135.0   135.0   135.0   133.0   135.0   95.0    94.0    115.0   0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     137.0
-ENSMUSG00000000049      42.0    42.0    42.0    42.0    42.0    20.0    32.0    39.0    0.0     0.0     0.0     0.0     0.0     16.0    0.0     0.0     58.0
-ENSMUSG00000000056      1453.0  1453.0  1324.0  1453.0  1453.0  844.0   776.0   1454.0  0.0     0.0     0.0     0.0     0.0     0.0     4.0     39.0    1506.0
-ENSMUSG00000000058      1750.0  1972.0  1802.0  1972.0  1750.0  1055.0  674.0   252.0   0.0     0.0     0.0     0.0     0.0     2.0     0.0     0.0     1977.0
-ENSMUSG00000000078      4255.0  4255.0  4255.0  4255.0  3951.0  4093.0  3189.0  3398.0  0.0     0.0     0.0     0.0     633.0   0.0     9.0     12.0    5134.0</code></pre>
-<p>For each gene, the number of gene counts for each founder allele is
-shown in the columns which start with “aln”. The “aln” columns contains
-the estimated gene counts for reads which aligned to each of the 8
-founder transcriptomes. The columns which begin wit “uniq” contains gene
-counts for reads which aligned uniquely to one of the 8 founder
-transcriptomes. The “locus_uniq” column contains ????.</p>
-</div>
-<div class="section level4">
-<h4 id="section"></h4>
-<p><sample>.diploid.genes.expected_read_counts</sample></p>
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
-<div class="callout-content">
-<ul>
-<li>GBRS produces several output file for each sample.</li>
-</ul>
-</div>
-</div>
-</div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
-</div>
-</div>
 </section></section>
 </div>
     </main>

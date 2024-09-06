@@ -118,11 +118,11 @@
   Genotyping by RNA Sequencing Tutorial
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 53%" class="percentage">
-    53%
+<aside class="col-md-12 lesson-progress"><div style="width: 19%" class="percentage">
+    19%
   </div>
   <div class="progress software">
-    <div class="progress-bar software" role="progressbar" style="width: 53%" aria-valuenow="53" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar software" role="progressbar" style="width: 19%" aria-valuenow="19" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -221,31 +221,13 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
-<div class="accordion accordion-flush" id="accordionFlush4">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading4">
-        <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
-    </div><!--/div.accordion-header-->
-
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush5">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading5">
-        <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
-    </div><!--/div.accordion-header-->
-
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
-        5. Running GBRS
+        3. Running GBRS
         </span>
       </button>
     </div><!--/div.accordion-header-->
@@ -255,6 +237,24 @@
         <ul><li><a href="#at-the-jackson-laboratory-jax">At the Jackson Laboratory (JAX)</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="prepare-pseudo-reference.html">4. Preparing GBRS Pseudo-References</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="prepare-emase.html">5. Prepare EMASE Reference Files</a>
+    </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -301,23 +301,23 @@
         <!-- START: inst/pkgdown/templates/content-instructor.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="../instructor/prepare-emase.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="../instructor/installation.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="../instructor/prepare-pseudo-reference.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="../instructor/prepare-emase.html" rel="prev">
+        <a class="chapter-link" href="../instructor/installation.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Prepare EMASE
+          Previous: Installing GBRS
         </a>
-        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="../instructor/prepare-pseudo-reference.html" rel="next">
+          Next: Preparing GBRS...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running GBRS</h1>
-        <p>Last updated on 2024-03-25 |
+        <p>Last updated on 2024-09-06 |
 
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/run-gbrs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -503,16 +503,11 @@ memory for a large computational job, but this is only the memeory
 required to start and manage the Nextflow job. Nextflow will request the
 resources that it needs to run GBRS.</p>
 <pre><code><span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span></code></pre>
-<p>The last option that we will speicify is the total wall-clock time
+<p>The last option that we will specify is the total wall-clock time
 needed to complete the job. This needs to be the total amount of time
 required to complete the job. This can be difficult to estimate and
 depends upon the number of samples, depth of coverage, and the
 configuration and utilization of the cluster.</p>
-<blockquote>
-<p>DMG: TBD: Should we run 50, 100, 200 &amp; 300 samples and include a
-time/samples plot? I have 350 samples that we could use for this. It’s
-not going to be linear with more samples, but it’s something.</p>
-</blockquote>
 <pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
 </div>
 <div class="section level4">
@@ -707,16 +702,11 @@ memory for a large computational job, but this is only the memeory
 required to start and manage the Nextflow job. Nextflow will request the
 resources that it needs to run GBRS.</p>
 <pre><code><span><span class="co">#SBATCH --mem=1G          # memory pool for all cores</span></span></code></pre>
-<p>The last option that we will speicify is the total wall-clock time
+<p>The last option that we will specify is the total wall-clock time
 needed to complete the job. This needs to be the total amount of time
 required to complete the job. This can be difficult to estimate and
 depends upon the number of samples, depth of coverage, and the
 configuration and utilization of the cluster.</p>
-<blockquote>
-<p>DMG: TBD: Should we run 50, 100, 200 &amp; 300 samples and include a
-time/samples plot? I have 350 samples that we could use for this. It’s
-not going to be linear with more sample, but it’s something.</p>
-</blockquote>
 <pre><code><span><span class="co">#SBATCH --time=48:00:00   # wall clock time (D-HH:MM)</span></span></code></pre>
 </div>
 <div class="section level4">
@@ -807,12 +797,8 @@ In the example below, it is recorded as ‘L004’ in the FASTQ file names
 and this is what we used in the <code>lane</code> column.</p>
 <p>The <code>fastq_1</code> and <code>fastq_2</code> columns contain the
 full path to the forward and reverse FASTQ files. In this case, we
-copied the files to /flashscratch, which is the temporary sratch storage
-space for large files.</p>
-<blockquote>
-<p>DMG: TBD: explain why we should copy the files over to /flashscrath
-instead of using them from /projects.</p>
-</blockquote>
+copied the files to /flashscratch, which is the temporary scratch
+storage space for large files.</p>
 <pre><code>sampleID,sex,generation,lane,fastq_1,fastq_2
 D2,F,46,L004,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D2_GT22-11729_CTAGGCAT-ACAGAGGT_S224_L004_R2_001.fastq.gz
 D3,F,46,L001,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R1_001.fastq.gz,/flashscratch/dgatti/fastq/D3_GT22-11665_CGGCTAAT-CTCGTTCT_S21_L001_R2_001.fastq.gz
@@ -862,9 +848,6 @@ transcripts.</p>
 GBRS_FULL_TRANSCRIPTS=${GBRS_REF_DIR}/emase.pooled.fullTranscripts.info</code></pre>
 <p>This file contains a list of transcript lengths in each of the eight
 DO founders.</p>
-<blockquote>
-<p>DMG: Confirm this with Mike.</p>
-</blockquote>
 <pre><code># GBRS Emission Probs.
 GBRS_EMIS_PROBS=${GBRS_REF_DIR}/gbrs_emissions_all_tissues.avecs.npz</code></pre>
 <p>This file contains the allele emission probabilities for the hidden
@@ -904,9 +887,6 @@ and the files are named “bowtie.transcripts.1.ewbt”,
 export NXF_SINGULARITY_CACHEDIR=${flashscratch}/singularity_cache</code></pre>
 <p>This is the cache directory where Singularity will store containers
 which it downloads during the analysis run.</p>
-<blockquote>
-<p>DMG: confirm with Mike.</p>
-</blockquote>
 </div>
 <div class="section level4">
 <h4 id="entire-gbrs-script">Entire GBRS Script<a class="anchor" aria-label="anchor" href="#entire-gbrs-script"></a></h4>
@@ -1039,26 +1019,39 @@ is prepended to each file name.</sample></p>
 </ul><p>We will look at the contents of each directory one at a time.</p>
 <div class="section level4">
 <h4 id="emase-directory">emase Directory<a class="anchor" aria-label="anchor" href="#emase-directory"></a></h4>
-<p>2.merged.compressed.emase.h5 2.multiway.genes.alignment_counts
-2.multiway.genes.expected_read_counts 2.multiway.genes.tpm
+<pre><code>2.merged.compressed.emase.h5
+2.multiway.genes.alignment_counts
+2.multiway.genes.expected_read_counts
+2.multiway.genes.tpm
 2.multiway.isoforms.alignment_counts
-2.multiway.isoforms.expected_read_counts 2.multiway.isoforms.tpm</p>
+2.multiway.isoforms.expected_read_counts
+2.multiway.isoforms.tpm</code></pre>
 </div>
 <div class="section level4">
 <h4 id="gbrs-directory">gbrs Directory<a class="anchor" aria-label="anchor" href="#gbrs-directory"></a></h4>
-<p>2.merged.compressed.emase.h5 2.multiway.genes.alignment_counts
-2.multiway.genes.expected_read_counts 2.multiway.genes.tpm
+<pre><code>2.merged.compressed.emase.h5
+2.multiway.genes.alignment_counts
+2.multiway.genes.expected_read_counts
+2.multiway.genes.tpm
 2.multiway.isoforms.alignment_counts
-2.multiway.isoforms.expected_read_counts 2.multiway.isoforms.tpm [<a href="mailto:c-dgatti@sumner-log1" class="email">c-dgatti@sumner-log1</a> 2]$ ls -1 gbrs/
-2.diploid.genes.alignment_counts 2.diploid.genes.expected_read_counts
-2.diploid.genes.tpm 2.diploid.isoforms.alignment_counts
-2.diploid.isoforms.expected_read_counts 2.diploid.isoforms.tpm
-2.gbrs.interpolated.genoprobs.npz 2.gbrs.interpolated.genoprobs.tsv
-2.gbrs.plotted.genome.pdf 2.genotypes.tsv</p>
+2.multiway.isoforms.expected_read_counts
+2.multiway.isoforms.tpm
+[c-dgatti@sumner-log1 2]$ ls -1 gbrs/
+2.diploid.genes.alignment_counts
+2.diploid.genes.expected_read_counts
+2.diploid.genes.tpm
+2.diploid.isoforms.alignment_counts
+2.diploid.isoforms.expected_read_counts
+2.diploid.isoforms.tpm
+2.gbrs.interpolated.genoprobs.npz
+2.gbrs.interpolated.genoprobs.tsv
+2.gbrs.plotted.genome.pdf
+2.genotypes.tsv</code></pre>
 </div>
 <div class="section level4">
 <h4 id="stats-directory">stats Directory<a class="anchor" aria-label="anchor" href="#stats-directory"></a></h4>
-<p><sample>.bowtie_R1.log <sample>.bowtie_R2.log</sample></sample></p>
+<pre><code>&lt;SAMPLE&gt;.bowtie_R1.log
+&lt;SAMPLE&gt;.bowtie_R2.log</code></pre>
 <p>These are the alignment log files generated by the <a href="https://bowtie-bio.sourceforge.net/index.shtml" class="external-link">Bowtie 1</a>
 aligner. Each file contains alignment statistics, such as the number of
 reads processed and the number of alignments. An example file is shown
@@ -1135,7 +1128,7 @@ transcriptomes. The “locus_uniq” column contains ????.</p>
 </div>
 <div class="section level4">
 <h4 id="section"></h4>
-<p><sample>.diploid.genes.expected_read_counts</sample></p>
+<pre><code>&lt;SAMPLE&gt;.diploid.genes.expected_read_counts</code></pre>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1155,17 +1148,17 @@ any links that you are not going to use.
 </div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="../instructor/prepare-emase.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="../instructor/installation.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="../instructor/prepare-pseudo-reference.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="../instructor/prepare-emase.html" rel="prev">
+        <a class="chapter-link" href="../instructor/installation.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Prepare EMASE
+          Previous: Installing GBRS
         </a>
-        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="../instructor/prepare-pseudo-reference.html" rel="next">
+          Next: Preparing GBRS...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -1211,7 +1204,7 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/instructor/run-gbrs.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/instructor/run-gbrs.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2024-03-25",
+  "dateModified": "2024-09-06",
   "datePublished": "2024-09-06"
 }
 

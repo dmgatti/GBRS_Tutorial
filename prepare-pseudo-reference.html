@@ -118,11 +118,11 @@
   Genotyping by RNA Sequencing Tutorial
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 19%" class="percentage">
-    19%
+<aside class="col-md-12 lesson-progress"><div style="width: 66%" class="percentage">
+    66%
   </div>
   <div class="progress software">
-    <div class="progress-bar software" role="progressbar" style="width: 19%" aria-valuenow="19" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar software" role="progressbar" style="width: 66%" aria-valuenow="66" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -221,13 +221,22 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="run-gbrs.html">3. Running GBRS</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
-        3. Preparing GBRS Pseudo-References
+        4. Preparing GBRS Pseudo-References
         </span>
       </button>
     </div><!--/div.accordion-header-->
@@ -245,19 +254,10 @@ Strains</a></li>
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
-<div class="accordion accordion-flush" id="accordionFlush5">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading5">
-        <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
-    </div><!--/div.accordion-header-->
-
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="run-gbrs.html">5. Running GBRS</a>
+        <a href="prepare-emase.html">5. Prepare EMASE Reference Files</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -305,14 +305,14 @@ Strains</a></li>
         <!-- START: inst/pkgdown/templates/content-instructor.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="installation.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link" href="run-gbrs.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="prepare-emase.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="installation.html" rel="prev">
+        <a class="chapter-link" href="run-gbrs.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Installing GBRS
+          Previous: Running GBRS
         </a>
         <a class="chapter-link float-end" href="prepare-emase.html" rel="next">
           Next: Prepare EMASE...
@@ -321,7 +321,7 @@ Strains</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Preparing GBRS Pseudo-References</h1>
-        <p>Last updated on 2024-03-27 |
+        <p>Last updated on 2024-09-06 |
 
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/prepare-pseudo-reference.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -576,7 +576,7 @@ NOD_ShiLtJ.39.fa.fai                             WSB_EiJ.39.vci.gz.tbi</code></p
 </section><section><h2 class="section-heading" id="creating-pseudo-reference-genomes-and-transcriptomes-for-other-strains">Creating Pseudo-Reference Genomes and Transcriptomes for Other
 Strains<a class="anchor" aria-label="anchor" href="#creating-pseudo-reference-genomes-and-transcriptomes-for-other-strains"></a></h2>
 <hr class="half-width"><p>If you are working with a cross comprised of other strains, you can
-change the ’–strain</p>
+change the “–strain” argument.</p>
 <div id="challenge-1-viewing-strain-names-in-a-vcf" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -599,7 +599,7 @@ SNP VCF header and find the strain names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Output </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -698,7 +698,8 @@ cross.</p>
 <pre><code>VCF_INDELS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_indels.vcf.gz
 VCF_SNPS=/projects/omics_share/mouse/GRCm39/genome/annotation/snps_indels/rel_2112_v8/mgp_REL2021_snps.vcf.gz</code></pre>
 <p>Next, we need to pass in the name of the strain for which we are
-creating the VCI file. In this case, we will use DBA/2J.</p>
+creating the VCI file. In this case, we will use DBA/2J. The strain name
+must exactly match the strain name in the VCF.</p>
 <pre><code><span><span class="va">STRAIN</span><span class="op">=</span><span class="va">DBA_2J</span></span></code></pre>
 
 <div id="challenge-2-viewing-strain-names-in-a-vcf" class="callout challenge">
@@ -723,7 +724,7 @@ SNP VCF header and find the strain names.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Output </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Call <code>tabix</code> with the ‘–only-header’ option and pass in
 the SNP VCF. In this course, we are using long option names. You could
@@ -975,10 +976,7 @@ singularity run ${G2GTOOLS} g2gtools convert \
 sequence, and</li>
 <li>the strain-specific GTF file, which contains the strain’s inferred
 annotation.</li>
-</ul><blockquote>
-<p>DMG: Stopped here.</p>
-</blockquote>
-<div id="challenge-3-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout challenge">
+</ul><div id="challenge-3-create-a-set-of-reference-files-for-another-strain-in-the-vcf." class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -996,7 +994,7 @@ an entire script on your compute instance to run the commands above</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Output </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1078,14 +1076,14 @@ any links that you are not going to use.
 </div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="installation.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link" href="run-gbrs.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="prepare-emase.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="installation.html" rel="prev">
+        <a class="chapter-link" href="run-gbrs.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Installing GBRS
+          Previous: Running GBRS
         </a>
         <a class="chapter-link float-end" href="prepare-emase.html" rel="next">
           Next: Prepare EMASE...
@@ -1134,7 +1132,7 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/prepare-pseudo-reference.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/prepare-pseudo-reference.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2024-03-27",
+  "dateModified": "2024-09-06",
   "datePublished": "2024-09-06"
 }
 

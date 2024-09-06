@@ -228,6 +228,7 @@
         <ul><li><a href="#introduction">Introduction</a></li>
 <li><a href="#install-nextflow">Install Nextflow</a></li>
 <li><a href="#install-singularity">Install Singularity</a></li>
+<li><a href="#install-nextflow-1">Install Nextflow</a></li>
 <li><a href="#nextflow-pipeline-repository">Nextflow Pipeline Repository</a></li>
 <li><a href="#cluster-profile-configuration-file">Cluster Profile Configuration File</a></li>
 <li><a href="#reference-data-files">Reference Data Files</a></li>
@@ -240,7 +241,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="prepare-pseudo-reference.html">3. Preparing GBRS Pseudo-References</a>
+        <a href="run-gbrs.html">3. Running GBRS</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -249,7 +250,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="prepare-emase.html">4. Prepare EMASE Reference Files</a>
+        <a href="prepare-pseudo-reference.html">4. Preparing GBRS Pseudo-References</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -258,7 +259,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="run-gbrs.html">5. Running GBRS</a>
+        <a href="prepare-emase.html">5. Prepare EMASE Reference Files</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -307,7 +308,7 @@
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="introduction.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="prepare-pseudo-reference.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="run-gbrs.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -315,14 +316,14 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Genotyping by RNA
         </a>
-        <a class="chapter-link float-end" href="prepare-pseudo-reference.html" rel="next">
-          Next: Preparing GBRS...
+        <a class="chapter-link float-end" href="run-gbrs.html" rel="next">
+          Next: Running GBRS...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Installing GBRS</h1>
-        <p>Last updated on 2023-10-03 |
+        <p>Last updated on 2024-09-06 |
 
         <a href="https://github.com/dmgatti/GBRS_Tutorial/edit/main/episodes/installation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -385,9 +386,12 @@ allow root access from within containers.</p>
 <p>Again, you should contact your computing cluster administrator and
 ask whether <code>Singularity</code> is installed and, if so, how to
 access it.</p>
-<blockquote>
-<p>DMG: Add an installation test?</p>
-</blockquote>
+</section><section><h2 class="section-heading" id="install-nextflow-1">Install Nextflow<a class="anchor" aria-label="anchor" href="#install-nextflow-1"></a></h2>
+<hr class="half-width"><p><a href="https://nextflow.io/" class="external-link">Nextflow</a> is a scripting language
+which runs computational pipelines. It handles running jobs and tracking
+progress. Most computing clusters should have this installed. If not,
+you will need to install it and make sure that it is in the PATH
+variable in your environment.</p>
 </section><section><h2 class="section-heading" id="nextflow-pipeline-repository">Nextflow Pipeline Repository<a class="anchor" aria-label="anchor" href="#nextflow-pipeline-repository"></a></h2>
 <hr class="half-width"><p>The Computational Sciences group at The Jackson Laboratory has
 created a suite of next-generation sequencing tools using
@@ -403,9 +407,6 @@ ssh), your command may look something like this:</p>
 <pre><code>git clone https://github.com/TheJacksonLaboratory/cs-nf-pipelines.git</code></pre>
 <p>or this:</p>
 <pre><code>git clone git@github.com:TheJacksonLaboratory/cs-nf-pipelines.git</code></pre>
-<blockquote>
-<p>DMG: Add an installation test?</p>
-</blockquote>
 </section><section><h2 class="section-heading" id="cluster-profile-configuration-file">Cluster Profile Configuration File<a class="anchor" aria-label="anchor" href="#cluster-profile-configuration-file"></a></h2>
 <hr class="half-width"><p>There are sample profile configuration files on <a href="https://github.com/TheJacksonLaboratory/cs-nf-pipelines/tree/main/config/profiles" class="external-link">Github</a>.
 These files are for the clusters at The Jackson Laboratory. You will
@@ -507,7 +508,7 @@ any links that you are not going to use.
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="introduction.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="prepare-pseudo-reference.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="run-gbrs.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -515,8 +516,8 @@ any links that you are not going to use.
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Genotyping by RNA
         </a>
-        <a class="chapter-link float-end" href="prepare-pseudo-reference.html" rel="next">
-          Next: Preparing GBRS...
+        <a class="chapter-link float-end" href="run-gbrs.html" rel="next">
+          Next: Running GBRS...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -562,7 +563,7 @@ any links that you are not going to use.
   "url": "https://dmgatti.github.io/GBRS_Tutorial/installation.html",
   "identifier": "https://dmgatti.github.io/GBRS_Tutorial/installation.html",
   "dateCreated": "2023-08-10",
-  "dateModified": "2023-10-03",
+  "dateModified": "2024-09-06",
   "datePublished": "2024-09-06"
 }
 
