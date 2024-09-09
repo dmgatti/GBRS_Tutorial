@@ -867,36 +867,35 @@ We will look at the contents of each directory one at a time.
 #### emase Directory
 
 ```
-2.merged.compressed.emase.h5
-2.multiway.genes.alignment_counts
-2.multiway.genes.expected_read_counts
-2.multiway.genes.tpm
-2.multiway.isoforms.alignment_counts
-2.multiway.isoforms.expected_read_counts
-2.multiway.isoforms.tpm
+<SAMPLE>.merged.compressed.emase.h5
+<SAMPLE>.multiway.genes.alignment_counts
+<SAMPLE>.multiway.genes.expected_read_counts
+<SAMPLE>.multiway.genes.tpm
+<SAMPLE>.multiway.isoforms.alignment_counts
+<SAMPLE>.multiway.isoforms.expected_read_counts
+<SAMPLE>.multiway.isoforms.tpm
 ```
 
 #### gbrs Directory
 
 ```
-2.merged.compressed.emase.h5
-2.multiway.genes.alignment_counts
-2.multiway.genes.expected_read_counts
-2.multiway.genes.tpm
-2.multiway.isoforms.alignment_counts
-2.multiway.isoforms.expected_read_counts
-2.multiway.isoforms.tpm
-[c-dgatti@sumner-log1 2]$ ls -1 gbrs/
-2.diploid.genes.alignment_counts
-2.diploid.genes.expected_read_counts
-2.diploid.genes.tpm
-2.diploid.isoforms.alignment_counts
-2.diploid.isoforms.expected_read_counts
-2.diploid.isoforms.tpm
-2.gbrs.interpolated.genoprobs.npz
-2.gbrs.interpolated.genoprobs.tsv
-2.gbrs.plotted.genome.pdf
-2.genotypes.tsv
+<SAMPLE>.merged.compressed.emase.h5
+<SAMPLE>.multiway.genes.alignment_counts
+<SAMPLE>.multiway.genes.expected_read_counts
+<SAMPLE>.multiway.genes.tpm
+<SAMPLE>.multiway.isoforms.alignment_counts
+<SAMPLE>.multiway.isoforms.expected_read_counts
+<SAMPLE>.multiway.isoforms.tpm
+<SAMPLE>.diploid.genes.alignment_counts
+<SAMPLE>.diploid.genes.expected_read_counts
+<SAMPLE>.diploid.genes.tpm
+<SAMPLE>.diploid.isoforms.alignment_counts
+<SAMPLE>.diploid.isoforms.expected_read_counts
+<SAMPLE>.diploid.isoforms.tpm
+<SAMPLE>.gbrs.interpolated.genoprobs.npz
+<SAMPLE>.gbrs.interpolated.genoprobs.tsv
+<SAMPLE>.gbrs.plotted.genome.pdf
+<SAMPLE>.genotypes.tsv
 ```
 
 #### stats Directory
